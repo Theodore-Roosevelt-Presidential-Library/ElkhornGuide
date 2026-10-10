@@ -115,14 +115,16 @@
     if (!('geolocation' in navigator)) { $('status').textContent = 'This device cannot share its location. Use the map and the stop list.'; return; }
     if (watchId !== null) return;
     watchId = navigator.geolocation.watchPosition(onPosition, function (err) {
-      $('status').textContent = err.code === 1
-        ? 'Location is turned off for this page. Allow location in your browser settings to use the compass and map.'
-        : 'Waiting for a GPS fix. Open sky helps.';
+      if (err.code === 1) {
+        $('status').textContent = 'Location is blocked for this page, so the map cannot show where you are.';
+        $('btnStatusHelp').hidden = false;
+      } else $('status').textContent = 'Waiting for a GPS fix. Open sky helps.';
     }, { enableHighAccuracy: true, maximumAge: 2000, timeout: 30000 });
   }
   function onPosition(p) {
     var c = p.coords;
     pos = { lat: c.latitude, lon: c.longitude, acc: c.accuracy || 20 };
+    checkPrecision(pos.acc);
     if (c.heading !== null && !isNaN(c.heading) && c.speed > 0.6) gpsHeading = c.heading;
     if (map) {
       var ll = [pos.lat, pos.lon];
@@ -143,17 +145,18 @@
   }
 
   /* ---------- compass ---------- */
-  function enableCompass() {
+  function enableCompass(cb) {
+    cb = cb || function () {};
     var go = function () {
       if ('ondeviceorientationabsolute' in window) window.addEventListener('deviceorientationabsolute', onOrient, true);
       window.addEventListener('deviceorientation', onOrient, true);
-      compassOn = true; $('btnCompass').hidden = true;
+      compassOn = true; $('btnCompass').hidden = true; cb('on');
       setTimeout(function () { if (heading === null && window.matchMedia('(pointer: coarse)').matches) toast('No compass reading. The arrow will assume north is up.', 4500); }, 3000);
     };
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
       DeviceOrientationEvent.requestPermission().then(function (r) {
-        if (r === 'granted') go(); else toast('Compass permission was not granted.');
-      }).catch(function () { toast('Compass is not available here. Open the guide full screen and try again.', 5000); });
+        if (r === 'granted') go(); else { cb('denied'); toast('Compass permission was not granted. The arrow will assume north is up.', 4500); }
+      }).catch(function () { cb('error'); toast('Compass is not available here. Open the guide full screen and try again.', 5000); });
     } else go();
   }
   function screenAngle() {
@@ -213,9 +216,12 @@
     if (t.kind === 'park') {
       $('status').textContent = 'Straight-line distance. The drive is about 46 miles from the Library, 30 of them on gravel.';
     } else {
-      $('status').textContent = (d < 60 ? 'Almost there.' : 'Follow the mowed path.') + accTxt;
+      $('status').textContent = preciseWarned
+        ? 'Your phone is sharing an approximate location, so stops will not open on their own. Tap Read this stop when you get there.'
+        : (d < 60 ? 'Almost there.' : 'Follow the mowed path.') + accTxt;
       var arriveR = Math.min(30, Math.max(18, pos.acc * 0.8));
-      if (d <= arriveR && arrivedFor !== t.i) {
+      // Only auto-open a stop on a reasonably precise fix.
+      if (pos.acc <= 60 && d <= arriveR && arrivedFor !== t.i) {
         arrivedFor = t.i;
         markVisited(t.i);
         if (navigator.vibrate) navigator.vibrate([120, 60, 120]);
@@ -307,7 +313,13 @@
       var ch = new MessageChannel();
       ch.port1.onmessage = function (ev) {
         $('btnOffline').disabled = false;
-        if (ev.data && ev.data.ok) { toast('Saved. The guide will work without signal.'); checkOffline(); }
+        if (ev.data && ev.data.ok) {
+          checkOffline();
+          locPermission().then(function (st) {
+            if (st === 'granted' && (!NEEDS_COMPASS_ASK || compassOn)) toast('Saved. The guide will work without signal.');
+            else { toast('Saved. Now set up location and the compass while you can read the prompts.', 4500); openPerm('setup', st); }
+          });
+        }
         else { $('btnOffline').textContent = 'Save for offline'; toast('Some files could not be saved. Try again with a stronger signal.', 5000); }
       };
       reg.active.postMessage({ type: 'save-offline' }, [ch.port2]);
@@ -337,10 +349,180 @@
     if (document.visibilityState === 'visible' && !$('nav').hidden) keepAwake();
   });
 
+
+  /* ---------- permissions: explain, ask, recover ---------- */
+  var UA = navigator.userAgent;
+  var IS_IOS = /iPad|iPhone|iPod/.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var IS_ANDROID = /Android/.test(UA);
+  var BROWSER = /CriOS/.test(UA) ? 'chrome-ios' : /FxiOS/.test(UA) ? 'firefox-ios' : /EdgiOS/.test(UA) ? 'edge-ios'
+    : IS_IOS ? 'safari' : /SamsungBrowser/.test(UA) ? 'samsung' : /Firefox/.test(UA) ? 'firefox' : /Edg\//.test(UA) ? 'edge'
+    : /Chrome/.test(UA) ? 'chrome' : /Safari/.test(UA) ? 'safari-mac' : 'other';
+  var HAS_ORIENT = typeof DeviceOrientationEvent !== 'undefined';
+  var NEEDS_COMPASS_ASK = HAS_ORIENT && typeof DeviceOrientationEvent.requestPermission === 'function';
+  var permMode = 'start', helpTopic = 'blocked';
+
+  function locPermission() {
+    if (!navigator.permissions || !navigator.permissions.query) return Promise.resolve('unknown');
+    return navigator.permissions.query({ name: 'geolocation' }).then(function (r) { return r.state; }, function () { return 'unknown'; });
+  }
+  function setStep(id, stateId, cls, msg) {
+    $(id).classList.toggle('done', cls === 'ok');
+    var s = $(stateId); s.textContent = msg || ''; s.classList.toggle('bad', cls === 'bad');
+  }
+  function openPerm(mode, locState) {
+    permMode = mode;
+    $('btnPermGo').textContent = mode === 'start' ? 'Continue to the guide' : 'Done';
+    $('btnPermClose').hidden = mode !== 'start';
+    if (locState === 'granted') { setStep('stepLoc', 'locState', 'ok', 'Location is on.'); $('btnAskLoc').hidden = true; }
+    else if (locState === 'denied') { helpTopic = 'blocked'; setStep('stepLoc', 'locState', 'bad', 'Location is blocked for this page. Your phone will not ask again until you switch it back on.'); $('btnAskLoc').textContent = 'Show me how'; $('btnAskLoc').hidden = false; }
+    else { setStep('stepLoc', 'locState', '', ''); $('btnAskLoc').textContent = 'Allow location'; $('btnAskLoc').hidden = false; }
+    if (!HAS_ORIENT || !window.matchMedia('(pointer: coarse)').matches) {
+      $('stepCompass').hidden = true;
+    } else if (!NEEDS_COMPASS_ASK) {
+      $('stepCompass').hidden = false;
+      $('compassExplain').textContent = 'Your phone’s compass turns on by itself. If the arrow seems off, wave the phone in a figure eight to calibrate it.';
+      $('btnAskCompass').hidden = true; setStep('stepCompass', 'compassState', 'ok', 'Ready.');
+    } else {
+      $('stepCompass').hidden = false;
+      if (compassOn) { $('btnAskCompass').hidden = true; setStep('stepCompass', 'compassState', 'ok', 'Compass is on.'); }
+      else { $('btnAskCompass').hidden = false; setStep('stepCompass', 'compassState', '', ''); }
+    }
+    $('preciseTip').hidden = !IS_IOS;
+    $('perm').hidden = false; $('perm').scrollTop = 0;
+  }
+  function askLocation() {
+    if ($('btnAskLoc').textContent === 'Show me how') { openHelp(helpTopic); return; }
+    if (!('geolocation' in navigator)) { setStep('stepLoc', 'locState', 'bad', 'This browser cannot share location. You can still read every stop.'); return; }
+    $('btnAskLoc').disabled = true; $('btnAskLoc').textContent = 'Waiting for your answer…';
+    navigator.geolocation.getCurrentPosition(function (p) {
+      $('btnAskLoc').disabled = false; $('btnAskLoc').hidden = true;
+      if (p.coords.accuracy > 500) {
+        setStep('stepLoc', 'locState', 'bad', 'Location is on, but your phone is sharing only an approximate location. Turn on Precise Location so the guide knows when you reach a stop.');
+        $('btnAskLoc').hidden = false; $('btnAskLoc').textContent = 'Show me how'; helpTopic = 'precise';
+      } else setStep('stepLoc', 'locState', 'ok', 'Location is on.');
+    }, function (err) {
+      $('btnAskLoc').disabled = false;
+      if (err.code === 1) {
+        setStep('stepLoc', 'locState', 'bad', IS_IOS && BROWSER === 'safari'
+          ? 'Location was blocked. If you never saw a prompt, location may be off for Safari on this iPhone.'
+          : 'Location was blocked.');
+        $('btnAskLoc').textContent = 'Show me how'; helpTopic = 'blocked';
+      } else {
+        setStep('stepLoc', 'locState', 'ok', 'Location is allowed. Your phone is still finding a GPS fix; that is normal indoors.');
+        $('btnAskLoc').hidden = true;
+      }
+    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 });
+  }
+  function askCompass() {
+    enableCompass(function (r) {
+      if (r === 'on') { $('btnAskCompass').hidden = true; setStep('stepCompass', 'compassState', 'ok', 'Compass is on.'); }
+      else setStep('stepCompass', 'compassState', 'bad', 'The compass was not allowed. The guide still works: the arrow will assume north is up. To try again, close this tab, reopen the guide and tap Allow.');
+    });
+  }
+
+  // Step-by-step recovery, by phone and browser.
+  var HELP = {
+    'safari': { name: 'iPhone, Safari', steps: [
+      'Tap the <strong>aA</strong> (or page-settings) button at the left of the address bar.',
+      'Tap <strong>Website Settings</strong>.',
+      'Set <strong>Location</strong> to <strong>Allow</strong>.',
+      'Reload the page, then tap <strong>Start the walking guide</strong>.'],
+      note: 'Never saw a prompt? Location may be off for Safari: open <strong>Settings › Privacy &amp; Security › Location Services › Safari Websites</strong> and choose <strong>While Using the App</strong>.' },
+    'chrome-ios': { name: 'iPhone, Chrome', steps: [
+      'Open the iPhone <strong>Settings</strong> app.',
+      'Scroll down and tap <strong>Chrome</strong>, then <strong>Location</strong>.',
+      'Choose <strong>While Using the App</strong> and turn on <strong>Precise Location</strong>.',
+      'Return to Chrome and reload the guide.'] },
+    'firefox-ios': { name: 'iPhone, Firefox', steps: [
+      'Open the iPhone <strong>Settings</strong> app and tap <strong>Firefox</strong>, then <strong>Location</strong>.',
+      'Choose <strong>While Using the App</strong> and turn on <strong>Precise Location</strong>.',
+      'Return to Firefox and reload the guide.'] },
+    'edge-ios': { name: 'iPhone, Edge', steps: [
+      'Open the iPhone <strong>Settings</strong> app and tap <strong>Edge</strong>, then <strong>Location</strong>.',
+      'Choose <strong>While Using the App</strong> and turn on <strong>Precise Location</strong>.',
+      'Return to Edge and reload the guide.'] },
+    'chrome': { name: 'Android, Chrome', steps: [
+      'Tap the icon at the left of the address bar.',
+      'Tap <strong>Permissions</strong> (or <strong>Site settings</strong>).',
+      'Turn <strong>Location</strong> on.',
+      'Reload the page, then tap <strong>Start the walking guide</strong>.'],
+      note: 'Still nothing? Check that Location is on in your phone’s quick settings, and that Chrome is allowed to use it: <strong>Settings › Apps › Chrome › Permissions › Location</strong>.' },
+    'samsung': { name: 'Android, Samsung Internet', steps: [
+      'Tap the menu (three lines) at the bottom right, then <strong>Settings</strong>.',
+      'Tap <strong>Sites and downloads › Site permissions › Location</strong>.',
+      'Remove the block for <strong>elkhornguide.labs.trlibrary.com</strong>.',
+      'Reload the guide.'] },
+    'firefox': { name: 'Android, Firefox', steps: [
+      'Tap the lock icon at the left of the address bar.',
+      'Turn <strong>Location</strong> back on (or clear the block).',
+      'Reload the guide.'] }
+  };
+  var PRECISE = {
+    ios: { name: 'iPhone', steps: [
+      'Open the iPhone <strong>Settings</strong> app.',
+      'Tap <strong>Privacy &amp; Security › Location Services</strong>.',
+      'Tap <strong>Safari Websites</strong> (or your browser’s name).',
+      'Turn on <strong>Precise Location</strong>, then reload the guide.'] },
+    android: { name: 'Android', steps: [
+      'Tap the icon at the left of the address bar, then <strong>Permissions</strong>.',
+      'Tap <strong>Location</strong> and choose <strong>Precise</strong>.',
+      'If Location on the phone itself is set to approximate, open <strong>Settings › Location</strong> and turn on <strong>Google Location Accuracy</strong>.'] }
+  };
+  function stepsHTML(h) {
+    return '<div class="help-steps"><h3>' + h.name + '</h3><ol>' + h.steps.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol>' + (h.note ? '<p>' + h.note + '</p>' : '') + '</div>';
+  }
+  function openHelp(topic) {
+    helpTopic = topic || 'blocked';
+    if (helpTopic === 'precise') {
+      $('helpTitle').textContent = 'Turn on precise location';
+      $('helpLede').textContent = 'Your phone is sharing only an approximate location, which can be off by hundreds of feet. The guide needs your exact spot to tell when you reach each stop.';
+      var mine = IS_ANDROID ? PRECISE.android : PRECISE.ios;
+      $('helpMine').innerHTML = stepsHTML(mine);
+      $('helpOthers').innerHTML = stepsHTML(IS_ANDROID ? PRECISE.ios : PRECISE.android);
+    } else {
+      $('helpTitle').textContent = 'Turn location back on';
+      $('helpLede').textContent = 'If you tapped Don’t Allow, your browser won’t ask again on its own. Here is how to switch it back on.';
+      var key = HELP[BROWSER] ? BROWSER : (IS_IOS ? 'safari' : 'chrome');
+      $('helpMine').innerHTML = stepsHTML(HELP[key]);
+      $('helpOthers').innerHTML = Object.keys(HELP).filter(function (k) { return k !== key; }).map(function (k) { return stepsHTML(HELP[k]); }).join('');
+    }
+    $('help').hidden = false; $('help').scrollTop = 0;
+  }
+
+  // If fixes keep coming back very coarse, the phone is probably sharing approximate location.
+  var coarseCount = 0, preciseWarned = false;
+  function checkPrecision(acc) {
+    if (SIM || preciseWarned) return;
+    coarseCount = acc > 500 ? coarseCount + 1 : 0;
+    if (coarseCount >= 3) {
+      preciseWarned = true;
+      $('btnStatusHelp').textContent = 'Turn on precise location'; $('btnStatusHelp').hidden = false;
+      $('btnStatusHelp').dataset.topic = 'precise';
+    }
+  }
+
+  $('btnAskLoc').addEventListener('click', askLocation);
+  $('btnAskCompass').addEventListener('click', askCompass);
+  $('btnPermGo').addEventListener('click', function () { $('perm').hidden = true; if (permMode === 'start') startNav(); });
+  $('btnPermClose').addEventListener('click', function () { $('perm').hidden = true; });
+  $('btnPermHelp').addEventListener('click', function () { openHelp(helpTopic); });
+  $('btnSetup').addEventListener('click', function () { locPermission().then(function (st) { openPerm('setup', st); }); });
+  $('btnStatusHelp').addEventListener('click', function () { openHelp(this.dataset.topic || 'blocked'); });
+  $('btnCloseHelp').addEventListener('click', function () { $('help').hidden = true; });
+  $('btnHelpRetry').addEventListener('click', function () { location.reload(); });
+
   /* ---------- wire up ---------- */
-  function begin() {
+  function startNav() {
     initMap(); show('nav'); startGPS(); keepAwake(); update();
-    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission !== 'function') enableCompass();
+    if (!compassOn && !NEEDS_COMPASS_ASK && HAS_ORIENT) enableCompass();
+  }
+  // Start: explain the permissions first unless they are already settled.
+  function begin() {
+    if (SIM) { startNav(); return; }
+    locPermission().then(function (st) {
+      if (st === 'granted' && (!NEEDS_COMPASS_ASK || compassOn)) startNav();
+      else openPerm('start', st);
+    });
   }
   $('btnBegin').addEventListener('click', begin);
   $('btnOffline').addEventListener('click', saveOffline);
@@ -348,7 +530,7 @@
   $('btnList').addEventListener('click', function () { $('list').hidden = false; });
   $('btnCloseList').addEventListener('click', function () { $('list').hidden = true; });
   $('btnFull').addEventListener('click', fullScreen);
-  $('btnCompass').addEventListener('click', enableCompass);
+  $('btnCompass').addEventListener('click', function () { enableCompass(); });
   $('btnRecenter').addEventListener('click', function () { if (pos && map) map.setView([pos.lat, pos.lon], Math.max(map.getZoom(), 17)); else if (map) toast('Waiting for your location.'); });
   $('btnRead').addEventListener('click', function () {
     var t = target();
@@ -362,7 +544,7 @@
   $('btnPrev').addEventListener('click', function () { if (storyIndex > 0) openStory(storyIndex - 1); });
   $('btnNext').addEventListener('click', nextFromStory);
   $('btnMap').addEventListener('click', function () { closeStory(); if ($('nav').hidden) begin(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (!$('story').hidden) closeStory(); $('list').hidden = true; } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (!$('story').hidden) closeStory(); $('list').hidden = true; $('help').hidden = true; } });
   if (params.has('embed')) document.documentElement.classList.add('embedded');
-  if (SIM) setTimeout(begin, 400);
+  if (SIM) setTimeout(startNav, 400);
 })();
