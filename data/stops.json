@@ -1,0 +1,152 @@
+{
+  "title": "Elkhorn Ranch Walking Guide",
+  "subtitle": "Theodore Roosevelt's home ranch on the Little Missouri",
+  "parking": {
+    "lat": 47.234929,
+    "lon": -103.62739,
+    "name": "Elkhorn Ranch parking area"
+  },
+  "approach": {
+    "heading": "Getting to the trailhead",
+    "body": "<p>The ranch is about 46 miles from the Library: 16 paved miles to I-94 exit 10, then 30 miles of gravel north on County Road 11, Westerheim Road, Bell Lake Road and FH 2. Allow 90 minutes or more each way.</p><p>The last three miles on FH 2 sometimes need four-wheel drive or a high-clearance vehicle, especially in winter and during and after rain. Ask about conditions at the South Unit Visitor Center in Medora or call (701) 623-4466 before you go.</p><p><strong>There is no cell service at the ranch.</strong> Open this guide and tap <em>Save for offline</em> while you still have signal.</p>",
+    "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=47.234929,-103.62739&travelmode=driving"
+  },
+  "stops": [
+    {
+      "n": 1,
+      "title": "The Trailhead",
+      "lat": 47.23498841,
+      "lon": -103.62724201,
+      "image": "img/stop1.jpg",
+      "imageAlt": "Historic photograph of the Elkhorn ranch house porch, hung with elk antlers, with rocking chairs on the veranda",
+      "imageCredit": "Photo courtesy of the National Park Service",
+      "lede": "A 0.7-mile mowed path runs from here through the cottonwoods to the riverbank where the house stood.",
+      "body": "<p>Nothing of the Elkhorn stands today. The path follows the river bottom north to the foundation stones, eight stops and about 1.4 miles round trip. It is flat but can be slippery after rain.</p><p>T.R. chose this bottom in the summer of 1884. Riding north from the Maltese Cross on the advice of the rancher Howard Eaton, he found a grove of cottonwoods under high buttes and, at the edge of the river, the interlocked antlers of two bull elk that had died fighting. The ranch took its name from them.</p>",
+      "source": "Elkhorn naming: Hermann Hagedorn, Roosevelt in the Bad Lands (1921), from interviews with T.R.'s ranch partners."
+    },
+    {
+      "n": 2,
+      "title": "Returning to the Badlands",
+      "lat": 47.23493401,
+      "lon": -103.62491369,
+      "image": "img/stop2.jpg",
+      "imageAlt": "Studio portrait of Theodore Roosevelt in a fringed buckskin hunting suit, holding a rifle",
+      "imageCredit": "Photo courtesy of the National Park Service",
+      "lede": "T.R. came back to Dakota in June 1884, four months after the worst day of his life.",
+      "body": "<p>He had first come west in September 1883 to hunt bison, and he bought into the Maltese Cross Ranch, seven miles south of Medora, before he went home. Five months later, on February 14, 1884, his mother, Mittie, died in the family's New York house in the early morning, and his wife, Alice, died there that afternoon, two days after giving birth to their daughter.</p><p>That night he drew a large X in his diary and wrote one line beneath it.</p>",
+      "quote": {
+        "text": "The light has gone out of my life.",
+        "cite": "Theodore Roosevelt, diary, February 14, 1884. Library of Congress Manuscript Division."
+      },
+      "after": "<p>The Maltese Cross sat close to town and the railroad. T.R. wanted somewhere farther off, and that summer he rode north looking for it.</p>"
+    },
+    {
+      "n": 3,
+      "title": "A Business Proposal",
+      "lat": 47.23502143,
+      "lon": -103.6240983,
+      "image": "img/stop3.jpg",
+      "imageAlt": "Bill Sewall, Theodore Roosevelt and Wilmot Dow standing together in heavy fur coats",
+      "imageCredit": "Photo courtesy of the National Park Service",
+      "lede": "To run the new ranch, T.R. sent for two Maine woodsmen who had never worked cattle.",
+      "body": "<p>Bill Sewall and his nephew Wilmot Dow had guided T.R. through the Maine woods when he was a Harvard student. Three weeks after the funerals he wrote to Sewall from New York.</p>",
+      "quote": {
+        "text": "I hope my Western venture turns out well. If it does, and I feel sure you will do well for yourself by coming out with me, I shall take you and Will Dow out next August. Of course, it depends upon how the cattle have gotten through the winter.",
+        "cite": "Theodore Roosevelt to William W. Sewall, March 9, 1884. Printed in Bill Sewall's Story of T.R. (1919)."
+      },
+      "after": "<p>The cattle wintered well. Sewall went to New York to hear the terms, and later wrote them down:</p>",
+      "quote2": {
+        "text": "He said he would guarantee us a share of anything made in the cattle business, and if anything was lost, he said he would lose it and pay our wages. He asked me what I thought of the proposition. I told him that I thought it was very one-sided, but if he thought he could stand it, I thought we could.",
+        "cite": "William W. Sewall, Bill Sewall's Story of T.R. (1919)."
+      }
+    },
+    {
+      "n": 4,
+      "title": "Building the Elkhorn",
+      "lat": 47.23625255,
+      "lon": -103.62326145,
+      "image": "img/stop4.jpg",
+      "imageAlt": "Historic photograph looking down on the cottonwood bottom of the Elkhorn Ranch beside the Little Missouri River",
+      "imageCredit": "Photo courtesy of the National Park Service",
+      "lede": "Sewall and Dow cut the house from the cottonwoods around you, over the fall and winter of 1884.",
+      "body": "<p>The three men left New York on July 28 and reached the Maltese Cross on August 1. Sewall and Dow worked cattle there for most of the month, then moved downriver to this bottom and lived in a shack while they built. Sewall described the site:</p>",
+      "quote": {
+        "text": "We started building the ranch-house in a clump of large cottonwood-trees near the bank of the Little Missouri River. West from the house it was smooth and grassy for about a hundred yards, then there was a belt of cottonwoods which went back for some two hundred yards. They were the largest trees I ever saw in Dakota.",
+        "cite": "William W. Sewall, Bill Sewall's Story of T.R. (1919)."
+      },
+      "after": "<p>Sewall drew up the plan:</p>",
+      "quote2": {
+        "text": "I designed the house myself and it was a sizable place, sixty feet long, thirty feet wide, and seven feet high, with a flat roof and a porch where after the day's work Theodore used to sit in a rocking-chair, reading poetry.",
+        "cite": "William W. Sewall, Bill Sewall's Story of T.R. (1919)."
+      }
+    },
+    {
+      "n": 5,
+      "title": "A Growing Ranch",
+      "lat": 47.23744721,
+      "lon": -103.62278938,
+      "image": "img/stop5.jpg",
+      "imageAlt": "Cattle wading and drinking in a river below badlands buttes",
+      "imageCredit": "Photo courtesy of the National Park Service",
+      "lede": "The Elkhorn ran on open range: no fences, no deeded land, cattle grazing on public grass.",
+      "body": "<p>When T.R. returned in June 1884 and found his first herd had come through the winter in good shape, he decided to make ranching his regular business and put about a thousand more head on the range. Sewall and Dow would run the downriver herd from the Elkhorn; Sylvane Ferris and Bill Merrifield kept the Maltese Cross.</p><p>Sewall was blunt about the country they had come to:</p>",
+      "quote": {
+        "text": "It is a dirty country and very dirty people on an average, but I think it is healthy. The soil is sand or clay, all dust or all mud.",
+        "cite": "William W. Sewall to his brother Samuel, 1884. Quoted in Hermann Hagedorn, Roosevelt in the Bad Lands (1921)."
+      }
+    },
+    {
+      "n": 6,
+      "title": "A Home on the Little Missouri",
+      "lat": 47.23886038,
+      "lon": -103.62248898,
+      "image": "img/stop6.jpg",
+      "imageAlt": "Historic photograph of the long, low Elkhorn ranch house among tall cottonwood trees, 1886",
+      "imageCredit": "Photograph by Theodore Roosevelt, 1886. Courtesy of the National Park Service",
+      "lede": "Look around: this is the valley T.R. described in his books.",
+      "body": "<p>After the house was finished he stayed here rather than at the Maltese Cross, and he wrote here. Much of <em>Hunting Trips of a Ranchman</em> (1885) and <em>Ranch Life and the Hunting-Trail</em> (1888) describes this bottom and the river beside you.</p>",
+      "quote": {
+        "text": "My home ranch lies on both sides of the Little Missouri, the nearest ranchman above me being about twelve, and the nearest below me about ten, miles distant. The general course of the stream here is northerly, but, while flowing through my ranch, it takes a great westerly reach of some three miles, walled in, as always, between chains of steep, high bluffs half a mile or more apart.",
+        "cite": "Theodore Roosevelt, Ranch Life and the Hunting-Trail (1888), \"The Home Ranch.\""
+      },
+      "after": "<p>He also took photographs. The one above, of the house in its grove, is his own.</p>"
+    },
+    {
+      "n": 7,
+      "title": "Life at the Elkhorn",
+      "lat": 47.24001857,
+      "lon": -103.62168431,
+      "image": "img/stop7.jpg",
+      "imageAlt": "Historic photograph of four women on horseback",
+      "imageCredit": "Photo courtesy of the National Park Service",
+      "lede": "By the summer of 1885 the Elkhorn was a family home, and a crowded one.",
+      "body": "<p>In June 1885 Dow went back to Maine to marry, and returned with his bride and with Sewall's wife and small daughter. Sewall's girl had no playmates and no toys, so T.R. wrote to his sister Anna and asked her to send picture blocks, letter blocks, a little horse and a rag doll.</p><p>The next year both wives gave birth, a week apart, with the nearest doctor 110 miles away. Sewall remembered T.R. coming home a few days later:</p>",
+      "quote": {
+        "text": "Theodore, when he came back to the ranch, about three days after the babies were born, found me making a cradle large enough to hold both babies. He thought I was making too much noise; thought I ought to be more quiet about my work. I told him the noise would be good for them. He laughed about that and told that story as long as he lived.",
+        "cite": "William W. Sewall, Bill Sewall's Story of T.R. (1919)."
+      }
+    },
+    {
+      "n": 8,
+      "title": "The Cabin Site",
+      "lat": 47.241898,
+      "lon": -103.622276,
+      "image": "img/stop8.jpg",
+      "imageAlt": "Grassy clearing among cottonwoods and sagebrush where the Elkhorn ranch house once stood, with buttes beyond",
+      "imageCredit": "NPS Photo/L. Thomas",
+      "lede": "The foundation stones mark where the house stood. Face the river.",
+      "body": "<p>This is the view T.R. wrote about from the veranda:</p>",
+      "quote": {
+        "text": "My home ranch-house stands on the river brink. From the low, long veranda, shaded by leafy cottonwoods, one looks across sand bars and shallows to a strip of meadowland, behind which rises a line of sheer cliffs and grassy plateaus.",
+        "cite": "Theodore Roosevelt, Hunting Trips of a Ranchman (1885)."
+      },
+      "after": "<p>The cattle never paid. In the fall of 1886 Dow sold a shipment in Chicago for less than it had cost, and Sewall and Dow told T.R. that the sooner he got out, the less he would lose. He agreed, and the Maine families went home. The terrible winter of 1886–87 that followed killed cattle across the northern plains. T.R. kept the ranch for some years and came back to hunt, but the life here was over.</p>",
+      "quote2": {
+        "text": "The old ranch is as picturesque as ever; but it is melancholy to see it deserted.",
+        "cite": "Theodore Roosevelt to Anna Roosevelt, August 11, 1892. Harvard College Library."
+      },
+      "closing": "<p>The ground he left became part of Theodore Roosevelt National Park. Inside the Library, the Elkhorn Ranch gallery recreates the house that stood here.</p>"
+    }
+  ],
+  "credits": "Stop locations and photographs: National Park Service, Theodore Roosevelt National Park, Elkhorn Ranch Walking Tour. Text: Theodore Roosevelt Presidential Library. Quotations checked against first editions of Hunting Trips of a Ranchman (1885), Ranch Life and the Hunting-Trail (1888) and Bill Sewall's Story of T.R. (1919), and against Theodore Roosevelt Center records."
+}

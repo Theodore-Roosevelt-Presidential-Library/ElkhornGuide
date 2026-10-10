@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elkhorn Ranch Walking Guide | Theodore Roosevelt Presidential Library</title>
+<meta name="description" content="A walking guide to Theodore Roosevelt's Elkhorn Ranch: a live map and compass that lead you to each of the eight stops, with the story of the ranch at each one. Works offline.">
+<meta name="theme-color" content="#1B4532">
+<meta property="og:title" content="Elkhorn Ranch Walking Guide">
+<meta property="og:description" content="Map, compass and the story of T.R.'s home ranch, stop by stop. Works without cell service.">
+<meta property="og:image" content="https://elkhornguide.labs.trlibrary.com/img/stop8.jpg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Elkhorn Guide">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="app" class="app">
+
+  <header class="bar">
+    <div class="bar-title">
+      <span class="eyebrow">Theodore Roosevelt Presidential Library</span>
+      <h1>Elkhorn Ranch Walking Guide</h1>
+    </div>
+    <div class="bar-actions">
+      <span id="offlinePill" class="pill" hidden>Ready offline</span>
+      <button id="btnFull" class="icon-btn" aria-label="Full screen" title="Full screen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+      </button>
+      <button id="btnList" class="icon-btn" aria-label="All stops" title="All stops">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Start screen -->
+  <section id="start" class="start">
+    <div class="start-hero" style="background-image:url('img/stop8.jpg')">
+      <div class="start-hero-text">
+        <p class="kicker">Theodore Roosevelt National Park · Elkhorn Ranch Unit</p>
+        <h2>Walk to T.R.'s home ranch</h2>
+        <p>Eight stops along a 0.7-mile path to the riverbank where his house stood. A live map and compass lead you to each one.</p>
+      </div>
+    </div>
+    <div class="start-body">
+      <button id="btnBegin" class="btn primary">Start the walking guide</button>
+      <button id="btnOffline" class="btn secondary">Save for offline</button>
+      <p id="offlineNote" class="note">There is no cell service at the ranch. Save the guide while you have signal.</p>
+      <button id="btnPreview" class="btn link">Read the stops from home</button>
+      <details class="approach">
+        <summary>Getting to the trailhead</summary>
+        <div id="approachBody"></div>
+        <a id="approachLink" class="btn secondary small" target="_blank" rel="noopener">Driving directions</a>
+      </details>
+    </div>
+  </section>
+
+  <!-- Navigation screen -->
+  <section id="nav" class="nav" hidden>
+    <div id="map" class="map" role="application" aria-label="Map of the Elkhorn Ranch trail"></div>
+    <button id="btnRecenter" class="map-btn" aria-label="Center on me" title="Center on me">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
+    </button>
+
+    <div class="sheet" id="sheet">
+      <div class="target">
+        <div class="compass" id="compass" aria-hidden="true">
+          <div class="dial" id="dial"><span class="n">N</span></div>
+          <svg class="arrow" id="arrow" viewBox="0 0 100 100"><path d="M50 8 L72 70 L50 58 L28 70 Z"/></svg>
+        </div>
+        <div class="target-text">
+          <p class="target-label" id="targetLabel">Next stop</p>
+          <h2 id="targetTitle">—</h2>
+          <p class="target-dist"><span id="dist">—</span> <span id="dir" class="dir"></span></p>
+          <p class="status" id="status" aria-live="polite">Finding your location…</p>
+        </div>
+      </div>
+      <div class="sheet-actions">
+        <button id="btnCompass" class="btn secondary small">Turn on compass</button>
+        <button id="btnRead" class="btn primary small">Read this stop</button>
+        <button id="btnSkip" class="btn link small">Skip ahead</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stop story -->
+  <article id="story" class="story" hidden aria-live="polite">
+    <div class="story-scroll" id="storyScroll"></div>
+    <nav class="story-nav">
+      <button id="btnPrev" class="btn link small">← Back</button>
+      <button id="btnMap" class="btn secondary small">Map</button>
+      <button id="btnNext" class="btn primary small">Next stop →</button>
+    </nav>
+  </article>
+
+  <!-- All stops -->
+  <aside id="list" class="list" hidden>
+    <div class="list-head">
+      <h2>The eight stops</h2>
+      <button id="btnCloseList" class="icon-btn" aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <ol id="listItems" class="list-items"></ol>
+    <p class="credits" id="credits"></p>
+  </aside>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

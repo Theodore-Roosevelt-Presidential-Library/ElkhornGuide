@@ -1,0 +1,15 @@
+{
+  "name": "Elkhorn Ranch Walking Guide",
+  "short_name": "Elkhorn Guide",
+  "description": "Map, compass and the story of Theodore Roosevelt's Elkhorn Ranch, stop by stop. Works offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F2EC",
+  "theme_color": "#1B4532",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
