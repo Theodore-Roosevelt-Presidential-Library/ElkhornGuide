@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elkhorn Site Methodology</title>
+<meta name="description" content="How the Theodore Roosevelt Presidential Library located the Elkhorn Ranch buildings from 360° panoramas, USGS lidar and the 1957–59 Park Service excavation plan.">
+<style>
+@font-face{font-family:"Dharma Gothic E";font-weight:700;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/dharma_type-dharmagothice-bold.woff2") format("woff2")}
+@font-face{font-family:"Clearface";font-weight:400;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/clearfacestd-regular.woff2") format("woff2")}
+@font-face{font-family:"Frutiger";font-weight:400;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/frutigerltstd-regular.woff2") format("woff2")}
+@font-face{font-family:"Frutiger";font-weight:700;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/frutigerltstd-bold.woff2") format("woff2")}
+:root{--ink:#25282A;--ink-2:#5A5F61;--paper:#F4F2EC;--card:#fff;--line:#D1CCBD;--green:#1B4532;--orange:#C9623F;--navy:#092A4D;--zebra:#EEECE5;
+--display:"Dharma Gothic E","Oswald","Arial Narrow",Impact,sans-serif;--serif:"Clearface",Georgia,serif;--sans:"Frutiger","Helvetica Neue",Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#ECE9E1;--ink-2:#B4B0A6;--paper:#14181B;--card:#1C2226;--line:#3A4247;--green:#8FC895;--orange:#E7805D;--navy:#99ADC5;--zebra:#1A1F23}}
+:root[data-theme="dark"]{--ink:#ECE9E1;--ink-2:#B4B0A6;--paper:#14181B;--card:#1C2226;--line:#3A4247;--green:#8FC895;--orange:#E7805D;--navy:#99ADC5;--zebra:#1A1F23}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--serif)}
+header{background:var(--navy);color:#fff;padding:28px 16px 24px}
+@media (prefers-color-scheme:dark){header{background:#092A4D}}
+header .in,main{max-width:860px;margin:0 auto}
+.eyebrow{font:700 12px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin:0 0 6px}
+h1{font:700 clamp(36px,7vw,56px)/.95 var(--display);text-transform:uppercase;margin:0 0 10px;letter-spacing:.01em}
+.byline{font:14px/1.4 var(--sans);opacity:.85;margin:0}
+main{padding:24px 16px 64px}
+main>p:first-child{font-size:20px;line-height:1.5}
+h2{font:700 30px/1 var(--display);text-transform:uppercase;color:var(--green);margin:44px 0 12px;letter-spacing:.02em}
+a{color:var(--orange)}
+strong{font-family:var(--sans);font-weight:700;font-size:.94em}
+code{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;background:var(--zebra);padding:1px 4px;border-radius:3px;word-break:break-word}
+ol,ul{padding-left:1.4em} li{margin:0 0 8px}
+.tw{overflow-x:auto;margin:16px 0 22px;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font:14px/1.45 var(--sans);min-width:560px}
+th{text-align:left;background:var(--zebra);font-weight:700;padding:9px 10px;border-bottom:2px solid var(--line);vertical-align:bottom}
+td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top}
+figure{margin:22px 0} figure img{display:block;width:100%;height:auto;border-radius:4px;border:1px solid var(--line)}
+figcaption{font:14px/1.45 var(--sans);color:var(--ink-2);margin-top:8px}
+.box{display:inline-block;width:14px;height:14px;border:2px solid var(--ink-2);border-radius:3px;vertical-align:-2px;margin-right:6px}
+ul:has(.box){list-style:none;padding-left:0}
+footer{max-width:860px;margin:0 auto;padding:0 16px 40px;font:13px/1.5 var(--sans);color:var(--ink-2)}
+</style>
+</head>
+<body>
+<header><div class="in">
+<p class="eyebrow">Theodore Roosevelt Presidential Library · Elkhorn Ranch Walking Guide</p>
+<h1>Locating the Elkhorn Ranch Buildings: Methodology</h1>
+<p class="byline">Matt Briney · October 14, 2026</p>
+</div></header>
+<main>
+<p>Three independent kinds of evidence put Theodore Roosevelt's Elkhorn ranch house on the line of foundation stones that stands today, facing about 12° east of true north. They also point to likely spots for the well and barn. Each is a desk finding until it is checked in the field with the National Park Service.</p>
+<h2>Question and approach</h2>
+<p>The goal is to fix where the Elkhorn buildings stood (the house, well, barn, shed, blacksmith shop, dugout and corral) accurately enough to place a 3D reconstruction in augmented reality at the site. The work answers one question: where, to the meter, did each structure stand?</p>
+<p>No single source answers that. The method combines three that do not depend on each other, then tests where they agree:</p>
+<ol>
+<li><strong>Ground photographs.</strong> The Library's own 360° panoramas of the ruins show the surviving foundation stones from several points.</li>
+<li><strong>Terrain.</strong> USGS lidar from 2021 records the ground surface to within a few centimeters and can reveal pits, mounds and banks.</li>
+<li><strong>The record.</strong> The Park Service's 1957–59 excavation produced a measured site plan, and period accounts describe where things stood.</li>
+</ol>
+<p>A fourth step lays the excavation plan onto the ground using the panorama footprint, then checks whether the lidar shows something where the plan says a building stood.</p>
+<h2>Sources used</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Date</th>
+<th>What it gives</th>
+<th>Resolution or scale</th>
+<th>Rights</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Library 360° panoramas (7), elkhorn.labs.trlibrary.com</td>
+<td>July 6, 2025</td>
+<td>Foundation stones seen from several points; compass heading per image</td>
+<td>4608 × 2304 px; phone GPS ±12 m</td>
+<td>Library-owned</td>
+</tr>
+<tr>
+<td>USGS 3DEP lidar, project ND_SouthWest_2021_D21</td>
+<td>Nov 6, 2021 (leaf-off)</td>
+<td>Bare-earth surface; tree heights</td>
+<td>About 5 ground points per m²; 0.5 m grid; 2.4 cm noise</td>
+<td>Public domain</td>
+</tr>
+<tr>
+<td>Dee C. Taylor, <em>Archeological Investigations of the Elkhorn Ranch Site</em> (NPS)</td>
+<td>1959</td>
+<td>Excavated building dimensions, distances, well, cellar</td>
+<td>Text and measured plan</td>
+<td>Federal record</td>
+</tr>
+<tr>
+<td>Beaubien–Taylor site plan (in Taylor 1959)</td>
+<td>Sept 1957, additions 1959</td>
+<td>Positions of house, well, barn, shed, blacksmith shop, dugout, corral, fences, river bank</td>
+<td>1 in = 30 ft</td>
+<td>Federal record</td>
+</tr>
+<tr>
+<td>Mattison, NPS location study and <em>North Dakota History</em> 27:2</td>
+<td>1950, 1960</td>
+<td>Site identification; letters from settlers; photo positions</td>
+<td>Text</td>
+<td>Published</td>
+</tr>
+<tr>
+<td>Torres, <em>Historic Structure Report, Elkhorn Ranch</em> (NPS)</td>
+<td>1980</td>
+<td>Building descriptions; house blueprint</td>
+<td>Text, plan</td>
+<td>Federal record</td>
+</tr>
+<tr>
+<td>Sewall (1919), Hagedorn (1921), T.R.'s <em>Ranch Life</em> (1888) and <em>Autobiography</em> (1913)</td>
+<td>1888–1921</td>
+<td>Eyewitness descriptions and T.R.'s photographs</td>
+<td>Text, halftones</td>
+<td>Public domain</td>
+</tr>
+<tr>
+<td>USDA aerial photos CCN-3T-168, CCN-4T-012 (ND GIS Hub mosaic)</td>
+<td>July 31, 1957</td>
+<td>The site two months before excavation; river position</td>
+<td>About 0.5 m; not orthorectified</td>
+<td>Public domain</td>
+</tr>
+<tr>
+<td>NAIP orthoimagery (ND GIS Hub, USGS)</td>
+<td>2024 and earlier</td>
+<td>Current trails, clearing, trees</td>
+<td>0.6 m</td>
+<td>Public domain</td>
+</tr>
+<tr>
+<td>Esri World Imagery</td>
+<td>Recent</td>
+<td>Sharper view of mowed paths</td>
+<td>About 0.3 m</td>
+<td>View only; not for publication</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Step 1: House footprint from the 360° panoramas</h2>
+<p>The panoramas place the house against its own stones, but only roughly on a map. Each image stores a compass heading at its center, so any pixel converts to a true bearing. The angle below the horizon converts to a distance once the camera height is known.</p>
+<ol>
+<li><strong>Check the headings.</strong> For each panorama, the predicted sun position for its time and place was compared with the brightest point in the sky. Six of seven agreed within 3°, and a butte summit lined up within 0.5° across panoramas 1, 2 and 5. The headings are true north, not magnetic (local declination is about 7°).</li>
+<li><strong>Check the GPS.</strong> Each image's GPS time was compared with its capture time. Panorama 2 carried a fix three minutes stale, and the fresh fixes of panoramas 1 and 5 disagree by about 23 m. GPS was therefore treated as approximate (±12 m).</li>
+<li><strong>Measure the stones.</strong> Every visible foundation stone was given a label (A–M) and measured at full resolution: bearing and depression angle to its ground contact.</li>
+<li><strong>Match and solve.</strong> Stones seen from more than one panorama tie the panoramas together. Panoramas 1 and 5 share six stones; panorama 2 sees three more. A joint least-squares solution fits bearings to about 0.5°. Panoramas 3, 4, 6 and 7 show no foundation stones and were not used.</li>
+<li><strong>Set the scale.</strong> The stones form two parallel rows (west: F, G, H, A, straight to within 0.2 m over 13 m; east: J, L, K). Taking the row spacing as the documented 30 ft (9.14 m) implies a camera height of 1.36 m, plausible for a handheld capture. Distances carry about ±10%.</li>
+<li><strong>Fit the house.</strong> A 60 × 30 ft rectangle was fitted to the rows. Its long axis runs <strong>11.7° east of true north (±3°)</strong>. Stones show along only 12–14 m of the 18.3 m length, so two placements are kept: one with the north wall on stones A and M, and one centered on the rows (3 m further north).</li>
+</ol>
+<p>Check: the Park Service's "Cabin Site" stop coordinate falls 1.9 m from the fitted center.</p>
+<figure><a href="model/overlay_pano1.jpg"><img src="model/overlay_pano1.jpg" alt="Panorama 1 with the fitted house outline drawn back into the image" loading="lazy"></a><figcaption>Panorama 1 with the fitted house outline (red) and a simple wall-and-roof box (white) drawn back into the image. The outline passes through the foundation stones.</figcaption></figure>
+
+<h2>Step 2: Feature detection in the lidar</h2>
+<p>The lidar can see features about 2 m across with 8–10 cm of relief or more. It cannot see individual stones, postholes or fence lines.</p>
+<ol>
+<li><strong>Get the points.</strong> The USGS point cloud for the site was read from the public 3DEP copy on Amazon S3 (<code>usgs-lidar-public/ND_SouthWest_1_D21</code>) and clipped to a 300 × 300 m square. It matches the USGS 1 m elevation model to a median of 0.1 cm.</li>
+<li><strong>Check density.</strong> Ground returns average 5.0 per m² inside the house area (spacing about 0.45 m), and only 1% of 1 m cells near the house lack a ground point. The data were flown leaf-off in November, so trees did not block the ground.</li>
+<li><strong>Build surfaces.</strong> A 0.5 m bare-earth model was triangulated from ground points, plus a canopy-height model from first returns.</li>
+<li><strong>Visualize.</strong> Archaeology-style views were made: multi-direction hillshade, local relief at 2, 5 and 10 m radii, sky-view factor, slope and 10 cm contours.</li>
+<li><strong>Detect.</strong> Pits were found by fill-sinks depth (at least 0.08 m) and mounds by local relief (at least ±0.10 m), with a 1 m² minimum. That gave 618 raw hits and 238 after screening. "Tier A" features are compact, in open grass, off the river bank, and at least 0.15 m deep or 0.18 m high.</li>
+<li><strong>Screen out the modern.</strong> Every candidate was compared with current imagery for trails, panels, fences and trees. A ring test scored rims around pits in 12 sectors; pit D2 scored 10 of 12, the highest in the tile.</li>
+<li><strong>Measure the background.</strong> Tier-A features run 24 per hectare within 25 m of the house but only 1–5 per hectare at 50–150 m. A feature far from the house is therefore much less likely to be chance.</li>
+</ol>
+<p>The lidar also traced the bank the house stood above: a terrace edge 18–37 m east of the house with a 2 m drop. The river now runs about 140 m east.</p>
+<h2>Step 3: The documentary record</h2>
+<p>The 1957–59 excavation plan is the backbone of this step. Paul Beaubien surveyed the site in September 1957 and Dee C. Taylor added his 1959 findings to the same plan, drawn at 1 inch = 30 feet. It survives as two scans inside Taylor's report.</p>
+<ol>
+<li><strong>Collect.</strong> Taylor's full report and the related Park Service studies were downloaded from the Theodore Roosevelt Center's digital library and npshistory.com, then OCR'd.</li>
+<li><strong>Extract every spatial statement.</strong> Each direction or distance in any source was logged with its exact wording and page, for example the well "located 33 feet from the southwest corner of the house" (Taylor, p. 33).</li>
+<li><strong>Rebuild the plan.</strong> The two scans were joined by eye along fences that cross the seam (good to about ±4 ft). The scale was confirmed at 5.0 pixels per foot against four measured features: the house (60 × 30 ft), blacksmith shop (33 × 16 ft), dugout (14 ft) and round corral (62 ft).</li>
+<li><strong>Log conflicts rather than resolve them.</strong> Sources disagree on several points, and each disagreement is kept with both readings:</li>
+</ol>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Point</th>
+<th>Readings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Well distance</td>
+<td>33 ft from SW corner (Taylor text); about 37 ft on the plan; "about 50 feet west of the house" (1949 settler letter)</td>
+</tr>
+<tr>
+<td>House to river bank</td>
+<td>70 ft (Taylor); 75 ft (1949 letter); about 84 ft on the plan</td>
+</tr>
+<tr>
+<td>Barn distance</td>
+<td>About 150 ft NW (Taylor); about 190 ft on the plan; "a hundred yards or more westward" (Hagedorn)</td>
+</tr>
+<tr>
+<td>Dugout distance</td>
+<td>30–40 yards (Hagedorn); about 95–110 yards SSE as excavated</td>
+</tr>
+<tr>
+<td>Storehouse side</td>
+<td>East of the house (Mattison's paraphrase); "west of the house and well" (Taylor quoting the same letter)</td>
+</tr>
+<tr>
+<td>Roof</td>
+<td>"Flat" (Sewall, 1919); low-pitched and shingled (T.R.'s photographs)</td>
+</tr>
+</tbody>
+</table></div>
+<figure><a href="model/beaubien_taylor_1957-59_site_plan.jpg"><img src="model/beaubien_taylor_1957-59_site_plan.jpg" alt="The 1957–59 Beaubien–Taylor site plan, joined from two scans" loading="lazy"></a><figcaption>The Beaubien–Taylor site plan as joined from the two scans in Taylor&#x27;s report. North is to the right; the Little Missouri runs along the bottom.</figcaption></figure>
+
+<h2>Step 4: Registering the plan and scoring matches</h2>
+<p>The plan was laid on the ground using only the house, then everything else on it was treated as a prediction to test against the lidar.</p>
+<ol>
+<li><strong>Fit.</strong> The plan's house outline was matched to the panorama footprint: scale fixed by the plan's 1 in = 30 ft, position by the house center, and rotation by the house's long axis.</li>
+<li><strong>Independent check on rotation.</strong> On the plan, the house axis sits 11.2° from the plan's frame; the panoramas give 11.7° from true north. Only 0.5° of rotation was needed. The two measurements agree, which is consistent with the plan having been drawn to true north.</li>
+<li><strong>Independent check on position.</strong> The river bank drawn on the 1957 plan falls on the terrace edge in the 2021 lidar. Nothing in the fit used the bank, so this is a genuine test.</li>
+<li><strong>Project.</strong> Every other feature on the plan was converted to latitude and longitude. Expected error is about 3–5 m near the house and 5–10 m at 100 m, from the north–south uncertainty of the footprint, the scan seam and ±3° of rotation.</li>
+<li><strong>Score.</strong> For each projected feature, the nearest lidar candidates were listed with their distance. A Tier-A candidate within about 6 m counts as support where such features are rare (beyond 50 m, an expected 0.01–0.06 by chance). Near the house, where pits and mounds are common, a nearby candidate counts for little.</li>
+</ol>
+<h2>Results to date</h2>
+<p>The house position is solid; the well and barn are leads; the rest are not yet supported by the lidar. Distances are from the house center.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Where the record puts it</th>
+<th>What the lidar shows</th>
+<th>Fit</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ranch house</td>
+<td>60 × 30 ft, about 70 ft west of the river bank (Taylor)</td>
+<td>No cellar hollow inside the outline; a 7 m hollow (D1) just outside the west wall, parallel to it</td>
+<td>Placed by the stones; rotation and bank confirmed</td>
+<td>High relative to the stones; ±12 m on a map</td>
+</tr>
+<tr>
+<td>Well</td>
+<td>33–37 ft from SW corner (Taylor, plan); about 50 ft west (1949 letter)</td>
+<td>Round pit with raised rim (D2), 2.7 m across, 0.36–0.45 m deep, 16 m due west</td>
+<td>7 m from the plan's spot; matches the 1949 letter</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td>Barn</td>
+<td>About 59 m NNW on the plan</td>
+<td>Mound (M12) 3 m away; 9 × 7 m hollow (D13) 11 m away</td>
+<td>Rare features this far out</td>
+<td>Moderate to low</td>
+</tr>
+<tr>
+<td>Utility shed</td>
+<td>About 21 m NW on the plan</td>
+<td>Small pit (D5) 1 m away</td>
+<td>Ground near the house is busy</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Blacksmith shop</td>
+<td>About 83 m SSE, near the bank</td>
+<td>Mound (M15) 5.5 m away, beside a trail, wrong orientation</td>
+<td>Weak</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Dugout</td>
+<td>In the bank face, about 96 m SSE</td>
+<td>Nothing distinct</td>
+<td>—</td>
+<td>None yet</td>
+</tr>
+<tr>
+<td>Round corral</td>
+<td>About 127 m SW, 62 ft across</td>
+<td>Posts too small to detect</td>
+<td>—</td>
+<td>None yet</td>
+</tr>
+<tr>
+<td>River bank</td>
+<td>70–75 ft east of the house (Taylor; 1949 letter)</td>
+<td>Terrace edge 18–37 m east, 2 m drop; river now about 140 m east</td>
+<td>Plan's bank line falls on it</td>
+<td>High</td>
+</tr>
+</tbody>
+</table></div>
+<figure><a href="model/site_evidence.jpg"><img src="model/site_evidence.jpg" alt="The 1957–59 excavation plan registered to the house footprint and drawn over the 2021 lidar" loading="lazy"></a><figcaption>The 1957–59 excavation plan (black lines, white crosses) registered to the footprint (yellow) over the 2021 lidar. Blue rings are pits, pink rings mounds. The plan&#x27;s river-bank line falls on the terrace edge.</figcaption></figure>
+
+<p>One correction to earlier notes: two features 22–26 m southeast of the house (M4, D4) were first suggested as the blacksmith shop. The plan puts the shop about 83 m out, so they are not it.</p>
+<h2>Accuracy and limits</h2>
+<ul>
+<li><strong>Absolute position is the weak link.</strong> Phone GPS puts the whole layout within about ±12 m. Relative positions (house to stones, stones to each other) are good to a few tenths of a meter.</li>
+<li><strong>The house's north–south placement is uncertain by about 3 m.</strong> Stones are visible along only part of its length. This is also the most likely reason the well candidate sits 7 m from the plan's well.</li>
+<li><strong>Scale rests on one assumption.</strong> Panorama distances were scaled by taking the stone rows as the 30 ft walls. If the rows are sill piers set inside the walls, distances shift by up to 10%.</li>
+<li><strong>Lidar sees shape, not material.</strong> A pit or mound can be a well, a 1959 test trench, a tree throw, an animal burrow or visitor wear. Only fieldwork tells them apart.</li>
+<li><strong>The 1957 aerial is not corrected.</strong> It can show where the river ran but not where buildings stood.</li>
+<li><strong>Interpretation is not proof.</strong> Every "candidate" in this document is a place to look, not a finding.</li>
+</ul>
+<h2>Field verification with NPS</h2>
+<p>One visit with the park's staff can settle most of the open questions. Any probing or ground disturbance at the site needs Park Service authorization and should be done by or with the park's archeologist.</p>
+<p><strong>Before the visit</strong></p>
+<ul>
+<li><span class="box" aria-hidden="true"></span> Ask the Midwest Archeological Center for Taylor's detailed house, blacksmith-shop and general maps, Beaubien's drawing AVMP-TR 3043, and the 1957–58 site photographs.</li>
+<li><span class="box" aria-hidden="true"></span> Ask the park for its 2012 Cultural Landscape Inventory and the National Register file for listing 12000252.</li>
+<li><span class="box" aria-hidden="true"></span> Ask whether Taylor's 1959 concrete corner posts are still in place. He set them at the southwest and northwest corners of each building; a 1986 Park Service history says the buildings are "marked with cement pilings."</li>
+<li><span class="box" aria-hidden="true"></span> Order the July 1957 aerial film (CCN-3T-168, CCN-4T-012) from USDA's Aerial Photography Field Office.</li>
+</ul>
+<p><strong>At the site</strong></p>
+<ul>
+<li><span class="box" aria-hidden="true"></span> Find the concrete posts and record each with survey-grade GPS. This alone fixes every building.</li>
+<li><span class="box" aria-hidden="true"></span> Record GPS (survey-grade, or averaged for 10 minutes) on stones A, F, J and K.</li>
+<li><span class="box" aria-hidden="true"></span> Tape between stones: G to L and F to J (expected about 9.1 m), along the west row F–G–H–A, and across A–M.</li>
+<li><span class="box" aria-hidden="true"></span> Visit pit D2 (16 m west of the house) with the archeologist to see whether stone lining is visible.</li>
+<li><span class="box" aria-hidden="true"></span> Walk D1, D5, D13 and M12, and the blacksmith-shop area, and photograph each.</li>
+<li><span class="box" aria-hidden="true"></span> Retake panoramas at the house corners, noting the camera height and confirming the GPS time matches the capture time.</li>
+</ul>
+<h2>Files and reproducibility</h2>
+<p>Everything is in the Library's ElkhornGuide repository, folder <code>docs/model/</code>. Anyone with the same public data can rerun each step.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="model/footprint.json"><code>footprint.json</code></a>, <a href="model/topdown.png"><code>topdown.png</code></a>, <a href="model/overlay_pano1.jpg"><code>overlay_pano1.jpg</code></a>, <a href="model/overlay_pano5.jpg"><code>overlay_pano5.jpg</code></a></td>
+<td>Step 1: stones, panorama positions, both house rectangles, and the outline drawn back into the panoramas</td>
+</tr>
+<tr>
+<td><a href="model/lidar_candidates.json"><code>lidar_candidates.json</code></a></td>
+<td>Step 2: all 238 screened pits and mounds with size, depth, position and interpretation</td>
+</tr>
+<tr>
+<td><a href="model/beaubien_taylor_1957-59_site_plan.jpg"><code>beaubien_taylor_1957-59_site_plan.jpg</code></a>, <a href="model/site_plan_features_px.json"><code>site_plan_features_px.json</code></a></td>
+<td>Step 3: the joined excavation plan and every feature's position on it</td>
+</tr>
+<tr>
+<td><a href="model/site_plan_registered.json"><code>site_plan_registered.json</code></a>, <a href="model/site_evidence.jpg"><code>site_evidence.jpg</code></a></td>
+<td>Step 4: the plan's features in latitude and longitude, and the combined map</td>
+</tr>
+<tr>
+<td><a href="model/site_200m.jpg"><code>site_200m.jpg</code></a>, <a href="model/site_600m.jpg"><code>site_600m.jpg</code></a></td>
+<td>Aerial, satellite and lidar views with the footprint</td>
+</tr>
+<tr>
+<td><a href="model/scripts/README.txt"><code>scripts/</code></a></td>
+<td>The code for each step, with a README on running it</td>
+</tr>
+</tbody>
+</table></div>
+<p>The large inputs are not stored in the repository. The lidar comes from the public USGS 3DEP bucket, and the panoramas from the elkhorn-panos repository.</p>
+<h2>Sources</h2>
+<ul>
+<li>Dee C. Taylor, <a href="https://www.theodorerooseveltcenter.org/digital-library/o274469">Archeological Investigations of the Elkhorn Ranch Site</a> (NPS, 1959), with the Beaubien–Taylor site plan</li>
+<li>Ray H. Mattison, <a href="https://npshistory.com/publications/thro/ndh-v27n2.pdf">"Roosevelt's Elkhorn Ranch," North Dakota History 27:2</a> (1960)</li>
+<li>Ray H. Mattison, <a href="https://www.theodorerooseveltcenter.org/digital-library/o294856">Historical study of buildings at the Elkhorn Ranch</a> (1960)</li>
+<li>Torres, <a href="https://npshistory.com/publications/thro/ccc_structures_hsr.pdf">Historic Structure Report, Elkhorn Ranch</a> (NPS, 1980)</li>
+<li>Harmon, <a href="https://npshistory.com/publications/thro/adhi.pdf">At the Open Margin: An Administrative History of Theodore Roosevelt National Park</a> (NPS, 1986)</li>
+<li>Brooks and Mattison, <a href="https://npshistory.com/handbooks/historical/thro/1962.pdf">Theodore Roosevelt and the Dakota Badlands</a> (NPS, 1958; 1962 printing)</li>
+<li><a href="https://www.theodorerooseveltcenter.org/digital-library/o294358">National Register nomination, Elkhorn Ranch Site</a> (1976)</li>
+<li>William W. Sewall, <a href="https://archive.org/details/billsewallsstory00sewa">Bill Sewall's Story of T.R.</a> (1919)</li>
+<li>Hermann Hagedorn, <a href="https://archive.org/details/inthebadlandshag00hermrich">Roosevelt in the Bad Lands</a> (1921)</li>
+<li>Theodore Roosevelt, <a href="https://archive.org/details/ranchlifehunting00roos">Ranch Life and the Hunting-Trail</a> (1888)</li>
+<li>USGS 3D Elevation Program, ND_SouthWest_2021_D21 lidar, via <a href="https://apps.nationalmap.gov/downloader/">The National Map Downloader</a> and the <a href="https://usgs.entwine.io/">public 3DEP point-cloud catalog</a></li>
+<li>North Dakota GIS Hub imagery services (1957 USDA aerials, 1995 orthophoto, NAIP): <a href="https://ndgishub.nd.gov">ndgishub.nd.gov</a></li>
+<li>Theodore Roosevelt Presidential Library, <a href="https://elkhorn.labs.trlibrary.com">Elkhorn Ranch in 360°</a> (July 2025)</li>
+</ul>
+</main>
+<footer>Part of the ElkhornGuide repository. Desk findings pending field verification with Theodore Roosevelt National Park.</footer>
+</body>
+</html>
