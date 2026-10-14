@@ -1,0 +1,139 @@
+{
+ "scale": 4.0,
+ "exposure_stops": 1.4,
+ "uv": "TEXCOORD_1",
+ "maps": {
+  "ceiling_pine": {
+   "file": "ceiling_pine.webp",
+   "size": 2048
+  },
+  "house_ilog": {
+   "file": "house_ilog.webp",
+   "size": 1024
+  },
+  "interior_bark": {
+   "file": "interior_bark.webp",
+   "size": 128
+  },
+  "interior_bear": {
+   "file": "interior_bear.webp",
+   "size": 128
+  },
+  "interior_blanket": {
+   "file": "interior_blanket.webp",
+   "size": 256
+  },
+  "interior_bone": {
+   "file": "interior_bone.webp",
+   "size": 128
+  },
+  "interior_books": {
+   "file": "interior_books.webp",
+   "size": 256
+  },
+  "interior_brick": {
+   "file": "interior_brick.webp",
+   "size": 256
+  },
+  "interior_buffalo": {
+   "file": "interior_buffalo.webp",
+   "size": 128
+  },
+  "interior_castiron": {
+   "file": "interior_castiron.webp",
+   "size": 256
+  },
+  "interior_chair": {
+   "file": "interior_chair.webp",
+   "size": 128
+  },
+  "interior_cloth": {
+   "file": "interior_cloth.webp",
+   "size": 128
+  },
+  "interior_coon": {
+   "file": "interior_coon.webp",
+   "size": 128
+  },
+  "interior_door": {
+   "file": "interior_door.webp",
+   "size": 512
+  },
+  "interior_duck": {
+   "file": "interior_duck.webp",
+   "size": 256
+  },
+  "interior_elkhide": {
+   "file": "interior_elkhide.webp",
+   "size": 128
+  },
+  "interior_flagstone": {
+   "file": "interior_flagstone.webp",
+   "size": 128
+  },
+  "interior_floor": {
+   "file": "interior_floor.webp",
+   "size": 1024
+  },
+  "interior_iron": {
+   "file": "interior_iron.webp",
+   "size": 128
+  },
+  "interior_leather": {
+   "file": "interior_leather.webp",
+   "size": 128
+  },
+  "interior_oilcloth": {
+   "file": "interior_oilcloth.webp",
+   "size": 256
+  },
+  "interior_paint": {
+   "file": "interior_paint.webp",
+   "size": 512
+  },
+  "interior_paper": {
+   "file": "interior_paper.webp",
+   "size": 128
+  },
+  "interior_pine": {
+   "file": "interior_pine.webp",
+   "size": 1024
+  },
+  "interior_pointblanket": {
+   "file": "interior_pointblanket.webp",
+   "size": 256
+  },
+  "interior_rubber": {
+   "file": "interior_rubber.webp",
+   "size": 128
+  },
+  "interior_sacking": {
+   "file": "interior_sacking.webp",
+   "size": 128
+  },
+  "interior_ticking": {
+   "file": "interior_ticking.webp",
+   "size": 256
+  },
+  "interior_tin": {
+   "file": "interior_tin.webp",
+   "size": 128
+  },
+  "interior_tinlabel": {
+   "file": "interior_tinlabel.webp",
+   "size": 128
+  },
+  "interior_transfer": {
+   "file": "interior_transfer.webp",
+   "size": 128
+  },
+  "interior_ware": {
+   "file": "interior_ware.webp",
+   "size": 128
+  },
+  "interior_wolf": {
+   "file": "interior_wolf.webp",
+   "size": 128
+  }
+ }
+}

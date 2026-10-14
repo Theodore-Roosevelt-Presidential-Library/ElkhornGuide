@@ -37,9 +37,10 @@ header { display: grid; gap: 4px; }
 h1 { font: 700 clamp(30px, 5vw, 46px)/1.05 var(--f-display); margin: 0; text-wrap: balance; letter-spacing: .01em; }
 .lede { margin: 4px 0 0; max-width: 62ch; color: var(--fg); }
 .stage { position: relative; background: var(--stage); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
-model-viewer { width: 100%; height: min(68vh, 620px); min-height: 360px; display: block; background: transparent; --poster-color: transparent; }
+#cv { width: 100%; height: min(68vh, 620px); min-height: 360px; display: block; touch-action: none; cursor: grab; }
 .badge { position: absolute; left: 10px; bottom: 10px; font: 500 11px/1.3 var(--f-data); color: var(--muted);
   background: color-mix(in srgb, var(--bg) 85%, transparent); padding: 5px 8px; border-radius: 3px; max-width: calc(100% - 20px); }
+.ar-btn { position: absolute; right: 10px; bottom: 10px; font: 600 15px var(--f-body); background: var(--accent); color: #fff; border: 0; border-radius: 3px; padding: 9px 14px; text-decoration: none; }
 .loading { position: absolute; inset: 0; display: grid; place-items: center; font: 500 13px var(--f-data); color: var(--muted); pointer-events: none; }
 .ar-btn { position: absolute; right: 10px; bottom: 10px; font: 600 15px var(--f-body); background: var(--accent); color: #fff; border: 0;
   border-radius: 3px; padding: 9px 14px; cursor: pointer; }
@@ -72,18 +73,13 @@ footer code { font: 12.5px var(--f-data); }
   <header>
     <div class="eyebrow">Elkhorn Ranch · Billings County, Dakota Territory · reconstruction draft 2</div>
     <h1>T.R.'s Elkhorn Ranch, 1886</h1>
-    <p class="lede">The ranch house and outbuildings rebuilt at full scale from T.R.'s own 1886 photographs, Bill Sewall's letters, the 1957–59 National Park Service excavations and the Library's 360° survey of the foundation stones. The rooms are furnished from T.R.'s and Sewall's descriptions and the objects Taylor dug up in 1959. Drag to look around. On a phone, “View in your space” places the building at full size in front of you.</p>
+    <p class="lede">The ranch house and outbuildings rebuilt at full scale from T.R.'s own 1886 photographs, Bill Sewall's letters, the 1957–59 National Park Service excavations and the Library's 360° survey of the foundation stones. The rooms are furnished from T.R.'s and Sewall's descriptions and the objects Taylor dug up in 1959. Drag to orbit, scroll or pinch to zoom, right-drag or two-finger drag to pan. On a phone, “View in your space” places the building at full size in front of you.</p>
   </header>
 
   <div class="stage">
-    <model-viewer id="mv" src="models/elkhorn_house.glb" alt="3D reconstruction of the Elkhorn ranch house, 1886"
-      camera-controls touch-action="pan-y" shadow-intensity="1" shadow-softness="0.8" exposure="0.95" tone-mapping="agx"
-      environment-image="neutral" ar ar-modes="webxr scene-viewer quick-look" ar-placement="floor"
-      camera-orbit="34deg 82deg 40m" camera-target="0m 2m 0m" field-of-view="38deg"
-      min-camera-orbit="auto 5deg 0.3m" max-camera-orbit="auto 92deg 900m" interaction-prompt="none">
-      <button slot="ar-button" class="ar-btn">View in your space</button>
-      <div class="loading" slot="progress-bar" id="loading">Loading model…</div>
-    </model-viewer>
+    <canvas id="cv" aria-label="3D reconstruction of the Elkhorn ranch, 1886"></canvas>
+    <a class="ar-btn" id="ar" href="ar.html">View in your space</a>
+    <div class="loading" id="loading">Loading model…</div>
     <div class="badge" id="badge">Ranch house · 60 × 30 ft · east veranda</div>
   </div>
 
@@ -92,6 +88,11 @@ footer code { font: 12.5px var(--f-data); }
       <span class="lbl">Model</span>
       <button class="chip" id="m-house" aria-pressed="true">Ranch house</button>
       <button class="chip" id="m-site" aria-pressed="false">Whole ranch</button>
+    </div>
+    <div class="row" role="group" aria-label="Interior light">
+      <span class="lbl">Light</span>
+      <button class="chip" id="l-baked" aria-pressed="true">Baked (as rendered)</button>
+      <button class="chip" id="l-live" aria-pressed="false">Live</button>
     </div>
     <div class="row" role="group" aria-label="Roof">
       <span class="lbl">Roof</span>
@@ -109,16 +110,22 @@ footer code { font: 12.5px var(--f-data); }
 
   <footer>
     <p>Positions: house footprint fitted to the surviving foundation stones in the Library's 360° panoramas (long axis 11.7° east of true north, ±3°); outbuildings placed from the Beaubien–Taylor 1957/59 site plan registered to that footprint (±4 ft for nearby features, more toward the corral). Absolute GPS placement is ±12 m until surveyed on site with NPS. Model origin: centre of the house footprint, <code>47.24191, −103.62226</code>.</p>
-    <p><a href="../docs/methodology.html">How this was built: methodology and sources</a>.</p>
     <p>Draft for internal review. Not for publication until the Library's historians and the National Park Service have checked it.</p>
   </footer>
 </div>
 
-<script type="module">
-import "../vendor/model-viewer/model-viewer.min.js";
-customElements.whenDefined("model-viewer").then(() => { const MV = customElements.get("model-viewer"); MV.dracoDecoderLocation = new URL("draco/", location.href).href; });
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/"
+} }
 </script>
-<script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 const MODELS = {
   house: { src: 'models/elkhorn_house.glb', badge: 'Ranch house · 60 × 30 ft · furnished as about 1886',
     views: [
@@ -136,16 +143,17 @@ const MODELS = {
       { id: 'se', open: false, label: '1886 · From the southeast', orbit: '34deg 97deg 36.85m', target: '6.06m 6.01m 8.69m', fov: '34deg',
         note: 'T.R.\'s view of the house through the cottonwoods. Trees are left out of the web model.' },
     ] },
-  site: { src: 'models/elkhorn_site.glb', badge: 'House, stables, storehouse, blacksmith shop, first cabin, corral',
+  site: { src: 'models/elkhorn_site.glb', badge: 'House, stables, storehouse, blacksmith shop, first cabin, corral · 2021 terrain',
     views: [
       { id: 'aerial', label: 'Aerial', orbit: '20deg 55deg 230m', target: '-10m 0m 25m', fov: '40deg' },
       { id: 'stables', open: false, label: '1886 · Stables', orbit: '4deg 90deg 20.7m', target: '-30.4m 1.52m -47.5m', fov: '34deg',
         note: 'T.R.\'s photograph of the stables from the south: two log stables with an open wagon bay and hay stacked on the roof.' },
       { id: 'river', open: false, label: '1886 · From across the river', orbit: '83.3deg 90deg 121.9m', target: '-12.9m -2m 40.9m', fov: '39deg',
-        note: 'The camera position solved from the butte skyline in T.R.\'s river photograph. Terrain and river are not in this AR model.' },
+        note: 'The camera position solved from the butte skyline in T.R.\'s river photograph. The terrain is today\'s (2021 lidar); the river has moved since 1886.' },
       { id: 'yard', label: 'House yard', orbit: '210deg 70deg 70m', target: '-8m 1m -5m', fov: '40deg' },
     ] },
 };
+const TERRAIN = 'models/elkhorn_terrain.glb';
 const LEDGER = [
   ['Ranch house', '60 × 30 ft · 8 courses of hewn cottonwood · shingled 30° roof', 'Footprint from the excavated outline and the 360° stone survey; walls, windows and doors measured off T.R.\'s veranda photograph and Sewall\'s letters; veranda depth 9¼ ft solved from the photo camera.', 'hi'],
   ['Veranda props', 'elk and mule deer racks · Windsor rockers · saddle · rifles', 'Placed to match T.R.\'s 1886 veranda photograph.', 'hi'],
@@ -163,49 +171,135 @@ const LEDGER = [
 ];
 const CONF = { hi: ['Strong evidence', 'c-hi'], mid: ['Partial evidence', 'c-mid'], low: ['Conjectural', 'c-low'] };
 
-const mv = document.getElementById('mv');
-let current = 'house'; let currentView = null; let roofOpen = false;
-const srcFor = key => MODELS[key].src.replace('.glb', roofOpen ? '_open.glb' : '.glb');
-function setRoof(open) {
-  if (open === roofOpen && mv.src) return;
-  roofOpen = open; mv.src = srcFor(current);
-  const l = document.getElementById('loading'); if (l) l.textContent = open ? 'Lifting the roof…' : 'Putting the roof back…';
+function renderLedger() {
+  document.getElementById('ledger').innerHTML = LEDGER.map(([name, dims, src, c]) =>
+    `<div class="item"><div><b>${name}</b><span class="dims">${dims}</span></div><p>${src}</p><span class="conf ${CONF[c][1]}">${CONF[c][0]}</span></div>`).join('');
+}
+const canvas = document.getElementById('cv');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.AgXToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.55;
+const sky = new THREE.Color(); const updSky = () => { sky.set(getComputedStyle(document.documentElement).getPropertyValue('--stage').trim() || '#d9d3c6'); scene.background = sky; if (scene.fog) scene.fog.color = sky; };
+updSky(); scene.fog = new THREE.Fog(sky, 900, 3000); matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updSky);
+new MutationObserver(updSky).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+const sun = new THREE.DirectionalLight(0xfff1dc, 2.6); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0004;
+scene.add(sun, sun.target); scene.add(new THREE.HemisphereLight(0xdfe6ee, 0x8a7a5e, 0.6));
+const ground = new THREE.Mesh(new THREE.CircleGeometry(600, 64), new THREE.MeshStandardMaterial({ color: 0x9c8f6c, roughness: 1 }));
+ground.rotation.x = -Math.PI / 2; ground.position.y = -0.01; ground.receiveShadow = true; scene.add(ground);
+const camera = new THREE.PerspectiveCamera(38, 1, 0.05, 3000);
+const controls = new OrbitControls(camera, canvas); controls.enableDamping = true; controls.maxPolarAngle = Math.PI * 0.6; controls.maxDistance = 900; controls.minDistance = 0.3;
+const draco = new DRACOLoader(); draco.setDecoderPath('draco/'); 
+const loader = new GLTFLoader(); loader.setDRACOLoader(draco);
+const LM = { manifest: null, tex: {} };
+async function lightmapManifest() {
+  if (LM.manifest !== null) return LM.manifest;
+  try { LM.manifest = await (await fetch('lightmaps.json')).json(); } catch (e) { LM.manifest = false; }
+  return LM.manifest;
+}
+async function applyLightmaps(root) {
+  const man = await lightmapManifest(); if (!man) return;
+  const k = man.scale * Math.pow(2, man.exposure_stops || 0);
+  const tl = new THREE.TextureLoader(); const jobs = [];
+  root.traverse(o => {
+    if (!o.isMesh) return;
+    let name = null; for (let p = o; p && !name; p = p.parent) if (man.maps[p.name]) name = p.name;
+    if (!name || !o.geometry.attributes.uv1) return;
+    const src = o.material;
+    jobs.push((async () => {
+      if (!LM.tex[name]) { LM.tex[name] = tl.loadAsync('lightmaps/' + man.maps[name].file).then(t => { t.flipY = false; t.colorSpace = THREE.SRGBColorSpace; t.channel = 1; return t; }); }
+      const t = await LM.tex[name];
+      const m = new THREE.MeshBasicMaterial({ map: src.map || null, color: src.color, vertexColors: !!o.geometry.attributes.color,
+        lightMap: t, lightMapIntensity: k, transparent: src.transparent, alphaTest: src.alphaTest, side: src.side });
+      o.userData.litMaterial = src; o.userData.bakedMaterial = m; o.material = baked ? m : src;
+    })());
+  });
+  await Promise.all(jobs);
+}
+let baked = true;
+function setBaked(on) {
+  baked = on;
+  if (model) model.traverse(o => { if (o.isMesh && o.userData.bakedMaterial) o.material = on ? o.userData.bakedMaterial : o.userData.litMaterial; });
+  document.getElementById('l-baked').setAttribute('aria-pressed', String(on));
+  document.getElementById('l-live').setAttribute('aria-pressed', String(!on));
+}
+const cache = {}; let model = null; let terrainObj = null; let current = 'house'; let currentView = null; let token = 0; let roofOpen = false;
+
+function setSun(span) {   // afternoon sun from the south-west, shadow box sized to the model
+  sun.position.set(-0.55 * span, 0.75 * span, 0.6 * span); sun.target.position.set(0, 0, 0);
+  const c = sun.shadow.camera; c.left = c.bottom = -span; c.right = c.top = span; c.near = 1; c.far = span * 3; c.updateProjectionMatrix();
+}
+function resize() { const w = canvas.clientWidth, h = canvas.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+new ResizeObserver(resize).observe(canvas);
+function parseVec(s) { return s.split(/\s+/).map(parseFloat); }
+function isRoof(o) { for (let p = o; p; p = p.parent) { if (/^(roof|ceiling)/.test(p.name || '')) return true; } return false; }
+function applyRoof() {
+  if (model) model.traverse(o => { if (o.isMesh && isRoof(o)) o.visible = !roofOpen; });
   document.getElementById('r-on').setAttribute('aria-pressed', String(!roofOpen));
   document.getElementById('r-off').setAttribute('aria-pressed', String(roofOpen));
 }
-
-function renderLedger() {
-  const el = document.getElementById('ledger');
-  el.innerHTML = LEDGER.map(([name, dims, src, c]) =>
-    `<div class="item"><div><b>${name}</b><span class="dims">${dims}</span></div><p>${src}</p><span class="conf ${CONF[c][1]}">${CONF[c][0]}</span></div>`).join('');
-}
-function applyCamera(v) { mv.cameraOrbit = v.orbit; mv.cameraTarget = v.target; mv.fieldOfView = v.fov; }
+function setRoof(open) { roofOpen = open; applyRoof(); updateAR(); }
+function updateAR() { const a = document.getElementById('ar'); if (a) a.href = `ar.html?m=${current}${roofOpen ? '&open=1' : ''}`; }
 function setView(v) {
   currentView = v;
-  if (v.open !== undefined && v.open !== roofOpen) setRoof(v.open);
-  applyCamera(v);
+  if (v.open !== undefined) setRoof(v.open);
+  const [th, ph, r] = parseVec(v.orbit.replace(/deg|m/g, ''));
+  const [tx, ty, tz] = parseVec(v.target.replace(/m/g, ''));
+  const T = THREE.MathUtils.degToRad(th), P = THREE.MathUtils.degToRad(ph);
+  controls.target.set(tx, ty, tz);
+  camera.position.set(tx + r * Math.sin(P) * Math.sin(T), ty + r * Math.cos(P), tz + r * Math.sin(P) * Math.cos(T));
+  camera.fov = parseFloat(v.fov); camera.updateProjectionMatrix(); controls.update();
   document.querySelectorAll('#views .chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === v.id)));
   document.getElementById('viewnote').textContent = v.note ||
     'Viewpoints marked “1886” put the camera where T.R. stood for his photographs, solved from the window positions in each print.';
 }
-function setModel(key) {
-  current = key; const M = MODELS[key];
+async function load(key) {
+  if (cache[key]) return cache[key];
+  const loading = document.getElementById('loading');
+  loading.hidden = false; loading.textContent = 'Loading model…';
+  const gltf = await loader.loadAsync(key === 'terrain' ? TERRAIN : MODELS[key].src, e => {
+    if (e.total) loading.textContent = `Loading model… ${Math.round(100 * e.loaded / e.total)}%`; });
+  gltf.scene.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true;
+    const m = o.material; if (m && m.map) { m.map.anisotropy = renderer.capabilities.getMaxAnisotropy(); } } });
+  if (key !== 'terrain') await applyLightmaps(gltf.scene);
+  cache[key] = gltf.scene; return gltf.scene;
+}
+async function setModel(key) {
+  current = key; updateAR(); const M = MODELS[key]; const my = ++token;
   document.getElementById('m-house').setAttribute('aria-pressed', String(key === 'house'));
   document.getElementById('m-site').setAttribute('aria-pressed', String(key === 'site'));
   document.getElementById('badge').textContent = M.badge;
-  mv.src = srcFor(key);
   const row = document.getElementById('views');
   row.innerHTML = '<span class="lbl">View</span>' + M.views.map(v => `<button class="chip" data-id="${v.id}" aria-pressed="false">${v.label}</button>`).join('');
   row.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => setView(M.views.find(v => v.id === b.dataset.id))));
   setView(M.views[0]);
+  try {
+    const s = await load(key); if (my !== token) return;
+    if (model) scene.remove(model); model = s; scene.add(s); applyRoof();
+    if (key === 'site') {
+      const t = await load('terrain'); if (my !== token) return;
+      if (!terrainObj) { terrainObj = t; t.traverse(o => { if (o.isMesh) o.castShadow = false; }); }
+      scene.add(terrainObj); ground.visible = false;
+    } else { if (terrainObj) scene.remove(terrainObj); ground.visible = true; }
+    setSun(key === 'site' ? 260 : 25);
+    document.getElementById('loading').hidden = true;
+  } catch (e) {
+    document.getElementById('loading').textContent = 'The model could not load in this browser. Try a current Chrome, Safari or Firefox.';
+    console.error(e);
+  }
 }
 document.getElementById('m-house').addEventListener('click', () => setModel('house'));
 document.getElementById('m-site').addEventListener('click', () => setModel('site'));
 document.getElementById('r-on').addEventListener('click', () => setRoof(false));
+document.getElementById('l-baked').addEventListener('click', () => setBaked(true));
+document.getElementById('l-live').addEventListener('click', () => setBaked(false));
 document.getElementById('r-off').addEventListener('click', () => setRoof(true));
-mv.addEventListener('progress', e => { const l = document.getElementById('loading'); if (l) l.textContent = e.detail.totalProgress < 1 ? `Loading model… ${Math.round(e.detail.totalProgress * 100)}%` : ''; });
-mv.addEventListener('load', () => { if (currentView) applyCamera(currentView); document.getElementById('loading').textContent = ''; });
-renderLedger(); setModel('house');
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+resize(); renderLedger(); setModel('house');
 </script>
 
 </body>
