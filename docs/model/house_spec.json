@@ -1,0 +1,2584 @@
+{
+ "title": "Elkhorn Ranch house (T.R.'s 'home ranch'), built Oct 1884 - spring 1885 by W.W. Sewall and W. Dow; recommended state = summer 1886 (date of T.R.'s photographs)",
+ "units": "feet (ft), feet-inches (ft_in) and metres (m) given for every dimension",
+ "coordinate_system": {
+  "origin": "south-west outside corner of the log wall faces (log ends project beyond this), Z=0 at finished grade beside the house (terrace varies <1 ft over the site per Taylor 1959 p.18)",
+  "X": "+east, perpendicular to the long walls (0 = west face, 30 = east face)",
+  "Y": "+north, along the long axis (0 = south face, 60 = north face)",
+  "Z": "up from grade",
+  "orientation_note": "Long axis is 'site north'. On the 1957/59 excavation map the house axis sits ~10.7 deg clockwise of Beaubien's baseline, which itself is ~N16W +/-5 -> house long axis ~N5W +/-6 deg true. Use your solved layout for placement.",
+  "elevation_naming": "east elevation faces the river (front); south gable end has the piazza; west = back (kitchen door, cellar hatch)"
+ },
+ "sources": {
+  "TAY59": "Taylor, D.C. 1959, Archeological Investigations of the Elkhorn Ranch Site (TRC thro_639-758; OCR layout/text/taylor1959_ocr)",
+  "MAP57": "Beaubien 1957 / Taylor 1959 excavation map, 1 in = 30 ft (mosaic layout/img/taylor/beaubien_taylor_map_mosaic_approx.png, 5.0 px/ft); positions converted to house coords by bilinear fit to the excavated 60x30 house outline (scripts in spec/derivations)",
+  "MAT60": "Mattison, R.H. 1960, Elkhorn Ranch buildings report (MWAC 6_41; layout/text/mattison1960_ocr)",
+  "SEW19": "Sewall, W.W. 1919, Bill Sewall's Story of T.R., pp.18-19 ('sixty feet long, thirty feet wide, and seven feet high, with a flat roof and a porch')",
+  "SEWLTR": "W.W. Sewall letters (Cunningham Coll.) quoted by Mattison 1960: Oct 19 1884 ('very flat roof', 9 ft high), Feb 18 1885 ('have got it shingled and the under floor layed'), Dec 20 1885 (stables 16x20, 12 ft space, logs hewn on three sides)",
+  "TRSK": "T.R.'s pencil sketch plan + end elevation + lumber list (Cunningham Coll.; Mattison 1960 photo 7 = MWAC_6_41_24; NPS redraw by D.E. Rogers 1-27-59 = MWAC_6_41_2/3)",
+  "EDITH": "Edith K. Roosevelt letter-sketch plan from the Elkhorn, 1890 (Mattison 1960 photo 6 = MWAC_6_41_26)",
+  "BP": "Harvard-collection blueprint 'Elkhorn Ranch, Little Missouri River, Dakota', plan + E and S elevations at 1/4in=1ft (HSR App. B, layout/img/hsr_appB-78.png). Measured: 24.63 px/ft horizontally, 25.47 px/ft vertically on the scan. A 20th-c. reconstruction drawing, NOT a survey: used only where it agrees with photos/excavation",
+  "P_PIAZZA": "T.R. photo 1886, east veranda with antlers (best scan: model/ref/trc_thrb/THRB03304-00217.jpg; also MWAC_1255_5_12a/12c, Sewall 1919 p.132, Hagedorn 1921 p.454)",
+  "P_HOUSE": "T.R. photo 1886, house among cottonwoods from SE (best scan: model/ref/trc_thrb/THRB03297-00402.jpg; also MWAC_1255_5_14c, Sewall p.46, Taylor fig.19)",
+  "P_RIVER": "T.R. photo 1886 from east bank across the Little Missouri (best scan: model/ref/trc_mwac1950/MWAC_1255_5_13b.jpg; also Harvard print via model/ref/harvard_via_astheyare/tr-6.jpg, Sewall p.46, Hagedorn p.318, Taylor fig.2)",
+  "P_STABLE": "T.R. photo 1886, stables close-up from S (best scan: model/ref/trc_thrb/THRB03296-00401.jpg; also MWAC_1255_5_7a/7b, Hagedorn p.514, Taylor fig.21)",
+  "P_CORRALS": "T.R. photo 1886, barn + utility shed + corrals looking N from 25 ft W of well (model/ref/trc_mwac1950/MWAC_1255_5_9a.jpg, 8a; Taylor fig.22)",
+  "TRBOOK": "T.R., Hunting Trips of a Ranchman (1885) pp.15-16, Ranch Life and the Hunting-Trail (1888) pp.25-27",
+  "GIFFORD": "R. Swain Gifford engraving 'Elkhorn Ranch-house', Hunting Trips 1885 - artist's rendering, low weight (shows full-length veranda; contradicted by photos/excavation)"
+ },
+ "footprint": {
+  "length_N_S": {
+   "ft": 60.0,
+   "ft_in": "60'0\"",
+   "m": 18.288,
+   "source": "SEW19 '60 ft long'; MAP57 excavated outline 59.5 ft; BP 60'-0\"",
+   "range_ft": [
+    59.4,
+    60.0
+   ],
+   "range_m": [
+    18.105,
+    18.288
+   ]
+  },
+  "width_E_W": {
+   "ft": 30.0,
+   "ft_in": "30'0\"",
+   "m": 9.144,
+   "source": "SEW19 '30 ft wide'; MAP57 30.6 ft; BP 30'-0\"; TRSK end elevation 12+4+14=30",
+   "range_ft": [
+    30.0,
+    30.6
+   ],
+   "range_m": [
+    9.144,
+    9.327
+   ]
+  },
+  "note": "Dimensions are to the outside faces of the hewn logs. Corner log ends project a further ~12 in (see corners)."
+ },
+ "foundation": {
+  "type": "hewn cottonwood sill logs laid on isolated fine-grained sandstone boulders (no continuous footing); cellar under SW quarter",
+  "stones_found": "Taylor 1959 p.33-34: nine partially visible sandstone boulders, buff/orange/deep red, plus small shims; SW corner stone missing (reported moved to State Capitol grounds, Bismarck). Exposed thicknesses listed by Taylor range 3.5in - ~16in.",
+  "stone_positions_from_MAP57": [
+   {
+    "id": "S1",
+    "where": "west wall, N of cellar hatch ('big block north of cellar entry')",
+    "X": {
+     "ft": 0.7,
+     "ft_in": "0'8½\"",
+     "m": 0.213,
+     "source": "MAP57"
+    },
+    "Y": {
+     "ft": 19.9,
+     "ft_in": "19'10¾\"",
+     "m": 6.066,
+     "source": "MAP57"
+    }
+   },
+   {
+    "id": "S2",
+    "where": "west wall, near back door",
+    "X": {
+     "ft": 1.1,
+     "ft_in": "1'1¼\"",
+     "m": 0.335,
+     "source": "MAP57"
+    },
+    "Y": {
+     "ft": 33.9,
+     "ft_in": "33'10¾\"",
+     "m": 10.333,
+     "source": "MAP57"
+    }
+   },
+   {
+    "id": "S3",
+    "where": "NW corner",
+    "X": {
+     "ft": 1.6,
+     "ft_in": "1'7¼\"",
+     "m": 0.488,
+     "source": "MAP57"
+    },
+    "Y": {
+     "ft": 57.6,
+     "ft_in": "57'7¼\"",
+     "m": 17.556,
+     "source": "MAP57"
+    }
+   },
+   {
+    "id": "S4",
+    "where": "north wall middle",
+    "X": {
+     "ft": 13.4,
+     "ft_in": "13'4¾\"",
+     "m": 4.084,
+     "source": "MAP57"
+    },
+    "Y": {
+     "ft": 57.2,
+     "ft_in": "57'2½\"",
+     "m": 17.435,
+     "source": "MAP57"
+    }
+   },
+   {
+    "id": "S5",
+    "where": "NE corner",
+    "X": {
+     "ft": 29.0,
+     "ft_in": "29'0\"",
+     "m": 8.839,
+     "source": "MAP57"
+    },
+    "Y": {
+     "ft": 57.4,
+     "ft_in": "57'4¾\"",
+     "m": 17.496,
+     "source": "MAP57"
+    }
+   },
+   {
+    "id": "S6",
+    "where": "east wall, 'long stone south of [NE] corner'",
+    "X": {
+     "ft": 29.1,
+     "ft_in": "29'1¼\"",
+     "m": 8.87,
+     "source": "MAP57"
+    },
+    "Y": {
+     "ft": 46.5,
+     "ft_in": "46'6\"",
+     "m": 14.173,
+     "source": "MAP57"
+    }
+   },
+   {
+    "id": "S7",
+    "where": "east wall middle (behind veranda)",
+    "X": {
+     "ft": 28.5,
+     "ft_in": "28'6\"",
+     "m": 8.687,
+     "source": "MAP57"
+    },
+    "Y": {
+     "ft": 26.5,
+     "ft_in": "26'6\"",
+     "m": 8.077,
+     "source": "MAP57"
+    }
+   },
+   {
+    "id": "S8",
+    "where": "east wall south part",
+    "X": {
+     "ft": 28.5,
+     "ft_in": "28'6\"",
+     "m": 8.687,
+     "source": "MAP57"
+    },
+    "Y": {
+     "ft": 11.6,
+     "ft_in": "11'7¼\"",
+     "m": 3.536,
+     "source": "MAP57"
+    }
+   },
+   {
+    "id": "S9",
+    "where": "SE corner",
+    "X": {
+     "ft": 28.2,
+     "ft_in": "28'2½\"",
+     "m": 8.595,
+     "source": "MAP57"
+    },
+    "Y": {
+     "ft": 1.0,
+     "ft_in": "1'0\"",
+     "m": 0.305,
+     "source": "MAP57"
+    }
+   },
+   {
+    "id": "S10",
+    "where": "south wall, W of hall door",
+    "X": {
+     "ft": 12.9,
+     "ft_in": "12'10¾\"",
+     "m": 3.932,
+     "source": "MAP57"
+    },
+    "Y": {
+     "ft": 1.5,
+     "ft_in": "1'6\"",
+     "m": 0.457,
+     "source": "MAP57"
+    }
+   },
+   {
+    "id": "S0",
+    "where": "SW corner (missing in 1959; restore)",
+    "X": {
+     "ft": 1.0,
+     "ft_in": "1'0\"",
+     "m": 0.305,
+     "source": "inferred"
+    },
+    "Y": {
+     "ft": 1.0,
+     "ft_in": "1'0\"",
+     "m": 0.305,
+     "source": "inferred"
+    },
+    "estimate": true
+   }
+  ],
+  "stone_size_model": "irregular slabs ~2'0\" x 1'6\" in plan, 6-16 in thick, top at Z 0'3\"-0'6\", set under the sill so ~3-6 in shows; sizes are estimates from the 1:360 map symbols",
+  "map_uncertainty": "+/-1.5 ft (mosaic seam +/-4 ft is far from the house; symbol size ~1-2 ft)"
+ },
+ "log_walls": {
+  "species": "cottonwood, cut near the site (TAY59 p.33; MAT60 p.4)",
+  "section": {
+   "face_height": {
+    "ft": 1.042,
+    "ft_in": "1'½\"",
+    "m": 0.318,
+    "source": "P_PIAZZA: 7 log courses between the dark sill band and the plate over a 9 ft wall; TAY59 'each timber well over a foot square'",
+    "estimate": true,
+    "range_ft": [
+     0.92,
+     1.17
+    ],
+    "range_m": [
+     0.279,
+     0.356
+    ]
+   },
+   "thickness": {
+    "ft": 0.833,
+    "ft_in": "0'10\"",
+    "m": 0.254,
+    "source": "estimate: hewn faces in/out; end grain in P_PIAZZA shows ~12x10 in blocks with waney rounded corners",
+    "estimate": true,
+    "range_ft": [
+     0.75,
+     1.0
+    ],
+    "range_m": [
+     0.229,
+     0.305
+    ]
+   },
+   "hewing": "hewn flat on outside and inside faces and on the bed (Sewall: 'we hew the logs on three sides' for the stables, same crew/method); broad-axe score marks and checks clearly visible in P_PIAZZA; corners waney/rounded; top of each log left slightly rounded where it beds into the joint",
+   "chinking": "tight hewn beds: joint visible as a dark line 1/2 - 1 in; no light-coloured daubing visible in P_PIAZZA; model 3/4 in recessed dark (mud/clay) chink, recessed 1 in"
+  },
+  "course_stack": {
+   "count": 8,
+   "pitch_in": 13.25,
+   "derivation": "P_PIAZZA (THRB03304-00217), SE corner strip at 148 px/ft (scale from window lights ~13in per light+muntin): eave at y=60, dark band 1140-1250, sill log 1250-1400, grade ~1400 -> eave 9.05 ft above grade; 7 log courses + sill. Confirmed by P_RIVER (eave 8.6 +/-1 ft) and BP east elevation (9.2 ft). Sewall 1919 '7 ft high' = interior clear height (T.R.'s sketch end elevation shows a 7 1/2 ft wall); Sewall letter 1884 '9 ft high' = exterior. Both reconciled by this stack.",
+   "courses": [
+    {
+     "n": 1,
+     "name": "sill log (on boulders)",
+     "z_bottom": {
+      "ft": 0.5,
+      "ft_in": "0'6\"",
+      "m": 0.152,
+      "source": "course stack"
+     },
+     "z_top": {
+      "ft": 1.604,
+      "ft_in": "1'7¼\"",
+      "m": 0.489,
+      "source": "course stack"
+     }
+    },
+    {
+     "n": 2,
+     "name": "wall log",
+     "z_bottom": {
+      "ft": 1.604,
+      "ft_in": "1'7¼\"",
+      "m": 0.489,
+      "source": "course stack"
+     },
+     "z_top": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "course stack"
+     }
+    },
+    {
+     "n": 3,
+     "name": "wall log",
+     "z_bottom": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "course stack"
+     },
+     "z_top": {
+      "ft": 3.812,
+      "ft_in": "3'9¾\"",
+      "m": 1.162,
+      "source": "course stack"
+     }
+    },
+    {
+     "n": 4,
+     "name": "wall log",
+     "z_bottom": {
+      "ft": 3.812,
+      "ft_in": "3'9¾\"",
+      "m": 1.162,
+      "source": "course stack"
+     },
+     "z_top": {
+      "ft": 4.917,
+      "ft_in": "4'11\"",
+      "m": 1.499,
+      "source": "course stack"
+     }
+    },
+    {
+     "n": 5,
+     "name": "wall log",
+     "z_bottom": {
+      "ft": 4.917,
+      "ft_in": "4'11\"",
+      "m": 1.499,
+      "source": "course stack"
+     },
+     "z_top": {
+      "ft": 6.021,
+      "ft_in": "6'¼\"",
+      "m": 1.835,
+      "source": "course stack"
+     }
+    },
+    {
+     "n": 6,
+     "name": "wall log",
+     "z_bottom": {
+      "ft": 6.021,
+      "ft_in": "6'¼\"",
+      "m": 1.835,
+      "source": "course stack"
+     },
+     "z_top": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "course stack"
+     }
+    },
+    {
+     "n": 7,
+     "name": "wall log",
+     "z_bottom": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "course stack"
+     },
+     "z_top": {
+      "ft": 8.229,
+      "ft_in": "8'2¾\"",
+      "m": 2.508,
+      "source": "course stack"
+     }
+    },
+    {
+     "n": 8,
+     "name": "plate log (rafters bear here)",
+     "z_bottom": {
+      "ft": 8.229,
+      "ft_in": "8'2¾\"",
+      "m": 2.508,
+      "source": "course stack"
+     },
+     "z_top": {
+      "ft": 9.333,
+      "ft_in": "9'4\"",
+      "m": 2.845,
+      "source": "course stack"
+     }
+    }
+   ],
+   "dark_band_note": "P_PIAZZA shows a continuous dark band ~8 in high at Z ~1'4\"-2'0\" along the east wall south of the veranda (between sill and course 2). Interpretation uncertain (deep unchinked joint, sill face set back, or darker/charred log). Recommend modelling course 2 recessed 2-3 in with a darker material.",
+   "plate_top_z": {
+    "ft": 9.333,
+    "ft_in": "9'4\"",
+    "m": 2.845,
+    "source": "course stack (8 x 13.25 in from Z 0'6\")",
+    "estimate": true,
+    "range_ft": [
+     8.9,
+     9.6
+    ],
+    "range_m": [
+     2.713,
+     2.926
+    ]
+   }
+  },
+  "corners": {
+   "type": "notched and lapped corners with projecting ends (crowns), alternate courses projecting in each direction",
+   "evidence": "P_PIAZZA SE corner: squared log ends with visible end grain project beyond both wall faces; a notch cut is visible on the upper face of several projecting ends; BP elevations draw the same staggered square ends.",
+   "notch_recommendation": "saddle-type notch cut on the underside of each hewn log over the log below (Maine woodsman practice), crown left square; NOT dovetail (no flush corners), NOT post-and-sill (no corner posts visible). Exact notch geometry not resolvable in the 1600-px scans.",
+   "projection": {
+    "ft": 1.0,
+    "ft_in": "1'0\"",
+    "m": 0.305,
+    "source": "P_PIAZZA: projecting blocks ~150 px at 148 px/ft",
+    "estimate": true,
+    "range_ft": [
+     0.67,
+     1.33
+    ],
+    "range_m": [
+     0.203,
+     0.406
+    ]
+   },
+   "end_finish": "ends sawn/axed square, irregular lengths (+/-3 in)"
+  },
+  "interior_face": "hewn log faces, probably whitewashed (unknown); rooms divided by board partitions"
+ },
+ "floor": {
+  "finished_floor_z": {
+   "ft": 1.604,
+   "ft_in": "1'7¼\"",
+   "m": 0.489,
+   "source": "top of sill log; door thresholds sit on the sill (P_PIAZZA door head aligns with window heads)",
+   "estimate": true,
+   "range_ft": [
+    1.2,
+    1.8
+   ],
+   "range_m": [
+    0.366,
+    0.549
+   ]
+  },
+  "construction": "double pine floor (BP note 'Double pine floor'; Sewall Feb 1885 'under floor layed'; lumber list 6,000 bf floor boards, 15 ft) on 2x6 floor joists (lumber list '2x6, 500 ft') and irregular cottonwood floor beams (BP note) spanning E-W from sill to sill with mid-bearing on the hall partitions",
+  "board": "pine, planed one side, 1 in x 6-8 in, two layers"
+ },
+ "roof": {
+  "type": "gable, wood-shingled, ridge running N-S (along the 60 ft axis), gables at south and north ends",
+  "pitch_deg": {
+   "value": 30.0,
+   "rise_run": "7:12 (30.3 deg)",
+   "range": [
+    26,
+    33
+   ],
+   "derivation": [
+    "T.R. sketch end elevation (MWAC_6_41_24/Rogers redraw): 30 ft span, rafters marked 18 ft, drawn apex 9.2 ft above wall -> 31.5 deg",
+    "BP south elevation: rise 138 px over half-span 237 px -> 30.2 deg",
+    "P_RIVER (MWAC_1255_5_13b, near-elevation from ~E, ~600 ft): projected rise eave->ridge 42 px on house scale 4.5 px/ft -> 9.3 ft over 16 ft (15 ft + 1 ft overhang) -> 30.2 deg; camera height error +/-1.5 deg",
+    "lumber list: 2x6 rafters 20 ft long (cut to 18 ft) -> 30 deg needs 17.3 ft + overhang = 18 ft (consistent)"
+   ],
+   "conflict": "Sewall letter Oct 1884 'the house is to have a very flat roof' and Sewall 1919 'flat roof' describe the plan/recollection; all three photographs show a clear gable of ~30 deg. Photos win."
+  },
+  "ridge_z": {
+   "ft": 17.994,
+   "ft_in": "18'0\"",
+   "m": 5.484,
+   "source": "plate top + 15 ft x tan30 (to top of rafter at ridge line); shingle surface adds ~0.15 ft",
+   "estimate": true,
+   "range_ft": [
+    17.0,
+    18.8
+   ],
+   "range_m": [
+    5.182,
+    5.73
+   ]
+  },
+  "rafters": {
+   "size": "2x6 in pine (lumber list)",
+   "spacing": {
+    "ft": 2.5,
+    "ft_in": "2'6\"",
+    "m": 0.762,
+    "source": "lumber list 1,000 bf of 2x6x20 = 50 rafters = 25 pairs over 60 ft -> 2'6\" o.c."
+   },
+   "seat": "birdsmouth on the plate log",
+   "ridge": "rafters butted at ridge, no ridge beam visible (assumption)"
+  },
+  "ceiling_joists": "2x4 x 16 ft (lumber list '2x4, 16 ft, 500 bf') spanning from plate to the hall partitions, ~2'0\" o.c.; 'single floor overhead' (Sewall) = boarded ceiling",
+  "eave_overhang_horizontal": {
+   "ft": 1.0,
+   "ft_in": "1'0\"",
+   "m": 0.305,
+   "source": "P_PIAZZA corner shows short eave beyond log face; rafter-length check (18 ft rafter at 30 deg)",
+   "estimate": true,
+   "range_ft": [
+    0.67,
+    1.5
+   ],
+   "range_m": [
+    0.204,
+    0.457
+   ]
+  },
+  "eave_fascia": "1x6 board fascia on rafter tails; open soffit (rafter tails visible) - photo shows thin eave edge",
+  "rake_overhang": {
+   "ft": 0.67,
+   "ft_in": "0'8\"",
+   "m": 0.204,
+   "source": "P_HOUSE shows a light rake board standing proud of the shingled gable",
+   "estimate": true,
+   "range_ft": [
+    0.4,
+    1.0
+   ],
+   "range_m": [
+    0.122,
+    0.305
+   ]
+  },
+  "rake_board": "1x6 pine barge board along both rakes, plain",
+  "sheathing": "1 in pine roof boards, 16 ft (lumber list 3,600 bf), laid tight",
+  "shingles": {
+   "material": "sawn pine shingles (Sewall Feb 1885 'Have got it shingled'; 'All boards and shingles here is pine')",
+   "length": {
+    "ft": 1.333,
+    "ft_in": "1'4\"",
+    "m": 0.406,
+    "source": "period standard",
+    "estimate": true
+   },
+   "exposure": {
+    "ft": 0.417,
+    "ft_in": "0'5\"",
+    "m": 0.127,
+    "source": "period standard for 16 in shingles on a 7:12 roof; not measurable in the scans",
+    "estimate": true,
+    "range_ft": [
+     0.38,
+     0.46
+    ],
+    "range_m": [
+     0.114,
+     0.14
+    ]
+   },
+   "width": "random 3-8 in",
+   "courses_per_slope": "approx 42 (17.3 ft slope + 1.15 ft overhang / 5 in)",
+   "ridge": "two 1x6 ridge boards (saddle boards) - assumption",
+   "weathering": "silver-grey; appears light in P_RIVER"
+  },
+  "veranda_and_piazza_roofs": "see porches"
+ },
+ "gables": {
+  "construction": "framed gable (2x4 studs on the plate log) sheathed and covered with sawn shingles, 5 in exposure; MAT60: 'the photographs indicate that the south gable and the piazza were shingled' - confirmed in P_HOUSE (fine shingle texture on the S gable)",
+  "south_gable_window": {
+   "center_X": {
+    "ft": 15.0,
+    "ft_in": "15'0\"",
+    "m": 4.572,
+    "source": "P_HOUSE: centered in gable",
+    "estimate": true
+   },
+   "size_w": {
+    "ft": 1.83,
+    "ft_in": "1'10\"",
+    "m": 0.558,
+    "source": "P_HOUSE / BP S elevation",
+    "estimate": true,
+    "range_ft": [
+     1.5,
+     2.3
+    ],
+    "range_m": [
+     0.457,
+     0.701
+    ]
+   },
+   "size_h": {
+    "ft": 2.6,
+    "ft_in": "2'7¼\"",
+    "m": 0.792,
+    "source": "P_HOUSE / BP",
+    "estimate": true,
+    "range_ft": [
+     2.0,
+     3.0
+    ],
+    "range_m": [
+     0.61,
+     0.914
+    ]
+   },
+   "sill_z": {
+    "ft": 12.0,
+    "ft_in": "12'0\"",
+    "m": 3.658,
+    "source": "above piazza roof junction (~11 ft)",
+    "estimate": true,
+    "range_ft": [
+     11.5,
+     13.0
+    ],
+    "range_m": [
+     3.505,
+     3.962
+    ]
+   },
+   "lights": "6 lights (2 wide x 3 high) single sash - P_HOUSE shows 2 lights wide; BP draws 4",
+   "confidence": "medium"
+  },
+  "north_gable_window": {
+   "note": "no photograph of the north end; TAY59 'I would guess that it was [present]'. Recommend mirror of south gable window (conjectural).",
+   "confidence": "low"
+  }
+ },
+ "openings": {
+  "doors_common": {
+   "leaf": "2'8\" x 6'6\" (BP note 'Doors about 2'8\" x 7'0\", some of matched pine boards'; 6'6\" fits the log-course head in P_PIAZZA)",
+   "rough_opening_w": {
+    "ft": 2.83,
+    "ft_in": "2'10\"",
+    "m": 0.863,
+    "source": "leaf + jambs"
+   },
+   "threshold_z": {
+    "ft": 1.604,
+    "ft_in": "1'7¼\"",
+    "m": 0.489,
+    "source": "top of sill"
+   },
+   "head_z": {
+    "ft": 8.229,
+    "ft_in": "8'2¾\"",
+    "m": 2.508,
+    "source": "top of course 7; P_PIAZZA door head aligns with window heads within ~4 in"
+   },
+   "construction": "vertical matched pine boards on 3 battens (ledged), strap hinges; plain board casing 3.5 in",
+   "confidence": "medium"
+  },
+  "east_elevation_X30": {
+   "measured_from": "SE outside corner, northward (Y)",
+   "evidence": "TAY59: 'six windows and a door. Two windows were south of the door, four north of it.' P_PIAZZA confirms the sequence W1 (outside veranda), W2 (under veranda), DOOR, W3...W6. Positions measured on BP plan (24.63 px/ft); a 1-D projective fit of these positions to their image x in P_PIAZZA leaves residuals <=1.5 ft, and the fit places the veranda's south end at Y=9.2-9.5 ft, matching the excavation (9.2).",
+   "items": [
+    {
+     "id": "E-W1",
+     "wall": "east",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 5.6,
+      "ft_in": "5'7¼\"",
+      "m": 1.707,
+      "source": "BP plan 4.06-7.23 ft"
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "high"
+    },
+    {
+     "id": "E-W2",
+     "wall": "east",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 15.5,
+      "ft_in": "15'6\"",
+      "m": 4.724,
+      "source": "BP plan 14.0-16.9 ft"
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "high"
+    },
+    {
+     "id": "E-D1",
+     "wall": "east",
+     "type": "door (main entrance from veranda)",
+     "center_along_wall": {
+      "ft": 21.0,
+      "ft_in": "21'0\"",
+      "m": 6.401,
+      "source": "BP plan 19.6-22.7 ft; centred on veranda 9.2-31.7 (MAP57)",
+      "estimate": true,
+      "range_ft": [
+       19.5,
+       22.5
+      ],
+      "range_m": [
+       5.944,
+       6.858
+      ]
+     },
+     "confidence": "high"
+    },
+    {
+     "id": "E-W3",
+     "wall": "east",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 27.0,
+      "ft_in": "27'0\"",
+      "m": 8.23,
+      "source": "BP plan 25.4-28.5 ft"
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "high"
+    },
+    {
+     "id": "E-W4",
+     "wall": "east",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 36.0,
+      "ft_in": "36'0\"",
+      "m": 10.973,
+      "source": "BP plan 34.5-37.4 ft",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "medium"
+    },
+    {
+     "id": "E-W5",
+     "wall": "east",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 45.2,
+      "ft_in": "45'2½\"",
+      "m": 13.777,
+      "source": "BP plan 43.6-46.7 ft",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "medium"
+    },
+    {
+     "id": "E-W6",
+     "wall": "east",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 54.9,
+      "ft_in": "54'10¾\"",
+      "m": 16.734,
+      "source": "BP plan 53.3-56.4 ft",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "medium"
+    }
+   ]
+  },
+  "south_elevation_Y0": {
+   "measured_from": "SW outside corner, eastward (X)",
+   "evidence": "TAY59: 'two windows and a door at ground level ... and another window higher up in the gable'; P_HOUSE shows the west window beside the piazza's west post; BP S elevation window-door-window.",
+   "items": [
+    {
+     "id": "S-W1",
+     "wall": "south",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 6.5,
+      "ft_in": "6'6\"",
+      "m": 1.981,
+      "source": "BP plan 5.0-8.6 ft from W; P_HOUSE",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "medium"
+    },
+    {
+     "id": "S-D1",
+     "wall": "south",
+     "type": "door (end of central hall onto piazza)",
+     "center_along_wall": {
+      "ft": 16.0,
+      "ft_in": "16'0\"",
+      "m": 4.877,
+      "source": "compromise: T.R. sketch S elevation 16 + door (centre ~17.2); TAY59 hall centre 16.9; BP 15.35; Rogers redraw 14",
+      "estimate": true,
+      "range_ft": [
+       14.0,
+       17.2
+      ],
+      "range_m": [
+       4.267,
+       5.243
+      ]
+     },
+     "confidence": "medium"
+    },
+    {
+     "id": "S-W2",
+     "wall": "south",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 25.0,
+      "ft_in": "25'0\"",
+      "m": 7.62,
+      "source": "BP plan 22.1-25.2 ft (shifted 1.3 ft E so the window sits clear of the hall partition)",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "medium"
+    }
+   ]
+  },
+  "west_elevation_X0": {
+   "measured_from": "SW outside corner, northward (Y)",
+   "evidence": "TAY59: 'According to Roosevelt's sketch plan there were 5 windows and one door along the house's western side.' No photograph shows the west side -> positions are conjectural, adjusted to the excavated cellar hatch (Y 8.8-14.8) and kitchen (Y 15-34).",
+   "items": [
+    {
+     "id": "W-W1",
+     "wall": "west",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 5.5,
+      "ft_in": "5'6\"",
+      "m": 1.676,
+      "source": "BP 4.0-7.1",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "low"
+    },
+    {
+     "id": "W-W2",
+     "wall": "west",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 18.0,
+      "ft_in": "18'0\"",
+      "m": 5.486,
+      "source": "BP 14.0-16.9, moved N clear of cellar hatch",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "low"
+    },
+    {
+     "id": "W-D1",
+     "wall": "west",
+     "type": "kitchen/back door onto stoop",
+     "center_along_wall": {
+      "ft": 27.0,
+      "ft_in": "27'0\"",
+      "m": 8.23,
+      "source": "TAY59 fig.20 (~26 ft); BP 30.3; kitchen excavated/inferred Y 15-34",
+      "estimate": true,
+      "range_ft": [
+       25.0,
+       30.5
+      ],
+      "range_m": [
+       7.62,
+       9.296
+      ]
+     },
+     "confidence": "low-medium"
+    },
+    {
+     "id": "W-W3",
+     "wall": "west",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 31.5,
+      "ft_in": "31'6\"",
+      "m": 9.601,
+      "source": "conjectural (kitchen 2nd window)",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "low"
+    },
+    {
+     "id": "W-W4",
+     "wall": "west",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 40.0,
+      "ft_in": "40'0\"",
+      "m": 12.192,
+      "source": "BP 39.1-42.1",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "low"
+    },
+    {
+     "id": "W-W5",
+     "wall": "west",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 53.0,
+      "ft_in": "53'0\"",
+      "m": 16.154,
+      "source": "BP 51.8-55.0",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "low"
+    }
+   ]
+  },
+  "north_elevation_Y60": {
+   "measured_from": "NW outside corner, eastward (X)",
+   "evidence": "TAY59: 'Likely the northern wall was broken by two or three windows'; BP shows two windows and a hall door. T.R.'s plan has the hall running only ~3/4 of the length, so no north door is recommended.",
+   "items": [
+    {
+     "id": "N-W1",
+     "wall": "north",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 6.5,
+      "ft_in": "6'6\"",
+      "m": 1.981,
+      "source": "BP 5.2-8.4",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "low"
+    },
+    {
+     "id": "N-W2",
+     "wall": "north",
+     "type": "double-hung",
+     "lights": "6/6",
+     "center_along_wall": {
+      "ft": 23.5,
+      "ft_in": "23'6\"",
+      "m": 7.163,
+      "source": "BP 21.7-24.8",
+      "estimate": true
+     },
+     "rough_opening_w": {
+      "ft": 2.333,
+      "ft_in": "2'4\"",
+      "m": 0.711,
+      "source": "derived: blueprint overall 3'0\" incl. casings minus 2x3.5\" casing; T.R. photo 00217 shows 3 lights wide x 2 high per sash (6/6) -> 3x8in glass + muntins/stiles ~2'4\"",
+      "estimate": true,
+      "range_ft": [
+       2.2,
+       2.75
+      ],
+      "range_m": [
+       0.671,
+       0.838
+      ]
+     },
+     "rough_opening_h": {
+      "ft": 4.417,
+      "ft_in": "4'5\"",
+      "m": 1.346,
+      "source": "derived: P_PIAZZA window frame spans ~4.5 log courses (between top of course 2 and top of course 6); 2 rows of ~10in lights per sash",
+      "estimate": true,
+      "range_ft": [
+       4.25,
+       5.0
+      ],
+      "range_m": [
+       1.295,
+       1.524
+      ]
+     },
+     "sill_z": {
+      "ft": 2.708,
+      "ft_in": "2'8½\"",
+      "m": 0.826,
+      "source": "top of course 2 (log-course stack below)",
+      "estimate": true,
+      "range_ft": [
+       2.4,
+       3.0
+      ],
+      "range_m": [
+       0.732,
+       0.914
+      ]
+     },
+     "head_z": {
+      "ft": 7.125,
+      "ft_in": "7'1½\"",
+      "m": 2.172,
+      "source": "top of course 6",
+      "estimate": true,
+      "range_ft": [
+       7.0,
+       7.75
+      ],
+      "range_m": [
+       2.134,
+       2.362
+      ]
+     },
+     "sash": "two sashes, each 3 lights wide x 2 high, glass ~8x10 in; meeting rail at mid-height; muntins 7/8 in",
+     "trim": "flat pine board casing 3.5in wide x 7/8in, head casing same, projecting board sill 1.5in; casings painted dark or left natural (photo shows dark frames against weathered logs)",
+     "confidence": "low"
+    }
+   ],
+   "optional": "BP north hall door - omit (conjectural)"
+  }
+ },
+ "porches": {
+  "east_veranda": {
+   "evidence": "TAY59 p.48 'a low, roofed porch, an area 6 feet wide by 22 feet long ... beams which supported the veranda's roof extended out from the edge of the cabin and rested on a pair of vertical posts'; MAP57 outline converts to X 30-36.3, Y 9.2-31.7; EDITH 1890 sketch puts it opposite the middle east room, ~10.7-31.6 ft from the S end; projective fit of P_PIAZZA gives south end at Y 9.2-9.5.",
+   "Y_start": {
+    "ft": 9.5,
+    "ft_in": "9'6\"",
+    "m": 2.896,
+    "source": "MAP57 9.2 / P_PIAZZA fit 9.2-9.5 / EDITH 10.7",
+    "range_ft": [
+     8.2,
+     10.7
+    ],
+    "range_m": [
+     2.499,
+     3.261
+    ]
+   },
+   "Y_end": {
+    "ft": 31.5,
+    "ft_in": "31'6\"",
+    "m": 9.601,
+    "source": "MAP57 31.7 / EDITH 31.6"
+   },
+   "length": {
+    "ft": 22.0,
+    "ft_in": "22'0\"",
+    "m": 6.706,
+    "source": "TAY59 text 22 ft; MAP57 22.5"
+   },
+   "depth_X": {
+    "ft": 6.25,
+    "ft_in": "6'3\"",
+    "m": 1.905,
+    "source": "MAP57 6.3 ft (bilinear conversion) and TAY59 text '6 feet wide'",
+    "range_ft": [
+     6.0,
+     10.0
+    ],
+    "range_m": [
+     1.829,
+     3.048
+    ],
+    "note": "CONFLICT: BP draws 9.7 ft, Rogers redraw of T.R.'s plan 10 ft x 40 ft (the plan, not as built), and a weak camera solve of P_PIAZZA suggests ~9-11 ft. Excavated outline + Taylor text win; validate with camera match #1 (if the SE post lands well left of the right frame edge when everything else lines up, deepen toward 8 ft)."
+   },
+   "deck_z_top": {
+    "ft": 1.0,
+    "ft_in": "1'0\"",
+    "m": 0.305,
+    "source": "P_PIAZZA: floor edge log + plank ~one log above ground; step ~7 in down from threshold",
+    "estimate": true,
+    "range_ft": [
+     0.75,
+     1.4
+    ],
+    "range_m": [
+     0.229,
+     0.427
+    ]
+   },
+   "deck": "pine planks (1.5-2 in) running N-S on log sleepers; a round log ~8 in dia forms the visible front edge (P_PIAZZA); timbers recovered in 1959 (TAY59 p.34)",
+   "posts": {
+    "count": 2,
+    "positions": "outer corners: (X 36.0, Y 9.75) and (X 36.0, Y 31.25)",
+    "section": {
+     "ft": 0.583,
+     "ft_in": "0'7\"",
+     "m": 0.178,
+     "source": "P_PIAZZA: squared/hewn post at right edge, ~1/25 of veranda length in perspective",
+     "estimate": true,
+     "range_ft": [
+      0.5,
+      0.67
+     ],
+     "range_m": [
+      0.152,
+      0.203
+     ]
+    },
+    "on": "flat stones (TAY59 'stones under the front veranda')",
+    "note": "22 ft clear span on a single hewn beam - if this reads wrong in renders, add a mid post (no evidence)."
+   },
+   "roof": {
+    "form": "nearly flat shed roof springing from the main eave line",
+    "z_at_wall": {
+     "ft": 9.333,
+     "ft_in": "9'4\"",
+     "m": 2.845,
+     "source": "ledger at plate (beams 'extended out from the edge of the cabin')"
+    },
+    "z_front_beam_top": {
+     "ft": 8.833,
+     "ft_in": "8'10\"",
+     "m": 2.692,
+     "source": "P_PIAZZA: front beam top sits ~level with the eave",
+     "estimate": true,
+     "range_ft": [
+      8.4,
+      9.3
+     ],
+     "range_m": [
+      2.56,
+      2.835
+     ]
+    },
+    "slope_deg": {
+     "value": 4.5,
+     "range": [
+      0,
+      8
+     ],
+     "source": "P_PIAZZA (beam and ceiling read nearly horizontal)"
+    },
+    "front_beam": "hewn log beam ~8 x 10 in, 22 ft + 1 ft overhangs",
+    "ceiling": "boarded soffit (reads dark/solid in P_PIAZZA)",
+    "covering": "boards + sawn shingles; edge visible with shingle butts in P_PIAZZA",
+    "overhang_beyond_posts": {
+     "ft": 0.75,
+     "ft_in": "0'9\"",
+     "m": 0.229,
+     "source": "P_PIAZZA",
+     "estimate": true
+    }
+   },
+   "railing": "none (P_PIAZZA, P_HOUSE)",
+   "steps": "none visible; deck 1 ft above grade"
+  },
+  "south_piazza": {
+   "evidence": "TAY59 p.48 '8 or 9 feet wide and about 14 feet long ... covered by an overhanging shingled roof which sloped down away from the house and was supported by posts at each corner'; MAP57 outline converts to X 8.6-28.7, depth 7.4-7.8 ft; P_HOUSE shows the piazza's east open end running back to the SE corner and the west window just outside its west post; EDITH sketch draws it near the hall door.",
+   "X_start": {
+    "ft": 8.5,
+    "ft_in": "8'6\"",
+    "m": 2.591,
+    "source": "MAP57 8.6; P_HOUSE (west window S-W1 lies outside, west of the piazza)",
+    "range_ft": [
+     8.5,
+     9.5
+    ],
+    "range_m": [
+     2.591,
+     2.896
+    ]
+   },
+   "X_end": {
+    "ft": 28.5,
+    "ft_in": "28'6\"",
+    "m": 8.687,
+    "source": "MAP57 28.7; P_HOUSE east end runs to ~SE corner",
+    "range_ft": [
+     23.0,
+     30.0
+    ],
+    "range_m": [
+     7.01,
+     9.144
+    ]
+   },
+   "length": {
+    "ft": 20.0,
+    "ft_in": "20'0\"",
+    "m": 6.096,
+    "source": "MAP57 20.1",
+    "range_ft": [
+     14.0,
+     21.5
+    ],
+    "range_m": [
+     4.267,
+     6.553
+    ],
+    "note": "CONFLICT: Taylor's text 'about 14 feet' and BP (13.4 ft centred) vs Taylor's own excavation map (~20 ft). The map's veranda dimensions match his text exactly, so the map is trusted here; P_HOUSE supports an east end near the SE corner."
+   },
+   "depth_Y": {
+    "ft": 7.5,
+    "ft_in": "7'6\"",
+    "m": 2.286,
+    "source": "MAP57 7.4-7.8; TAY59 '8 or 9'; BP 9.4",
+    "range_ft": [
+     7.4,
+     9.0
+    ],
+    "range_m": [
+     2.256,
+     2.743
+    ]
+   },
+   "deck_z_top": {
+    "ft": 1.0,
+    "ft_in": "1'0\"",
+    "m": 0.305,
+    "source": "match veranda",
+    "estimate": true
+   },
+   "posts": {
+    "count": 3,
+    "positions_X": [
+     8.75,
+     18.5,
+     28.25
+    ],
+    "Y": -7.25,
+    "section": {
+     "ft": 0.5,
+     "ft_in": "0'6\"",
+     "m": 0.152,
+     "source": "P_HOUSE light square posts",
+     "estimate": true,
+     "range_ft": [
+      0.42,
+      0.58
+     ],
+     "range_m": [
+      0.127,
+      0.178
+     ]
+    },
+    "note": "TAY59 says posts at each corner; P_HOUSE shows at least two free-standing front posts plus a third hidden by a tree; mid post added for the 20 ft span (assumption). Wall-side 'corner posts' = ledger/stud against the logs."
+   },
+   "roof": {
+    "form": "shed (lean-to) roof sloping south away from the gable wall",
+    "z_at_wall": {
+     "ft": 11.0,
+     "ft_in": "11'0\"",
+     "m": 3.353,
+     "source": "P_HOUSE: piazza roof meets the shingled gable above the eave line",
+     "estimate": true,
+     "range_ft": [
+      10.0,
+      11.5
+     ],
+     "range_m": [
+      3.048,
+      3.505
+     ]
+    },
+    "z_front_beam_top": {
+     "ft": 8.75,
+     "ft_in": "8'9\"",
+     "m": 2.667,
+     "source": "P_HOUSE: front edge ~level with the main eave",
+     "estimate": true,
+     "range_ft": [
+      8.0,
+      9.2
+     ],
+     "range_m": [
+      2.438,
+      2.804
+     ]
+    },
+    "slope_deg": {
+     "value": 16.5,
+     "range": [
+      12,
+      22
+     ],
+     "source": "derived from the two heights over 7.5 ft"
+    },
+    "covering": "boards + sawn shingles (MAT60/P_HOUSE: piazza shingled)",
+    "side_overhang": {
+     "ft": 0.75,
+     "ft_in": "0'9\"",
+     "m": 0.229,
+     "source": "estimate",
+     "estimate": true
+    },
+    "front_overhang": {
+     "ft": 0.75,
+     "ft_in": "0'9\"",
+     "m": 0.229,
+     "source": "estimate",
+     "estimate": true
+    }
+   },
+   "railing": "none visible"
+  },
+  "back_stoop_west": {
+   "evidence": "TAY59 p.48: 'Roosevelt shows the back door stoop as 6 feet wide by 10 feet long; actually it seems to have been only about [4?] feet by 8 feet ... nothing to indicate whether or not the stoop was roofed over. I rather think not.' Wood from the kitchen door stoop found (p.34). TAY59 fig.20 proportions 0.47 -> ~3.8 x 8 ft.",
+   "X": [
+    -4.0,
+    0.0
+   ],
+   "Y": [
+    23.0,
+    31.0
+   ],
+   "size": "4'0\" (W-E) x 8'0\" (N-S), centred on kitchen door W-D1",
+   "deck_z_top": {
+    "ft": 1.0,
+    "ft_in": "1'0\"",
+    "m": 0.305,
+    "source": "estimate",
+    "estimate": true
+   },
+   "roof": "none (recommended); alternative per T.R.'s plan: 6x10 ft with lean-to roof",
+   "confidence": "low-medium"
+  },
+  "cellar_hatch_west": {
+   "evidence": "TAY59 p.40, 48: outside entry framed with timbers 3 in x 5.5-6 in x >6 ft, 'set against the wall', ~6 ft by 4 ft, door lay just above ground level and lifted up; eight steps down (six survived), steps reach ~3 ft into the cellar; MAP57 places the frame at Y ~8.8-14.8 projecting ~4.9 ft west of the wall.",
+   "X": [
+    -4.0,
+    0.0
+   ],
+   "Y": [
+    8.75,
+    14.75
+   ],
+   "lid": "board bulkhead door, hinged on the wall side, lying ~6-10 in above grade, nearly flat (slight fall away from wall)",
+   "steps": "8 plank steps descending EAST under the sill into the west cellar room; rise ~9.5 in, run ~9 in (derived: ~6.3 ft drop)",
+   "confidence": "high (position), medium (form)"
+  }
+ },
+ "chimney": {
+  "evidence": "TAY59 pp.35-38, 50: only ONE chimney; brick and mortar rubble (bricks 8 x 3.75 x 2.25 in) over the cellar/passage; a 3-ft section of soot-blackened flue with a metal stove-pipe collar lay across the darkroom passage, base resting on the ground with red-painted lowest courses; it 'had tipped towards the west as it fell, hence must have stood a little nearer the center of the house'; 'almost entirely below the kitchen area'; location 'agrees with that shown in Roosevelt's view across the front veranda'. P_PIAZZA (THRB03304-00217) shows the chimney cap rising above the main roof behind the veranda roof, at top-centre (x~1050/2000, y~150).",
+  "plan_position": {
+   "X": [
+    12.67,
+    14.0
+   ],
+   "Y": [
+    22.0,
+    24.0
+   ],
+   "note": "against the kitchen side of the hall's west partition (hall X 14-18)",
+   "source": "TAY59 + MAP57 passage line X~11.7-11.9, shifted E per fall direction",
+   "estimate": true,
+   "range": "X 11-15, Y 20-27"
+  },
+  "stack_above_roof": {
+   "section": "1'4\" x 2'0\" (one 8 x 12 in flue, 4 in brick walls) - estimate",
+   "top_z": {
+    "ft": 20.494,
+    "ft_in": "20'6\"",
+    "m": 6.246,
+    "source": "P_PIAZZA: cap clearly visible above roof from ground level ~22 ft away; set 2.5 ft above ridge",
+    "estimate": true,
+    "range_ft": [
+     18.5,
+     21.0
+    ],
+    "range_m": [
+     5.639,
+     6.401
+    ]
+   },
+   "cap": "corbelled brick cap (1-2 projecting courses), light-coloured in P_PIAZZA (possibly lime-washed or mortar-capped)"
+  },
+  "brick": "soft red common brick 8 x 3 3/4 x 2 1/4 in (TAY59), lime mortar",
+  "base": "brick stack from ground (inside the cellar/passage) up through the kitchen; stove-pipe thimble low in kitchen"
+ },
+ "fireplace": {
+  "evidence": "T.R. (Hunting Trips 1885 p.16): evenings 'round the hearthstone, while the pine logs roar and crackle ... the rifles stand in the corners of the room or rest across the elk antlers which jut out from over the fireplace'; Fred Sewall: Wilmot Dow built the fireplace (MAT60); TAY59 p.50: with only one chimney, 'about the only place the fireplace could have been was also in the kitchen'.",
+  "recommendation": "single brick fireplace on the kitchen's east wall (backing on the hall), opening facing WEST into the kitchen, with the cook-stove piped into the same stack via a thimble; flat sandstone hearthstone in front; plank mantel shelf with an elk rack above.",
+  "opening": "2'6\" W x 2'4\" H x 1'4\" deep (estimate, Rumford-less ranch fireplace)",
+  "hearth": "sandstone slab ~4'0\" x 2'0\" (TAY59: a stone 'perhaps the fireplace hearth' was taken to the State Capitol grounds)",
+  "alternative": "BP draws the fireplace in a 'Living Room' on the east side of the hall (X 18-25, Y 18-24). Rejected: no east-side chimney rubble was excavated.",
+  "confidence": "low-medium"
+ },
+ "cellar": {
+  "evidence": "TAY59 pp.35-46, figs 9-18; MAP57",
+  "excavation_outline": "rounded pit, walls rounded with no sharp corners, ~12 x 12 ft",
+  "center": {
+   "X": {
+    "ft": 7.5,
+    "ft_in": "7'6\"",
+    "m": 2.286,
+    "source": "MAP57"
+   },
+   "Y": {
+    "ft": 12.0,
+    "ft_in": "12'0\"",
+    "m": 3.658,
+    "source": "MAP57"
+   }
+  },
+  "extent": {
+   "X": [
+    1.5,
+    13.5
+   ],
+   "Y": [
+    6.0,
+    18.0
+   ]
+  },
+  "west_room": {
+   "size": "~12 ft (N-S) x ~6.5 ft (E-W)",
+   "use": "storage",
+   "floor": "board floor 7'6\" x 5'5\" of 1x6 boards on three cross beams, painted white, at foot of steps; rest earth",
+   "floor_depth_below_grade": {
+    "ft": 6.5,
+    "ft_in": "6'6\"",
+    "m": 1.981,
+    "source": "derived: 8 steps from just above grade",
+    "estimate": true,
+    "range_ft": [
+     6.0,
+     7.25
+    ],
+    "range_m": [
+     1.829,
+     2.21
+    ]
+   },
+   "north_wall": "vertical boards nailed to end of flooring",
+   "other": "flat sandstone with 21 in circular barrel stain south of bottom step"
+  },
+  "darkroom": {
+   "size": "~4 ft (E-W) x 11 ft (N-S)",
+   "partition": "horizontal boards on 4 cedar posts (6, 3.5, 3.5, 3.75 in dia, N to S) with battens over joints (light-proofing)",
+   "floor_depth_below_grade": {
+    "ft": 7.75,
+    "ft_in": "7'9\"",
+    "m": 2.362,
+    "source": "TAY59 '7 feet 9 inches below ground surface'"
+   },
+   "ceiling": "own board ceiling resting on E cellar wall and the partition",
+   "workbench": "boards across the S end; zinc sheet on bench",
+   "use": "T.R.'s photographic darkroom (Mrs. George Harmon, Sewall's daughter, via MAT60)"
+  },
+  "passage_and_ladder": {
+   "route": "from darkroom N end, north ~13 ft to a fixed ladder under a kitchen trapdoor",
+   "ladder_top_position": {
+    "X": {
+     "ft": 11.8,
+     "ft_in": "11'9½\"",
+     "m": 3.597,
+     "source": "MAP57 passage end"
+    },
+    "Y": {
+     "ft": 33.0,
+     "ft_in": "33'0\"",
+     "m": 10.058,
+     "source": "MAP57 33.8 -> trapdoor just inside kitchen N wall"
+    }
+   },
+   "widths": "2'6\" at ladder, 3'0\" beyond the door; single step down; 18-20 in oblique light baffle; darkroom door 22-23 in wide with 2 steps down",
+   "ladder": "2 cedar poles 24 in apart (3 and 3.5 in dia), nailed rungs",
+   "trapdoor": "~2'6\" x 2'6\" in kitchen floor near NE corner of kitchen (TAY59: 'probably through a trapdoor in the kitchen floor')"
+  }
+ },
+ "interior_plan": {
+  "status": "Recommended layout = Edith Roosevelt's 1890 room sequence (the only complete first-hand plan of the house as built), dimensioned to the excavated cellar/passage/chimney and Taylor's 16 ft kitchen; T.R.'s 1884 sketch (10 rooms) is the original two-family scheme. Interior is the least certain part of the model.",
+  "hall": {
+   "X": [
+    14.0,
+    18.0
+   ],
+   "Y": [
+    0.0,
+    44.0
+   ],
+   "width": {
+    "ft": 4.0,
+    "ft_in": "4'0\"",
+    "m": 1.219,
+    "source": "T.R. sketch (Rogers redraw 12/4/14); BP 4.0"
+   },
+   "length": {
+    "ft": 44.0,
+    "ft_in": "44'0\"",
+    "m": 13.411,
+    "source": "MAT60: hall 'running from the south door about three-fourths of the [length of the] house'"
+   }
+  },
+  "rooms": [
+   {
+    "name": "Dining room",
+    "X": [
+     0,
+     14
+    ],
+    "Y": [
+     0,
+     15
+    ],
+    "evidence": "EDITH (SW 'D. Room'); TAY59 dining S of kitchen; TRSK dining 16 ft"
+   },
+   {
+    "name": "Kitchen (with fireplace/stove, trapdoor to darkroom, back door)",
+    "X": [
+     0,
+     14
+    ],
+    "Y": [
+     15,
+     34
+    ],
+    "evidence": "EDITH kitchen ~18 ft; TAY59 16 ft; MAP57 passage ends at Y 33.8 under it"
+   },
+   {
+    "name": "Ironing / work room (1890); Sewall's room in T.R.'s 1884 plan",
+    "X": [
+     0,
+     14
+    ],
+    "Y": [
+     34,
+     46
+    ],
+    "evidence": "EDITH; TRSK 'Seawall's Room'"
+   },
+   {
+    "name": "NW room ('Common room'? - Edith's label partly illegible)",
+    "X": [
+     0,
+     15
+    ],
+    "Y": [
+     46,
+     60
+    ]
+   },
+   {
+    "name": "T.R.'s room (SE; 'E. & T.R.' 1890)",
+    "X": [
+     18,
+     30
+    ],
+    "Y": [
+     0,
+     14
+    ],
+    "evidence": "EDITH; BP 'Roosevelt's Rm' SE"
+   },
+   {
+    "name": "Front room behind the veranda (sitting room / 1890 guests Ferguson & Lodge) - east door enters here",
+    "X": [
+     18,
+     30
+    ],
+    "Y": [
+     14,
+     31.5
+    ],
+    "evidence": "EDITH ('Mr Ferguson & Cog Lodge', piazza in front); TRSK 'Sitting Room'"
+   },
+   {
+    "name": "Bamie's room (1890)",
+    "X": [
+     18,
+     30
+    ],
+    "Y": [
+     31.5,
+     44
+    ]
+   },
+   {
+    "name": "NE 'Work room' (1890)",
+    "X": [
+     15,
+     30
+    ],
+    "Y": [
+     44,
+     60
+    ]
+   }
+  ],
+  "partitions": "board partitions of vertical matched pine boards ~1 in thick on 2x4 plates (lumber list: partition boards 18 ft 4,300 bf and 10 ft 600 bf); door openings 2'8\" x 6'6\" off the hall",
+  "ceiling_height_clear": {
+   "ft": 7.429,
+   "ft_in": "7'5¼\"",
+   "m": 2.264,
+   "source": "plate top minus floor minus joist/board depth; matches T.R.'s 7 1/2 ft wall and Sewall's '7 feet high'",
+   "estimate": true,
+   "range_ft": [
+    7.0,
+    7.75
+   ],
+   "range_m": [
+    2.134,
+    2.362
+   ]
+  },
+  "alt_TR_1884_10_rooms": "T.R.'s sketch (Rogers redraw): east porch 10 x 40 ft, back stoop 6 x 10, end wall divided 8 + 8 + 14 ft, rooms 'Seawall's Room' and 'Kitchen' (16 ft) on the stoop side, 'Dining Room' and 'Sitting Room' at the other end. Mattison: partitions probably moved 1885-1890 when the house went from two families to one."
+ },
+ "props_visible_in_photos": {
+  "east_veranda_P_PIAZZA": [
+   {
+    "item": "mule-deer head (skull + antlers, with hide remnants) hung on the projecting SE corner log ends",
+    "position": "SE corner, Z ~4.5-6 ft",
+    "count": 1
+   },
+   {
+    "item": "elk antler racks on skulls lying on the ground in front of the SE corner and south end of the veranda",
+    "count": 3,
+    "note": "largest rack ~4.5-5 ft spread"
+   },
+   {
+    "item": "large elk rack standing on the veranda deck, leaning against the wall at window E-W2",
+    "count": 1
+   },
+   {
+    "item": "elk rack hung from the veranda front beam near the SE post, with a cartridge belt/saddle bags and a strap hanging from it",
+    "count": 1
+   },
+   {
+    "item": "small deer racks on the ground at far left and by the saddle",
+    "count": 2
+   },
+   {
+    "item": "Winchester lever-action rifle and a second long gun leaning against the wall beside the door",
+    "count": 2
+   },
+   {
+    "item": "Windsor-style spindle-back rocking chair(s) with flat crest rail, on the deck against the wall near E-W3/E-W4",
+    "count": 2,
+    "note": "TRC record: 'a pair of rocking chairs'; one clearly visible"
+   },
+   {
+    "item": "Western stock saddle (tooled leather, tapaderos) with bridle, on the deck near the SE post; light felt hat at post base",
+    "count": 1
+   },
+   {
+    "item": "stack of sawn lumber beyond the north end of the veranda",
+    "count": 1
+   },
+   {
+    "item": "long-handled tool (axe/shovel) leaning at the SE corner",
+    "count": 1
+   }
+  ],
+  "total_antler_sets_visible": "7-8 (5 elk, 2-3 deer)",
+  "south_side_P_HOUSE": [
+   "light wagon/buckboard and a second set of wheels parked in front of the piazza",
+   "hides/clothing hanging under the piazza",
+   "sawhorse/workbench and barrel at left (SW)",
+   "low split-rail fence line at left",
+   "lumber/firewood stack and tools at right (NE)"
+  ]
+ },
+ "landscape_near_house": "very large plains cottonwoods crowd the east and south sides (trunks 1.5-3 ft dia, 60-80 ft high) - see P_HOUSE; 'Just in front of the ranch veranda is a line of old cottonwoods' (T.R. 1888). Scoria (clinker) path and yard surfacing between house, well, shed and privy (TAY59 p.8); scoria path NW from veranda ~35 ft.",
+ "conflicts_resolved": [
+  {
+   "issue": "Flat roof (Sewall 1884 letter, 1919 book) vs photos",
+   "decision": "30 deg gable (7:12)",
+   "why": "Three independent T.R. photographs, T.R.'s own sketch elevation and the blueprint all show/measure ~30 deg."
+  },
+  {
+   "issue": "Wall height 7 ft (Sewall 1919) vs 9 ft (Sewall 1884 letter) vs 7.5 ft (T.R. sketch) vs 9.2 ft (BP)",
+   "decision": "Exterior grade-to-plate 9'4\" (8 courses x 13.25 in from Z 0'6\"); interior clear ~7'6\"",
+   "why": "Photo course count + scale gives ~9 ft at eave outside; 7-7.5 ft is the interior floor-to-ceiling."
+  },
+  {
+   "issue": "Veranda depth 6 ft (Taylor text, excavation map) vs ~9.7 ft (BP) vs 10 ft (T.R. plan) vs ~9-11 ft (weak camera solve)",
+   "decision": "6'3\"",
+   "why": "Only the excavation measured the as-built porch; T.R.'s plan and BP are design/conjecture. Validate with camera match #1."
+  },
+  {
+   "issue": "Veranda length 40 ft (T.R. plan), full length (Gifford engraving) vs 22 ft",
+   "decision": "22 ft, Y 9.5-31.5",
+   "why": "Taylor: 'Neither the archeological evidence nor the photographs support the 40-foot figure'; P_PIAZZA shows W1 outside the veranda; Edith's sketch agrees."
+  },
+  {
+   "issue": "South piazza ~14 ft (Taylor text, BP 13.4) vs ~20 ft (Taylor's excavation map)",
+   "decision": "20 ft (X 8.5-28.5) x 7.5 ft",
+   "why": "Map is the measured record and reproduces his veranda text exactly; P_HOUSE shows the piazza's east end reaching the SE corner."
+  },
+  {
+   "issue": "BP porch layout (veranda 20.7 x 9.7 centred; S porch 13.4 x 9.4 centred)",
+   "decision": "Use BP for window/door spacing only",
+   "why": "BP agrees with photos on window rhythm but its porches disagree with the excavation."
+  },
+  {
+   "issue": "10 rooms (T.R. 1884) vs 8 rooms (Edith 1890)",
+   "decision": "Model the 8-room 1886-1890 layout; keep T.R.'s 10-room partition set as an alternative layer",
+   "why": "Mattison: partitions likely moved when the house changed from two families to one; Edith's plan is the only as-built record."
+  },
+  {
+   "issue": "Fireplace location (T.R. sitting-room hearth vs single kitchen chimney)",
+   "decision": "Kitchen fireplace + stove on one stack at X~13, Y~23",
+   "why": "Only one chimney excavated, under the kitchen (Taylor)."
+  },
+  {
+   "issue": "Chimney visible in photos?",
+   "decision": "Yes - one brick stack with light cap visible above the roof in P_PIAZZA; hidden by foliage in P_HOUSE and P_RIVER",
+   "why": "Direct observation in THRB03304-00217 at full resolution; Taylor/Mattison 1960 note the chimney agrees with the 'view across the front veranda'."
+  }
+ ],
+ "open_uncertainties": [
+  "Veranda depth (6.25 ft recommended; 6-10 ft plausible).",
+  "South piazza length (20 ft recommended; 14 ft per Taylor's text).",
+  "West and north window positions and the back stoop (no photographs).",
+  "Corner-notch type (projection certain, notch geometry not resolvable).",
+  "The dark band at Z ~1.3-2.0 ft on the east wall.",
+  "Interior partitions (only Edith's sketch and Taylor's conjectural plan).",
+  "Exact chimney plan position (+/-3 ft) and height."
+ ]
+}

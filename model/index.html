@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elkhorn Ranch 1886</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: field-notebook viewer. One big stage, a ruled strip of view controls, then the evidence ledger. */
+:root {
+  --bg: #efebe3;          /* weathered paper */
+  --surface: #e4ded2;
+  --fg: #26231f;
+  --muted: #6b6359;
+  --rule: #c9c0b1;
+  --accent: #9b3f26;      /* scoria */
+  --hi: #2f6b3f; --mid: #8a6a18; --low: #7a4f8a;
+  --stage: #d9d3c6;
+  --f-display: "Alegreya SC", "Iowan Old Style", Georgia, serif;
+  --f-body: "Alegreya", "Iowan Old Style", Georgia, serif;
+  --f-data: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1b1a18; --surface: #24221f; --fg: #ebe5da; --muted: #a59c8f; --rule: #3a3631;
+  --accent: #d0704f; --hi: #7cbf8c; --mid: #d6b25a; --low: #c49ad3; --stage: #2a2825; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #1b1a18; --surface: #24221f; --fg: #ebe5da; --muted: #a59c8f; --rule: #3a3631;
+  --accent: #d0704f; --hi: #7cbf8c; --mid: #d6b25a; --low: #c49ad3; --stage: #2a2825; color-scheme: dark }
+
+body { background: var(--bg); color: var(--fg); font: 17px/1.5 var(--f-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 48px; }
+.wrap { max-width: 1100px; margin: 0 auto; display: grid; gap: 18px; }
+header { display: grid; gap: 4px; }
+.eyebrow { font: 500 12px/1.2 var(--f-data); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font: 700 clamp(30px, 5vw, 46px)/1.05 var(--f-display); margin: 0; text-wrap: balance; letter-spacing: .01em; }
+.lede { margin: 4px 0 0; max-width: 62ch; color: var(--fg); }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+model-viewer { width: 100%; height: min(68vh, 620px); min-height: 360px; display: block; background: transparent; --poster-color: transparent; }
+.badge { position: absolute; left: 10px; bottom: 10px; font: 500 11px/1.3 var(--f-data); color: var(--muted);
+  background: color-mix(in srgb, var(--bg) 85%, transparent); padding: 5px 8px; border-radius: 3px; max-width: calc(100% - 20px); }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; font: 500 13px var(--f-data); color: var(--muted); pointer-events: none; }
+.ar-btn { position: absolute; right: 10px; bottom: 10px; font: 600 15px var(--f-body); background: var(--accent); color: #fff; border: 0;
+  border-radius: 3px; padding: 9px 14px; cursor: pointer; }
+.controls { display: grid; gap: 10px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.row > .lbl { font: 500 12px var(--f-data); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); min-width: 5.5em; }
+button.chip { font: 600 15px/1 var(--f-body); color: var(--fg); background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 999px; padding: 8px 13px; cursor: pointer; }
+button.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.note { font-size: 15px; color: var(--muted); max-width: 70ch; margin: 0; }
+h2 { font: 700 22px/1.2 var(--f-display); margin: 18px 0 0; letter-spacing: .02em; }
+.ledger { border-top: 2px solid var(--fg); }
+.item { display: grid; grid-template-columns: minmax(0, 13em) minmax(0, 1fr) auto; gap: 6px 18px; padding: 12px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.item b { font: 700 17px var(--f-display); letter-spacing: .02em; }
+.item .dims { display: block; font: 400 12.5px var(--f-data); color: var(--muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.item p { margin: 0; font-size: 15.5px; min-width: 0; }
+.conf { font: 500 11px var(--f-data); letter-spacing: .06em; text-transform: uppercase; padding: 3px 7px; border-radius: 3px; border: 1px solid currentColor; white-space: nowrap; }
+.c-hi { color: var(--hi); } .c-mid { color: var(--mid); } .c-low { color: var(--low); }
+@media (max-width: 640px) { .item { grid-template-columns: minmax(0, 1fr) auto; } .item p { grid-column: 1 / -1; } }
+footer { font-size: 14px; color: var(--muted); max-width: 75ch; }
+footer code { font: 12.5px var(--f-data); }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Elkhorn Ranch · Billings County, Dakota Territory · reconstruction draft 1</div>
+    <h1>T.R.'s Elkhorn Ranch, 1886</h1>
+    <p class="lede">The ranch house and outbuildings rebuilt at full scale from T.R.'s own 1886 photographs, Bill Sewall's letters, the 1957–59 National Park Service excavations and the Library's 360° survey of the foundation stones. Drag to look around. On a phone, “View in your space” places the building at full size in front of you.</p>
+  </header>
+
+  <div class="stage">
+    <model-viewer id="mv" src="models/elkhorn_house.glb" alt="3D reconstruction of the Elkhorn ranch house, 1886"
+      camera-controls touch-action="pan-y" shadow-intensity="1" shadow-softness="0.8" exposure="0.95" tone-mapping="agx"
+      environment-image="neutral" ar ar-modes="webxr scene-viewer quick-look" ar-placement="floor"
+      camera-orbit="34deg 82deg 40m" camera-target="0m 2m 0m" field-of-view="38deg"
+      min-camera-orbit="auto 5deg 2m" max-camera-orbit="auto 92deg 900m" interaction-prompt="none">
+      <button slot="ar-button" class="ar-btn">View in your space</button>
+      <div class="loading" slot="progress-bar" id="loading">Loading model…</div>
+    </model-viewer>
+    <div class="badge" id="badge">Ranch house · 60 × 30 ft · east veranda</div>
+  </div>
+
+  <div class="controls">
+    <div class="row" role="group" aria-label="Model">
+      <span class="lbl">Model</span>
+      <button class="chip" id="m-house" aria-pressed="true">Ranch house</button>
+      <button class="chip" id="m-site" aria-pressed="false">Whole ranch</button>
+    </div>
+    <div class="row" role="group" aria-label="Viewpoint" id="views"></div>
+    <p class="note" id="viewnote">Viewpoints marked “1886” put the camera where T.R. stood for his photographs, solved from the window positions in each print.</p>
+  </div>
+
+  <section>
+    <h2>What the model is built from</h2>
+    <div class="ledger" id="ledger"></div>
+  </section>
+
+  <footer>
+    <p>Positions: house footprint fitted to the surviving foundation stones in the Library's 360° panoramas (long axis 11.7° east of true north, ±3°); outbuildings placed from the Beaubien–Taylor 1957/59 site plan registered to that footprint (±4 ft for nearby features, more toward the corral). Absolute GPS placement is ±12 m until surveyed on site with NPS. Model origin: centre of the house footprint, <code>47.24191, −103.62226</code>.</p>
+    <p><a href="../docs/methodology.html">How this was built: methodology and sources</a>.</p>
+    <p>Draft for internal review. Not for publication until the Library's historians and the National Park Service have checked it.</p>
+  </footer>
+</div>
+
+<script type="module">
+import "../vendor/model-viewer/model-viewer.min.js";
+customElements.whenDefined("model-viewer").then(() => { const MV = customElements.get("model-viewer"); MV.dracoDecoderLocation = new URL("draco/", location.href).href; });
+</script>
+<script>
+const MODELS = {
+  house: { src: 'models/elkhorn_house.glb', badge: 'Ranch house · 60 × 30 ft · east veranda',
+    views: [
+      { id: 'overview', label: 'Overview', orbit: '34deg 70deg 42m', target: '0m 2m 0m', fov: '38deg' },
+      { id: 'veranda', label: '1886 · Veranda', orbit: '21.6deg 90deg 12.19m', target: '3.36m 1.52m 2.28m', fov: '30deg',
+        note: 'Where T.R. set up his camera for the veranda photograph with the elk antlers, rockers and saddle.' },
+      { id: 'se', label: '1886 · From the southeast', orbit: '34deg 90deg 36.6m', target: '6.06m 1.52m 8.69m', fov: '34deg',
+        note: 'T.R.\'s view of the house through the cottonwoods. The grove is not modelled, so the house stands in the open here.' },
+      { id: 'top', label: 'Plan', orbit: '0deg 4deg 40m', target: '0m 0m 0m', fov: '45deg' },
+    ] },
+  site: { src: 'models/elkhorn_site.glb', badge: 'Ranch house, stables, storehouse, blacksmith shop, first cabin, corral',
+    views: [
+      { id: 'aerial', label: 'Aerial', orbit: '20deg 55deg 230m', target: '-10m 0m 25m', fov: '40deg' },
+      { id: 'stables', label: '1886 · Stables', orbit: '4deg 90deg 20.7m', target: '-30.4m 1.52m -47.5m', fov: '34deg',
+        note: 'T.R.\'s photograph of the stables from the south: two log stables with an open wagon bay and hay on the roof.' },
+      { id: 'river', label: '1886 · From across the river', orbit: '74deg 88deg 183m', target: '20m 1.5m 30m', fov: '12deg',
+        note: 'T.R. photographed the ranch from the east bank of the Little Missouri. River and terrain are not modelled yet.' },
+      { id: 'yard', label: 'House yard', orbit: '210deg 70deg 70m', target: '-8m 1m -5m', fov: '40deg' },
+    ] },
+};
+const LEDGER = [
+  ['Ranch house', '60 × 30 ft · 8 courses of hewn cottonwood · shingled 30° roof', 'Footprint from the excavated outline and the 360° stone survey; walls, windows and doors measured off T.R.\'s veranda photograph and Sewall\'s letters; veranda depth 9¼ ft solved from the photo camera.', 'hi'],
+  ['Veranda props', 'elk and mule deer racks · Windsor rockers · saddle · rifles', 'Placed to match T.R.\'s 1886 veranda photograph.', 'hi'],
+  ['Stables', '52 × 16 ft · two 20 × 16 stables with a 12 ft bay', 'Sewall, Dec. 20, 1885; excavated burn area; T.R.\'s stables photograph (hay stack, pole ladder, sod roof).', 'hi'],
+  ['Blacksmith shop', '33 × 16 ft · two rooms · brick forge chimney', 'Excavated by Taylor in 1959; elevations read from T.R.\'s river photograph. Door and window positions partly conjectural.', 'mid'],
+  ['First cabin (dugout)', '14 × 12 ft inside · upright-post walls cut into the bank', 'Beaubien 1957 excavation; front overhang from the river photograph.', 'mid'],
+  ['Storehouse and hen house', '16½ × 25 ft shed · 13½ × 19½ ft stockade', 'Outline from burned rubble (Taylor 1959). Height, roof and door placement conjectural.', 'low'],
+  ['Round horse corral', '62 ft across · 15 paired-post sets · 49½ ft wing', 'T.R., Ranch Life and the Hunting-Trail (1888); Beaubien 1957. Rail count and height conjectural.', 'mid'],
+  ['Well and fences', 'stone-lined well · post-and-rail yard fence · corral fence', 'Well position and fence construction from Taylor 1959; fence lines approximate.', 'low'],
+];
+const CONF = { hi: ['Strong evidence', 'c-hi'], mid: ['Partial evidence', 'c-mid'], low: ['Conjectural', 'c-low'] };
+
+const mv = document.getElementById('mv');
+let current = 'house'; let currentView = null;
+
+function renderLedger() {
+  const el = document.getElementById('ledger');
+  el.innerHTML = LEDGER.map(([name, dims, src, c]) =>
+    `<div class="item"><div><b>${name}</b><span class="dims">${dims}</span></div><p>${src}</p><span class="conf ${CONF[c][1]}">${CONF[c][0]}</span></div>`).join('');
+}
+function setView(v) {
+  currentView = v;
+  mv.cameraOrbit = v.orbit; mv.cameraTarget = v.target; mv.fieldOfView = v.fov;
+  document.querySelectorAll('#views .chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === v.id)));
+  document.getElementById('viewnote').textContent = v.note ||
+    'Viewpoints marked “1886” put the camera where T.R. stood for his photographs, solved from the window positions in each print.';
+}
+function setModel(key) {
+  current = key; const M = MODELS[key];
+  document.getElementById('m-house').setAttribute('aria-pressed', String(key === 'house'));
+  document.getElementById('m-site').setAttribute('aria-pressed', String(key === 'site'));
+  document.getElementById('badge').textContent = M.badge;
+  mv.src = M.src;
+  const row = document.getElementById('views');
+  row.innerHTML = '<span class="lbl">View</span>' + M.views.map(v => `<button class="chip" data-id="${v.id}" aria-pressed="false">${v.label}</button>`).join('');
+  row.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => setView(M.views.find(v => v.id === b.dataset.id))));
+  setView(M.views[0]);
+}
+document.getElementById('m-house').addEventListener('click', () => setModel('house'));
+document.getElementById('m-site').addEventListener('click', () => setModel('site'));
+mv.addEventListener('progress', e => { const l = document.getElementById('loading'); if (l) l.textContent = e.detail.totalProgress < 1 ? `Loading model… ${Math.round(e.detail.totalProgress * 100)}%` : ''; });
+mv.addEventListener('load', () => { if (currentView) setView(currentView); });
+renderLedger(); setModel('house');
+</script>
+
+</body>
+</html>

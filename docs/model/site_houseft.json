@@ -1,0 +1,108 @@
+{
+ "affine_px_to_houseft": [
+  [
+   -0.03752818732102378,
+   0.196672865210972
+  ],
+  [
+   0.1901879915849324,
+   0.037491749804006894
+  ],
+  [
+   -253.70408542239684,
+   -475.08847001232124
+  ]
+ ],
+ "features_houseft": {
+  "house_outline_SW": [
+   0.2,
+   0.2
+  ],
+  "house_outline_NW": [
+   -0.2,
+   59.8
+  ],
+  "house_outline_NE": [
+   30.1,
+   60.2
+  ],
+  "house_outline_SE": [
+   29.8,
+   -0.2
+  ],
+  "house_center": [
+   15.0,
+   29.9
+  ],
+  "well_center": [
+   -34.9,
+   -7.3
+  ],
+  "blacksmith_SW": [
+   131.2,
+   -242.7
+  ],
+  "blacksmith_NW": [
+   121.3,
+   -211.8
+  ],
+  "blacksmith_NE": [
+   135.2,
+   -207.0
+  ],
+  "blacksmith_SE": [
+   145.6,
+   -238.8
+  ],
+  "dugout_bbox": [
+   [
+    159.8,
+    -263.4
+   ],
+   [
+    170.9,
+    -246.9
+   ]
+  ],
+  "utility_shed_bbox_approx": [
+   [
+    -45.2,
+    55.8
+   ],
+   [
+    -32.1,
+    85.5
+   ]
+  ],
+  "barn_hatched_bbox_approx": [
+   [
+    -108.8,
+    171.8
+   ],
+   [
+    -65.9,
+    210.9
+   ]
+  ],
+  "round_corral_center_snubbing_post": [
+   -163.6,
+   -354.5
+  ],
+  "baseline_south_end_zero_point_pipe": [
+   -119.6,
+   -293.8
+  ],
+  "baseline_north_end_pipe": [
+   -194.9,
+   125.9
+  ],
+  "river_bank_hachure_due_east_of_house": [
+   109.6,
+   38.8
+  ],
+  "unlabeled_hatched_circle": [
+   37.5,
+   -87.7
+  ]
+ }
+}

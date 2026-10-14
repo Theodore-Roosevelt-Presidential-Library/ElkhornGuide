@@ -1,0 +1,198 @@
+{
+ "conventions": "Positions are relative to the house SE outside corner (E = feet east of the east wall face, N = feet north of the south wall face) unless stated; bearing = compass direction the camera looks, in house-axis degrees (0 = house 'north' along the long axis, 90 = east). Heights above grade. FOV = full horizontal FOV across the full print width of the listed scan (prints are trimmed; lens unknown, probably a ~6-8 in lens on a 4x5 or 5x7 plate).",
+ "solve_method": "1-D projective fit of window/door positions along the east wall (from the blueprint) to their image x-coordinates, combined with apparent window heights (h ~ 1/depth); see derivation fields. Treat as starting values and refine by matching the log courses and window edges in Blender (fSpy or manual).",
+ "photos": [
+  {
+   "id": 1,
+   "name": "East veranda with antlers (close view)",
+   "scans": [
+    "model/ref/trc_thrb/THRB03304-00217.jpg (2263x1600, best)",
+    "model/ref/trc_mwac1950/MWAC_1255_5_12c.jpg",
+    "photos/candidates/sewall1919_n132_a.jpg",
+    "photos/candidates/hag1921_n454_b.jpg"
+   ],
+   "documented": "Mattison 1960 photo 3: 'Close-up view of the piazza ... camera pointing to [north]'",
+   "camera": {
+    "E": 12.7,
+    "N": -12.8,
+    "height_ft": 5.0,
+    "distance_to_SE_corner_ft": 18.0,
+    "look_bearing_deg": 333.3,
+    "hfov_deg": 48.6,
+    "vfov_deg": 35.4,
+    "focal_px_on_2000px_width": 2212,
+    "uncertainty": "position +/-6 ft, bearing +/-5 deg, hfov 35-50 deg (the solve is weakly conditioned)"
+   },
+   "derivation": "Windows E-W1..E-W6 + door at x=730,1040,1225,1355,1475,1570,1665 (2000-px-wide frame) vs Y=5.6,15.5,21.2,27.0,36.0,45.2,54.9 ft; apparent heights 515,320,245,195,145 px for W2..W6. Horizon at y~560/1414 -> camera ~5 ft above grade. Veranda south end projects to Y 9.2-9.5 ft.",
+   "visible": [
+    "SE corner log ends (projecting crowns) at left",
+    "east wall from SE corner to N end: W1 (outside veranda), W2, door, W3-W6",
+    "east veranda: deck edge log, boarded ceiling, front beam, SE post at right edge",
+    "main roof eave over the SE corner; chimney cap above the roof at top centre",
+    "props: antlers, rifles, rocker, saddle, lumber pile"
+   ],
+   "validation_targets": [
+    "chimney cap position (constrains chimney Y)",
+    "SE post x-position (constrains veranda depth)",
+    "log course lines at the corner",
+    "window head line"
+   ]
+  },
+  {
+   "id": 2,
+   "name": "House among cottonwoods from SE",
+   "scans": [
+    "model/ref/trc_thrb/THRB03297-00402.jpg (2397x1600, best)",
+    "model/ref/trc_mwac1950/MWAC_1255_5_14c.jpg",
+    "photos/candidates/sewall1919_n46_b_t.jpg",
+    "layout/img/taylor/fig19_TR_photo_house_p47.jpg"
+   ],
+   "documented": "Mattison 1960 photo 2: camera pointing NW; Mattison: photos taken from points east and south of the house",
+   "camera": {
+    "house_centre_offset": {
+     "E_of_centre": 87,
+     "N_of_centre": -128
+    },
+    "relative_to_SE_corner": {
+     "E": 72,
+     "N": -98
+    },
+    "distance_to_house_centre_ft": 155,
+    "height_ft": 5.0,
+    "look_bearing_deg": 326,
+    "hfov_deg": 48,
+    "uncertainty": "distance 130-190 ft, bearing 315-335 deg"
+   },
+   "derivation": "Apparent width per foot: south face ~13.3 px/ft vs east face ~9 px/ft (2000-px frame) -> camera azimuth 34 deg off the south-face normal (bearing from house 146 deg); house spans ~22 deg of a ~48 deg frame -> ~155 ft.",
+   "visible": [
+    "south gable (shingled) with gable window",
+    "south piazza: shed roof, front posts, east open end",
+    "south wall west window (S-W1) beside piazza west post",
+    "east wall (north 2/3) behind cottonwood trunks, veranda roof and post, NE window",
+    "foreground: wagon, sawhorse, barrel, fences, lumber pile"
+   ],
+   "validation_targets": [
+    "gable pitch and gable window height",
+    "piazza roof slope and its junction above the eave",
+    "piazza east end vs SE corner (piazza length)"
+   ]
+  },
+  {
+   "id": 3,
+   "name": "Ranch from the east bank (across the river)",
+   "scans": [
+    "model/ref/trc_mwac1950/MWAC_1255_5_13b.jpg (2467x1600, best of house)",
+    "model/ref/harvard_via_astheyare/tr-6.jpg (1714x900, wider crop, Harvard print)",
+    "photos/candidates/sewall1919_n46_a_t.jpg",
+    "photos/candidates/hag1921_n318_a_t.jpg",
+    "layout/img/taylor/fig02_TR_photo_from_east_bank_p21.jpg"
+   ],
+   "documented": "Mattison 1960 photo 1: from a point on the east side of the Little Missouri; Sewall: 'To the east we looked across the river about two hundred yards'",
+   "camera": {
+    "bearing_from_house_deg": 106,
+    "look_bearing_deg": 286,
+    "distance_to_house_ft": 600,
+    "height_ft": "5 ft above the east-bank bench (approx. same elevation as the house terrace, +/-10 ft)",
+    "hfov_deg": 45,
+    "uncertainty": "distance 450-750 ft, bearing from house 95-115 deg"
+   },
+   "derivation": "North rake of the house roof shifts 4.4 ft horizontally over the 16 ft eave-to-ridge depth -> camera ~16 deg south of the house's east normal; house roof (62 ft) spans 280 px of 2467 -> ~5 deg -> ~600-700 ft at 45 deg hfov.",
+   "visible": [
+    "house east roof slope + east wall (low, behind trees), south piazza roof end at left",
+    "blacksmith shop E wall with partition log ends and brick chimney",
+    "dugout E face with overhang on 3 posts, retaining logs",
+    "river bed and sandbar, cows (foreground)"
+   ],
+   "validation_targets": [
+    "roof pitch (ridge height over eave)",
+    "eave height",
+    "blacksmith partition position and chimney",
+    "dugout roof overhang"
+   ]
+  },
+  {
+   "id": 4,
+   "name": "Stables close-up from the south",
+   "scans": [
+    "model/ref/trc_thrb/THRB03296-00401.jpg (2309x1600, best)",
+    "model/ref/trc_mwac1950/MWAC_1255_5_7b.jpg",
+    "photos/candidates/hag1921_n514_b_t.jpg",
+    "photos/candidates/sewall1919_n68_top_t.jpg",
+    "layout/img/taylor/fig21_barn_closeup_p52.jpg"
+   ],
+   "documented": "Mattison 1960 photo 5: barn, camera pointing north-northwest",
+   "camera": {
+    "relative_to_barn_front_centre": {
+     "E": 15,
+     "S": 70
+    },
+    "distance_ft": 72,
+    "height_ft": 5.0,
+    "look_bearing_deg": 337,
+    "hfov_deg": 48,
+    "uncertainty": "distance 55-90 ft, bearing 325-350 deg"
+   },
+   "derivation": "Barn front (52 ft) spans ~68% of the frame; east (right) stable appears larger than west -> camera east of centre, looking NNW.",
+   "visible": [
+    "S fronts of both stables and the open central bay with wagon",
+    "east stable door (right), ladder to hay stack on roof",
+    "front eave log ends",
+    "pair-post corral fences both sides"
+   ],
+   "validation_targets": [
+    "roof profile (low gable peak)",
+    "bay width vs stables",
+    "eave height"
+   ]
+  },
+  {
+   "id": 5,
+   "name": "Barn, utility shed and corrals looking north",
+   "scans": [
+    "model/ref/trc_mwac1950/MWAC_1255_5_9a.jpg",
+    "model/ref/trc_mwac1950/MWAC_1255_5_8a.jpg",
+    "layout/img/taylor/fig22_barn_and_shed_view_north_p53.jpg",
+    "photos/candidates/sewall1919_n68_bot.jpg (check)"
+   ],
+   "documented": "Taylor 1959 p.55: 'taken from a point about 25 feet due west of the well. Roosevelt was looking north.' MWAC card: 'Direction of Butte D given on Kerri map'",
+   "camera": {
+    "relative_to_well_centre": {
+     "E": -25,
+     "N": 0
+    },
+    "height_ft": 5.0,
+    "look_bearing_deg": 0,
+    "hfov_deg": 48,
+    "uncertainty": "+/-10 ft, bearing +/-10 deg"
+   },
+   "visible": [
+    "barn S face (left, ~150 ft away) with hay rack wagon",
+    "utility shed S gable (right) with overhanging sod roof and woodpile",
+    "pair-post corral fence (5 rails) and single-post house fence (right edge)"
+   ],
+   "validation_targets": [
+    "shed roof form and height",
+    "fence heights and rail counts"
+   ]
+  },
+  {
+   "id": 6,
+   "name": "From SE of the house looking west to the south end of the corral (X-frame fence)",
+   "scans": [
+    "model/ref/trc_mwac1950/MWAC_1255_5_10a.jpg",
+    "MWAC_1255_5_10c.jpg",
+    "layout/img/taylor/fig26_view_west_X_fence_p63.jpg"
+   ],
+   "documented": "MWAC card: 'T.R.'s photo of 1886 from a point southeast of ranch house, west toward south end of corral'",
+   "camera": {
+    "note": "south-east of the house, looking west (~270 deg); no buildings in frame - use for landscape/X-fence only",
+    "height_ft": 5.0
+   },
+   "visible": [
+    "X-frame fence on the W edge of the clearing",
+    "big cottonwoods",
+    "western bluffs"
+   ]
+  }
+ ]
+}

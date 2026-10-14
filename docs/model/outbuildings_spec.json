@@ -1,0 +1,708 @@
+{
+ "units": "ft / ft_in / m",
+ "conventions": "Each building has its own local origin at its SW outside corner, X east, Y north, Z up from grade. Placement is already solved in your layout; 'conjectural' flags mark designs reconstructed from period Dakota ranch practice.",
+ "general_practice_notes": "Badlands ranch outbuildings of 1884-86 were round or hewn cottonwood/juniper logs, saddle-notched with long projecting ends, walls 6-7 ft high, roofs of log stringers/poles covered with brush or hay and 6-12 in of clay/sod/scoria, nearly flat (5-12 deg). This matches the barn, blacksmith shop and dugout in T.R.'s photographs.",
+ "sources": {
+  "TAY59": "Taylor, D.C. 1959, Archeological Investigations of the Elkhorn Ranch Site (TRC thro_639-758; OCR layout/text/taylor1959_ocr)",
+  "MAP57": "Beaubien 1957 / Taylor 1959 excavation map, 1 in = 30 ft (mosaic layout/img/taylor/beaubien_taylor_map_mosaic_approx.png, 5.0 px/ft); positions converted to house coords by bilinear fit to the excavated 60x30 house outline (scripts in spec/derivations)",
+  "MAT60": "Mattison, R.H. 1960, Elkhorn Ranch buildings report (MWAC 6_41; layout/text/mattison1960_ocr)",
+  "SEW19": "Sewall, W.W. 1919, Bill Sewall's Story of T.R., pp.18-19 ('sixty feet long, thirty feet wide, and seven feet high, with a flat roof and a porch')",
+  "SEWLTR": "W.W. Sewall letters (Cunningham Coll.) quoted by Mattison 1960: Oct 19 1884 ('very flat roof', 9 ft high), Feb 18 1885 ('have got it shingled and the under floor layed'), Dec 20 1885 (stables 16x20, 12 ft space, logs hewn on three sides)",
+  "TRSK": "T.R.'s pencil sketch plan + end elevation + lumber list (Cunningham Coll.; Mattison 1960 photo 7 = MWAC_6_41_24; NPS redraw by D.E. Rogers 1-27-59 = MWAC_6_41_2/3)",
+  "EDITH": "Edith K. Roosevelt letter-sketch plan from the Elkhorn, 1890 (Mattison 1960 photo 6 = MWAC_6_41_26)",
+  "BP": "Harvard-collection blueprint 'Elkhorn Ranch, Little Missouri River, Dakota', plan + E and S elevations at 1/4in=1ft (HSR App. B, layout/img/hsr_appB-78.png). Measured: 24.63 px/ft horizontally, 25.47 px/ft vertically on the scan. A 20th-c. reconstruction drawing, NOT a survey: used only where it agrees with photos/excavation",
+  "P_PIAZZA": "T.R. photo 1886, east veranda with antlers (best scan: model/ref/trc_thrb/THRB03304-00217.jpg; also MWAC_1255_5_12a/12c, Sewall 1919 p.132, Hagedorn 1921 p.454)",
+  "P_HOUSE": "T.R. photo 1886, house among cottonwoods from SE (best scan: model/ref/trc_thrb/THRB03297-00402.jpg; also MWAC_1255_5_14c, Sewall p.46, Taylor fig.19)",
+  "P_RIVER": "T.R. photo 1886 from east bank across the Little Missouri (best scan: model/ref/trc_mwac1950/MWAC_1255_5_13b.jpg; also Harvard print via model/ref/harvard_via_astheyare/tr-6.jpg, Sewall p.46, Hagedorn p.318, Taylor fig.2)",
+  "P_STABLE": "T.R. photo 1886, stables close-up from S (best scan: model/ref/trc_thrb/THRB03296-00401.jpg; also MWAC_1255_5_7a/7b, Hagedorn p.514, Taylor fig.21)",
+  "P_CORRALS": "T.R. photo 1886, barn + utility shed + corrals looking N from 25 ft W of well (model/ref/trc_mwac1950/MWAC_1255_5_9a.jpg, 8a; Taylor fig.22)",
+  "TRBOOK": "T.R., Hunting Trips of a Ranchman (1885) pp.15-16, Ranch Life and the Hunting-Trail (1888) pp.25-27",
+  "GIFFORD": "R. Swain Gifford engraving 'Elkhorn Ranch-house', Hunting Trips 1885 - artist's rendering, low weight (shows full-length veranda; contradicted by photos/excavation)"
+ },
+ "barn_stables": {
+  "evidence": "Sewall Dec 20 1885: 'We hew the logs on three sides and are putting up two stables 16 x 20 feet with a twelve foot space between like a woods hovel and hay shed.' TAY59 pp.51-56, fig.24; P_STABLE (THRB03296-00401) close-up from S; P_CORRALS from SW. Burned; 18 vertical posts excavated across the N side of the central bay.",
+  "overall": {
+   "length_E_W": {
+    "ft": 52.0,
+    "ft_in": "52'0\"",
+    "m": 15.85,
+    "source": "20 + 12 + 20 ft; MAP57 burn area 51 ft E-W",
+    "range_ft": [
+     44,
+     52
+    ],
+    "range_m": [
+     13.411,
+     15.85
+    ]
+   },
+   "depth_N_S": {
+    "ft": 16.0,
+    "ft_in": "16'0\"",
+    "m": 4.877,
+    "source": "Sewall 16; TAY59: roof held up by 'big logs which spanned the space from north to south walls' -> 16 ft span N-S"
+   },
+   "note": "Orientation choice: stables are 20 ft E-W x 16 ft N-S (MAP57 burn extents + N-S roof logs). If your layout already uses 16 E-W x 20 N-S, the overall becomes 44 x 20 ft - P_STABLE's apparent proportions allow either; 52 x 16 is preferred."
+  },
+  "west_stable": {
+   "X": [
+    0,
+    20
+   ],
+   "Y": [
+    0,
+    16
+   ]
+  },
+  "central_bay": {
+   "X": [
+    20,
+    32
+   ],
+   "Y": [
+    0,
+    16
+   ],
+   "front": "open on the south (buggy/wagon stored inside in P_STABLE)",
+   "back": "closed by closely spaced vertical posts, 18 excavated, 4.75-11 in dia, plus a horizontal log laid against them outside",
+   "floor": "earth"
+  },
+  "east_stable": {
+   "X": [
+    32,
+    52
+   ],
+   "Y": [
+    0,
+    16
+   ]
+  },
+  "walls": {
+   "logs": "cottonwood logs hewn on 3 sides (Sewall) - P_STABLE shows rounded outer faces with flattened beds; ~10-12 in",
+   "height_to_eave": {
+    "ft": 7.0,
+    "ft_in": "7'0\"",
+    "m": 2.134,
+    "source": "P_STABLE: bay opening ~7 ft at 21.5 px/ft; 7-8 courses",
+    "estimate": true,
+    "range_ft": [
+     6.5,
+     7.75
+    ],
+    "range_m": [
+     1.981,
+     2.362
+    ]
+   },
+   "corners": "saddle-notched, ends projecting 12-18 in (P_STABLE at bay edges)",
+   "chinking": "clay/mud daubing, light"
+  },
+  "doors": [
+   {
+    "stable": "east",
+    "wall": "south",
+    "position": "east end of S wall, edge ~1 ft from SE corner",
+    "size": "3'6\" x 6'6\" board door (P_STABLE)",
+    "confidence": "high"
+   },
+   {
+    "stable": "west",
+    "wall": "south",
+    "position": "west part of S wall (hidden behind fence post in P_STABLE; TAY59 'two doors, one in each stable, opened towards the south')",
+    "size": "3'6\" x 6'6\"",
+    "confidence": "medium"
+   }
+  ],
+  "other_openings": "small window-like (manure) hatch ~2 x 1.5 ft in the east wall of the east stable (TAY59; probably same in W wall of W stable); feed openings through the inner (bay-side) walls (TAY59 conjecture)",
+  "interior": "posts dividing stalls and mangers (8 round posts 3.75-7 in excavated in a stable); manure floor",
+  "roof": {
+   "form": "very low gable, ridge running N-S over the centre of the bay (front edge in P_STABLE rises ~3-3.5 ft from the ends to the middle)",
+   "pitch_deg": {
+    "value": 7.5,
+    "range": [
+     5,
+     10
+    ],
+    "derivation": "P_STABLE: front edge rises ~75-80 px over ~700-800 px half-width at ~21.5 px/ft -> ~3.5 ft over 26 ft"
+   },
+   "structure": "big N-S log stringers (log ends visible along the S eave at ~8-11 ft spacing) carrying poles laid E-W, then hay/brush and a thin mantle of clay/sod (TAY59; MAT60 'low sloping roof of logs covered with dirt')",
+   "south_overhang": {
+    "ft": 3.0,
+    "ft_in": "3'0\"",
+    "m": 0.914,
+    "source": "P_STABLE: roof projects well beyond the stable fronts",
+    "estimate": true,
+    "range_ft": [
+     2,
+     4
+    ],
+    "range_m": [
+     0.61,
+     1.219
+    ]
+   },
+   "east_west_overhang": {
+    "ft": 1.5,
+    "ft_in": "1'6\"",
+    "m": 0.457,
+    "source": "estimate",
+    "estimate": true
+   },
+   "on_roof": "hay stack ~12 x 10 ft x 5 ft high on the roof over the bay/east stable, reached by a pole ladder (13 rungs, ~11 ft) leaning on the east stable front (P_STABLE)"
+  },
+  "attached_fences": "corral fences abut the barn front at both ends; west stable door opens into one pen, east into another (TAY59)",
+  "fate": "burned (charred posts, ash, burned manure)"
+ },
+ "utility_shed_storehouse": {
+  "evidence": "TAY59 pp.66-67: outline from burned rubble - N 16 ft, S 17'6\" ('seems unlikely'), E 24'10\", W 25'2\"; 'rectangular log building having a low-gabled overhanging roof ... covered with sod or clay. A door opened on the south side, and there may have been windows in the southeast corner'; coal dust and wood chips -> coal/wood store; Henry Walz lived in it in 1898 ('storehouse'); huge pile of cottonwood branches in front (P_CORRALS).",
+  "footprint": {
+   "E_W": {
+    "ft": 16.5,
+    "ft_in": "16'6\"",
+    "m": 5.029,
+    "source": "TAY59 N 16 / S 17.5 -> 16.5 adopted",
+    "range_ft": [
+     16,
+     17.5
+    ],
+    "range_m": [
+     4.877,
+     5.334
+    ]
+   },
+   "N_S": {
+    "ft": 25.0,
+    "ft_in": "25'0\"",
+    "m": 7.62,
+    "source": "TAY59 24'10\"-25'2\""
+   }
+  },
+  "walls": {
+   "logs": "round/hewn cottonwood, saddle-notched (conjectural, by analogy with barn)",
+   "height_to_eave": {
+    "ft": 7.0,
+    "ft_in": "7'0\"",
+    "m": 2.134,
+    "source": "P_CORRALS (similar to barn eave)",
+    "estimate": true,
+    "range_ft": [
+     6.5,
+     7.5
+    ],
+    "range_m": [
+     1.981,
+     2.286
+    ]
+   }
+  },
+  "roof": {
+   "form": "low gable, ridge N-S, gable facing south over the door (P_CORRALS)",
+   "pitch_deg": {
+    "value": 10,
+    "range": [
+     6,
+     14
+    ]
+   },
+   "covering": "poles + sod/clay",
+   "south_overhang": {
+    "ft": 2.5,
+    "ft_in": "2'6\"",
+    "m": 0.762,
+    "source": "P_CORRALS 'overhanging roof'",
+    "estimate": true,
+    "range_ft": [
+     1.5,
+     3.5
+    ],
+    "range_m": [
+     0.457,
+     1.067
+    ]
+   },
+   "side_overhang": {
+    "ft": 2.0,
+    "ft_in": "2'0\"",
+    "m": 0.61,
+    "source": "TAY59: roof extended far enough to cover the coop entry on the W side",
+    "estimate": true
+   }
+  },
+  "openings": [
+   {
+    "wall": "south",
+    "type": "door 3'0\" x 6'3\" board",
+    "position": "centre (conjectural)"
+   },
+   {
+    "wall": "south/east near SE corner",
+    "type": "1-2 small windows 2'0\" x 2'0\"",
+    "confidence": "low"
+   }
+  ],
+  "context": "woodpile of cottonwood branches ~20 ft long x 8 ft high in front (south); coal (lignite) stored inside",
+  "fate": "burned",
+  "confidence": "medium (footprint), low (elevations)"
+ },
+ "chicken_coop_pen": {
+  "evidence": "TAY59 pp.64-67: rectangle of closely set vertical cedar posts, outside N 13'2\", S 13'9\", W 18'8.5\", E 20'0\"; E side open (posts only 3'4\" from the north) because it abuts the W wall of the shed; posts 3.5-7 in (mostly 4-5 in), set so close a hen could not pass; nest box remains 4 x 3 ft; T.R.: bobcats repeatedly raided the hen house.",
+  "footprint": {
+   "E_W": {
+    "ft": 13.5,
+    "ft_in": "13'6\"",
+    "m": 4.115,
+    "source": "TAY59 13'2\"-13'9\""
+   },
+   "N_S": {
+    "ft": 19.5,
+    "ft_in": "19'6\"",
+    "m": 5.944,
+    "source": "TAY59 18'8.5\"-20'0\""
+   }
+  },
+  "walls": "stockade of round cedar posts set in the ground, touching or <2 in gaps, height 5'0\"-6'0\" (conjectural)",
+  "roof": "probably unroofed (TAY59); option: pole/brush cover",
+  "entry": "door between the shed's W wall and the coop's E posts at the north (TAY59 fig.29)",
+  "fittings": "nest boxes against the shed wall (box remains 4 x 3 ft)",
+  "confidence": "high (plan), low (height)"
+ },
+ "blacksmith_shop": {
+  "evidence": "TAY59 pp.24-32, fig.7: outside 33'0\" (W), 32'8\" (E) x 16'0\" (N), 16'9\" (S) [1959]; Beaubien 1957: 33'9\" x 15'?; Mattison card: 33'6\" x 15'6\"; two rooms: south ~10 x 14'6\" inside, north work room 20'6\" x 14'6\" inside; P_RIVER shows the E side (log ends of the partition), a rectangular brick chimney over the forge, flat sod roof.",
+  "footprint": {
+   "N_S": {
+    "ft": 33.0,
+    "ft_in": "33'0\"",
+    "m": 10.058,
+    "source": "TAY59 1959",
+    "range_ft": [
+     32.67,
+     33.75
+    ],
+    "range_m": [
+     9.958,
+     10.287
+    ]
+   },
+   "E_W": {
+    "ft": 16.0,
+    "ft_in": "16'0\"",
+    "m": 4.877,
+    "source": "TAY59 N wall 16 ft",
+    "range_ft": [
+     15.5,
+     16.75
+    ],
+    "range_m": [
+     4.724,
+     5.105
+    ]
+   }
+  },
+  "partition": {
+   "Y_from_south_outside": {
+    "ft": 11.5,
+    "ft_in": "11'6\"",
+    "m": 3.505,
+    "source": "inside S room 10 ft + 2 wall logs ~0.75 ft; P_RIVER partition log ends at ~12.7 ft (+/-1.5)",
+    "estimate": true,
+    "range_ft": [
+     10.75,
+     12.7
+    ],
+    "range_m": [
+     3.277,
+     3.871
+    ]
+   },
+   "type": "log partition, ends visible in E wall"
+  },
+  "walls": {
+   "logs": "round cottonwood logs ~9-11 in, saddle-notched with short projecting ends (P_RIVER)",
+   "courses": "8 visible on E wall (P_RIVER)",
+   "height_to_eave": {
+    "ft": 6.75,
+    "ft_in": "6'9\"",
+    "m": 2.057,
+    "source": "P_RIVER: 135 px at 19.7 px/ft (zoom) -> 6.9 ft",
+    "estimate": true,
+    "range_ft": [
+     6.25,
+     7.25
+    ],
+    "range_m": [
+     1.905,
+     2.21
+    ]
+   },
+   "south_room_east_wall": "logs only about half height, upper half open (TAY59 reading of P_RIVER) -> stall for 1-2 milk cows"
+  },
+  "roof": {
+   "form": "almost flat gable, ridge N-S",
+   "pitch_deg": {
+    "value": 8,
+    "range": [
+     4,
+     12
+    ]
+   },
+   "structure": "pole rafters ~2 ft o.c. (ends visible as a row of light dots under the E eave in P_RIVER) + clay (collapsed roof clay 2-8 in thick found inside)",
+   "eave_overhang": {
+    "ft": 1.0,
+    "ft_in": "1'0\"",
+    "m": 0.305,
+    "source": "P_RIVER",
+    "estimate": true
+   }
+  },
+  "chimney": {
+   "type": "rectangular brick chimney over the forge (P_RIVER, TAY59)",
+   "position": "north room, Y ~25 ft from S end, near the E-W centre/forge stones",
+   "section": "1'4\" x 1'4\" (estimate)",
+   "height_above_roof": {
+    "ft": 2.5,
+    "ft_in": "2'6\"",
+    "m": 0.762,
+    "source": "P_RIVER",
+    "estimate": true,
+    "range_ft": [
+     1.5,
+     3.5
+    ],
+    "range_m": [
+     0.457,
+     1.067
+    ]
+   }
+  },
+  "openings": [
+   {
+    "wall": "south",
+    "type": "ordinary door ~2'8\" x 6'0\" near SE corner into the S room",
+    "confidence": "medium (photo)"
+   },
+   {
+    "wall": "north",
+    "type": "wide door ~3'6\" near NE corner (animals in/out)",
+    "confidence": "low"
+   },
+   {
+    "wall": "west",
+    "type": "narrow door 22 in into N room beside the partition",
+    "confidence": "low"
+   },
+   {
+    "wall": "west",
+    "type": "1-2 windows (glass + frame fragments found near W wall) ~2 x 2 ft",
+    "confidence": "medium"
+   },
+   {
+    "wall": "north",
+    "type": "1 window (conjectural)",
+    "confidence": "low"
+   },
+   {
+    "wall": "east",
+    "type": "none (TAY59 from photo)",
+    "confidence": "medium"
+   }
+  ],
+  "interior": "forge on pinkish-red sandstone slabs in N room with brick hearth/chimney (bricks 8 x 3.75 x 2.25 in); work bench along W wall from NW corner ~12 ft, 3 ft deep on 2 posts; ash/slag bin 24-25 in wide against N wall; cottonwood bark spread outside E, W, N walls as footing",
+  "confidence": "high (plan), medium (elevations)"
+ },
+ "dugout_first_shack": {
+  "evidence": "TAY59 pp.20-22, fig.3 (from Beaubien 1957): inside 12 ft N-S x 14 ft E-W; walls of juniper/cottonwood posts 8-12 in set upright side by side; cut into the bank face so earth surrounds 3 sides; exposed E wall with doorway 2'6\" wide 'set almost in the middle' (Mattison card: 'only 1 inch off-center'); low gable roof on 3 beams (N wall, S wall, centre beam on posts); roof extended beyond the living space as an overhang over the doorway; sod or scoria roof; horizontal retaining logs against the bank; walls charred above floor. P_RIVER shows the E face with 3 front posts.",
+  "interior": {
+   "N_S": {
+    "ft": 12.0,
+    "ft_in": "12'0\"",
+    "m": 3.658,
+    "source": "Beaubien"
+   },
+   "E_W": {
+    "ft": 14.0,
+    "ft_in": "14'0\"",
+    "m": 4.267,
+    "source": "Beaubien"
+   }
+  },
+  "walls": {
+   "type": "palisade of upright posts 8-12 in dia, flush; earth-backed on N, S, W",
+   "height_inside": {
+    "ft": 6.5,
+    "ft_in": "6'6\"",
+    "m": 1.981,
+    "source": "estimate",
+    "estimate": true,
+    "range_ft": [
+     6.0,
+     7.0
+    ],
+    "range_m": [
+     1.829,
+     2.134
+    ]
+   }
+  },
+  "door": {
+   "width": {
+    "ft": 2.5,
+    "ft_in": "2'6\"",
+    "m": 0.762,
+    "source": "Beaubien"
+   },
+   "position": "E wall centred: edges 4'9\" and 7'3\" from the inside NE corner",
+   "height": {
+    "ft": 6.0,
+    "ft_in": "6'0\"",
+    "m": 1.829,
+    "source": "estimate",
+    "estimate": true
+   }
+  },
+  "windows": "possibly 1 in E wall (TAY59 'seems likely')",
+  "roof": {
+   "form": "low gable, ridge E-W on the centre beam (gable faces east toward the river)",
+   "pitch_deg": {
+    "value": 12,
+    "range": [
+     8,
+     18
+    ],
+    "source": "P_RIVER"
+   },
+   "beams": "3 log beams E-W (on N wall, S wall, centre on posts)",
+   "front_overhang_east": {
+    "ft": 5.0,
+    "ft_in": "5'0\"",
+    "m": 1.524,
+    "source": "P_RIVER: roof carried forward on 3 posts (2 corners + 1 centre in front of the door)",
+    "estimate": true,
+    "range_ft": [
+     3,
+     6
+    ],
+    "range_m": [
+     0.914,
+     1.829
+    ]
+   },
+   "covering": "poles + sod/scoria; grass growing"
+  },
+  "retaining": "horizontal logs stacked against the bank on either side of the front (P_RIVER)",
+  "confidence": "medium"
+ },
+ "round_horse_corral": {
+  "evidence": "T.R. 1888: 'high, circular horse-corral, with a snubbing-post in the center, and a wing built out from one side of the gate entrance, so that the saddle-band can be driven in without trouble'; TAY59 pp.23-24 (Beaubien 1957 excavation).",
+  "diameter_outside": {
+   "ft": 62.0,
+   "ft_in": "62'0\"",
+   "m": 18.898,
+   "source": "Beaubien: outside post to outside post"
+  },
+  "posts": "cedar posts 5-7 in dia set in PAIRS ~8 in apart (two concentric circles); pairs 10-12 ft apart; 15 sets around the circle; 2 sets of 4 posts mark the gate",
+  "rails": "horizontal poles fastened between each pair (sandwiched), 3-5 in dia; recommend 6 rails, top rail Z 7'0\" ('high' corral; conjectural count)",
+  "post_height": {
+   "ft": 7.5,
+   "ft_in": "7'6\"",
+   "m": 2.286,
+   "source": "conjectural 'high' corral",
+   "estimate": true,
+   "range_ft": [
+    6.5,
+    8.0
+   ],
+   "range_m": [
+    1.981,
+    2.438
+   ]
+  },
+  "gate": "swinging gate (gate-hook fragment) at the 4-post set where the wing joins; opening ~10 ft",
+  "snubbing_post": {
+   "diameter": {
+    "ft": 1.0,
+    "ft_in": "1'0\"",
+    "m": 0.305,
+    "source": "estimate",
+    "estimate": true,
+    "range_ft": [
+     0.83,
+     1.17
+    ],
+    "range_m": [
+     0.254,
+     0.356
+    ]
+   },
+   "height": {
+    "ft": 5.0,
+    "ft_in": "5'0\"",
+    "m": 1.524,
+    "source": "estimate",
+    "estimate": true,
+    "range_ft": [
+     4,
+     6
+    ],
+    "range_m": [
+     1.219,
+     1.829
+    ]
+   }
+  },
+  "wing": {
+   "length": {
+    "ft": 49.5,
+    "ft_in": "49'6\"",
+    "m": 15.088,
+    "source": "TAY59 '49 feet or 50 feet'"
+   },
+   "side": "east side of the corral",
+   "construction": "horizontal poles between the corral and three further pairs of posts",
+   "height": "as corral"
+  }
+ },
+ "fences": {
+  "house_enclosure": {
+   "evidence": "TAY59 p.58-62, table 2: single round posts (3.4-6 in, mostly ~4.5 in) at almost exactly 10 ft intervals, 'four spaced horizontal bars nailed to them'; encloses house, well, shed and privy, ~110 x 100 ft; trees used as posts in front of the house; posts 25-33 curve NW along the scoria path",
+   "post_spacing": {
+    "ft": 10.0,
+    "ft_in": "10'0\"",
+    "m": 3.048,
+    "source": "TAY59"
+   },
+   "post_dia": {
+    "ft": 0.375,
+    "ft_in": "0'4½\"",
+    "m": 0.114,
+    "source": "TAY59 table 2"
+   },
+   "rails": "4 sawn boards or split poles nailed on the outside face; rails at Z 1'0\", 2'0\", 3'0\", 4'0\" (conjectural spacing)",
+   "post_height": {
+    "ft": 4.5,
+    "ft_in": "4'6\"",
+    "m": 1.372,
+    "source": "conjectural",
+    "estimate": true,
+    "range_ft": [
+     4,
+     5
+    ],
+    "range_m": [
+     1.219,
+     1.524
+    ]
+   }
+  },
+  "corral_fence_around_barn": {
+   "evidence": "TAY59 p.57: pairs of cedar posts at 10 ft intervals, five horizontal poles fit into the slot between each pair and nailed; area ~100 ft square; gates of sliding poles marked by sets of three posts",
+   "post_spacing": {
+    "ft": 10.0,
+    "ft_in": "10'0\"",
+    "m": 3.048,
+    "source": "TAY59"
+   },
+   "rails": "5 round poles 3-4 in",
+   "height": {
+    "ft": 6.0,
+    "ft_in": "6'0\"",
+    "m": 1.829,
+    "source": "P_STABLE/P_CORRALS",
+    "estimate": true,
+    "range_ft": [
+     5.5,
+     6.5
+    ],
+    "range_m": [
+     1.676,
+     1.981
+    ]
+   }
+  },
+  "x_frame_fence_west": {
+   "evidence": "TAY59 p.63, fig.26 (T.R. photo MWAC_1255_5_10a): 'X' frames set on top of the ground, a horizontal bar spanning between the tops of the Xs, and two other poles nailed to the frame below",
+   "frame_spacing": {
+    "ft": 10.0,
+    "ft_in": "10'0\"",
+    "m": 3.048,
+    "source": "estimate (pole length)",
+    "estimate": true,
+    "range_ft": [
+     8,
+     12
+    ],
+    "range_m": [
+     2.438,
+     3.658
+    ]
+   },
+   "height": {
+    "ft": 4.5,
+    "ft_in": "4'6\"",
+    "m": 1.372,
+    "source": "estimate",
+    "estimate": true,
+    "range_ft": [
+     4,
+     5
+    ],
+    "range_m": [
+     1.219,
+     1.524
+    ]
+   },
+   "members": "X legs ~5.5 ft poles crossing at ~3.75 ft; top rail cradled in the X crotch; 2 lower rails nailed to the legs"
+  }
+ },
+ "well": {
+  "evidence": "TAY59 p.33: 33 ft from the SW corner of the house; oval shaft 4'6\" diameter, stone-lined; top 'surrounded with a small rectangular enclosure, for the base logs were still intact'; choked within 6 ft of the top in 1959; depth unknown.",
+  "shaft": {
+   "shape": "oval",
+   "diameter": {
+    "ft": 4.5,
+    "ft_in": "4'6\"",
+    "m": 1.372,
+    "source": "TAY59"
+   },
+   "lining": "dry-laid sandstone boulders/slabs",
+   "depth": {
+    "ft": 18.0,
+    "ft_in": "18'0\"",
+    "m": 5.486,
+    "source": "conjectural: terrace is 13-15 ft above the streambed (TAY59 p.6); water near river level",
+    "estimate": true,
+    "range_ft": [
+     12,
+     25
+    ],
+    "range_m": [
+     3.658,
+     7.62
+    ]
+   }
+  },
+  "curb_enclosure": {
+   "plan": "rectangular log curb of base logs ~6'0\" x 5'6\" outside (conjectural size)",
+   "height": {
+    "ft": 2.5,
+    "ft_in": "2'6\"",
+    "m": 0.762,
+    "source": "conjectural",
+    "estimate": true,
+    "range_ft": [
+     1.5,
+     3.0
+    ],
+    "range_m": [
+     0.457,
+     0.914
+    ]
+   },
+   "cover": "plank lid; windlass or bucket-and-rope (no evidence; omit or keep minimal)"
+  }
+ },
+ "privy": {
+  "evidence": "not found by excavation (TAY59 p.17); north of the house inside the fence along the scoria path",
+  "recommendation": "conjectural 4'0\" x 4'6\" board privy, shed roof, ~7 ft high; or omit",
+  "confidence": "low"
+ }
+}

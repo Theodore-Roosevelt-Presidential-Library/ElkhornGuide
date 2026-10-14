@@ -1,0 +1,11 @@
+{
+ "model_origin": "centre of the 60 x 30 ft house footprint at grade (house coords 15, 30 ft)",
+ "origin_lat": 47.2419083,
+ "origin_lon": -103.6222558,
+ "model_plus_y_azimuth_deg_true": 11.7,
+ "model_plus_x_azimuth_deg_true": 101.7,
+ "units": "metres; glTF +Y up, model north (+Y in Blender) exported as glTF -Z",
+ "absolute_accuracy_m": 12,
+ "relative_accuracy_m": "0.3-0.5 at the foundation stones",
+ "source": "docs/model/footprint.json rectangle_primary"
+}
