@@ -1,0 +1,38 @@
+{
+ "note": "1957/59 Beaubien-Taylor excavation plan (1 in = 30 ft) registered to the 360-derived house footprint (alternative, centred rectangle). Rotation applied: 0.54 deg. Positions good to roughly 3-5 m near the house and 5-10 m at 100 m.",
+ "features": {
+  "well": {
+   "lat": 47.2418631,
+   "lon": -103.6224817
+  },
+  "utility_shed": {
+   "lat": 47.2420743,
+   "lon": -103.6224332
+  },
+  "barn": {
+   "lat": 47.2424252,
+   "lon": -103.6225332
+  },
+  "blacksmith": {
+   "lat": 47.241186,
+   "lon": -103.6219736
+  },
+  "dugout": {
+   "lat": 47.2410868,
+   "lon": -103.6218673
+  },
+  "corral": {
+   "lat": 47.2410032,
+   "lon": -103.6232906
+  },
+  "bank_east": {
+   "lat": 47.2419063,
+   "lon": -103.6218544
+  },
+  "unlabeled_circle": {
+   "lat": 47.2416071,
+   "lon": -103.6222522
+  }
+ },
+ "source": "Dee C. Taylor, Archeological Investigations of the Elkhorn Ranch Site (1959), Theodore Roosevelt Center o274469; plan by Paul Beaubien, Sept 1957, additions Taylor 1959"
+}

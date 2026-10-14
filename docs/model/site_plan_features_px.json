@@ -1,0 +1,111 @@
+{
+ "image": "img/taylor/beaubien_taylor_map_mosaic_approx.png",
+ "image_notes": "Mosaic of TRC scans thro_4785-6top.jpg (top/west half, placed at x+200,y+0) and thro_4783-4bottom.jpg (bottom/east half, placed at x+0,y+1555). Seam offset estimated by eye from fence/pen/barn continuity, uncertainty ~+/-20 px (~4 ft). Source map: 'Archeological site and post locations by Paul Beaubien (Sept 1957), site survey by Ken Kerr(?) Sept 1957, additions Taylor 1959'; nominal scale 1 in = 30 ft.",
+ "scale_px_per_ft": 5.0,
+ "scale_check": "House outline 297x153 px vs 60x30 ft; blacksmith 165x77 px vs 33x16 ft (Taylor); dugout 70 px vs 14 ft (Beaubien); corral ~296 px vs 62 ft -> ~5.0 px/ft",
+ "orientation": "Map +x points roughly north, +y roughly east (river at bottom). Partial ORIENT arrow (cut off at right edge of scan) suggests north = +x rotated ~16 deg toward +y (i.e. image +x is ~N16W); treat as +/-5 deg at best. Taylor: Beaubien baseline 'did not run in a north-south direction'.",
+ "features_px": {
+  "house_outline_SW": [
+   2084,
+   1746
+  ],
+  "house_outline_NW": [
+   2376,
+   1802
+  ],
+  "house_outline_NE": [
+   2349,
+   1956
+  ],
+  "house_outline_SE": [
+   2053,
+   1896
+  ],
+  "house_center": [
+   2215,
+   1850
+  ],
+  "well_center": [
+   2081,
+   1561
+  ],
+  "blacksmith_SW": [
+   767,
+   2175
+  ],
+  "blacksmith_NW": [
+   928,
+   2155
+  ],
+  "blacksmith_NE": [
+   938,
+   2230
+  ],
+  "blacksmith_SE": [
+   772,
+   2252
+  ],
+  "dugout_bbox": [
+   [
+    638,
+    2300
+   ],
+   [
+    708,
+    2372
+   ]
+  ],
+  "utility_shed_bbox_approx": [
+   [
+    2400,
+    1570
+   ],
+   [
+    2533,
+    1665
+   ]
+  ],
+  "barn_hatched_bbox_approx": [
+   [
+    3030,
+    1360
+   ],
+   [
+    3180,
+    1615
+   ]
+  ],
+  "round_corral_center_snubbing_post": [
+   504,
+   573
+  ],
+  "round_corral_diameter_px": 296,
+  "baseline_south_end_zero_point_pipe": [
+   759,
+   855
+  ],
+  "baseline_north_end_pipe": [
+   2888,
+   879
+  ],
+  "river_bank_hachure_due_east_of_house": [
+   2167,
+   2338
+  ],
+  "unlabeled_hatched_circle": [
+   1617,
+   1850
+  ]
+ },
+ "derived_distances_ft_from_map": {
+  "house_SW_corner_to_well": 37.0,
+  "house_SE_corner_to_blacksmith_NW_corner": 230.9,
+  "house_center_to_blacksmith_center": 281.7,
+  "house_center_to_dugout_center": 323.4,
+  "house_center_to_corral_center": 427.0,
+  "house_center_to_barn_center": 192.2,
+  "house_center_to_utility_shed_center": 68.5,
+  "house_east_wall_to_bank_hachure": 83.8,
+  "baseline_length": 425.8
+ }
+}
