@@ -4,7 +4,7 @@ from mathutils import Vector, Matrix
 
 FT = 0.3048
 IN = FT / 12.0
-M = __import__('os').environ.get('ELKHORN_MODEL_DIR', 'model')  # holds spec/, materials/, tex/, hdri/, out/
+M = __import__('os').environ.get('ELKHORN_MODEL_DIR', 'model')
 PBR = M + '/materials/pbr/'
 COR = M + '/materials/pbr_corrected/'
 
@@ -52,6 +52,20 @@ def pbr_material(name, albedo, normal=None, rough=None, rough_value=0.85, normal
     return mat
 
 
+def alpha_material(name, path):
+    mat = bpy.data.materials.new(name); mat.use_nodes = True
+    mat['x_albedo'] = path; mat['x_normal'] = ''; mat['x_rough'] = ''; mat['x_tint'] = [1.0, 1.0, 1.0]
+    mat['x_rough_value'] = 0.9; mat['x_normal_strength'] = 1.0; mat['x_alpha'] = 1
+    nt = mat.node_tree; b = nt.nodes['Principled BSDF']
+    tx = nt.nodes.new('ShaderNodeTexImage'); tx.image = _img(path)
+    va = nt.nodes.new('ShaderNodeVertexColor'); va.layer_name = 'Col'
+    mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'; mul.inputs['Factor'].default_value = 1.0
+    nt.links.new(tx.outputs['Color'], mul.inputs[6]); nt.links.new(va.outputs['Color'], mul.inputs[7])
+    nt.links.new(mul.outputs[2], b.inputs['Base Color']); nt.links.new(tx.outputs['Alpha'], b.inputs['Alpha'])
+    b.inputs['Roughness'].default_value = 0.9
+    return mat
+
+
 def flat_material(name, rgb, rough=0.8, metal=0.0, transmission=0.0, ior=1.45, alpha=1.0):
     mat = bpy.data.materials.new(name); mat.use_nodes = True
     b = mat.node_tree.nodes.get('Principled BSDF')
@@ -91,8 +105,8 @@ def build_materials():
                              TX + 'hewn_cottonwood_rough.jpg', normal_strength=1.5, tint=(0.62, 0.58, 0.53))
     S['pole'] = pbr_material('poles', TX + 'hewn_cottonwood_albedo.jpg', TX + 'hewn_cottonwood_normal.png',
                              TX + 'hewn_cottonwood_rough.jpg', normal_strength=1.0, tint=(0.55, 0.52, 0.48))
-    S['hay'] = pbr_material('hay', COR + 'stable_roof_withered_grass_albedo_weathered_1886_2k.jpg',
-                            p('withered_grass', 'withered_grass_normal_gl_2k.jpg'), p('withered_grass', 'withered_grass_roughness_2k.jpg'), normal_strength=2.0, tint=(0.86, 0.76, 0.56))
+    S['hay'] = pbr_material('hay', TX + 'hay_albedo.jpg', TX + 'hay_normal.png', None, 0.95, normal_strength=1.6, tint=(0.78, 0.74, 0.66))
+    S['straw'] = alpha_material('straw', TX + 'hay_strands.png')
     S['door'] = pbr_material('door_boards', COR + 'doors_wood_planks_grey_albedo_weathered_1886_2k.jpg',
                              p('wood_planks_grey', 'wood_planks_grey_normal_gl_2k.jpg'), p('wood_planks_grey', 'wood_planks_grey_roughness_2k.jpg'))
     S['deck'] = pbr_material('porch_floor', COR + 'porch_floor_wood_planks_grey_albedo_weathered_1886_2k.jpg',
@@ -116,7 +130,7 @@ def build_materials():
     S['scoria'] = pbr_material('scoria', COR + 'scoria_path_terrain_red_01_albedo_weathered_1886_2k.jpg',
                                p('terrain_red_01', 'terrain_red_01_normal_gl_2k.jpg'), p('terrain_red_01', 'terrain_red_01_roughness_2k.jpg'))
     S['bark'] = pbr_material('bark', COR + 'cottonwood_bark_Bark001_albedo_weathered_1886_2k.jpg',
-                             PBR + 'Bark001/Bark001_2K-JPG_NormalGL.jpg', PBR + 'Bark001/Bark001_2K-JPG_Roughness.jpg', normal_strength=1.5)
+                             PBR + 'Bark001/Bark001_2K-JPG_NormalGL.jpg', PBR + 'Bark001/Bark001_2K-JPG_Roughness.jpg', normal_strength=1.5, tint=(0.42, 0.4, 0.37))
     S['bone'] = flat_material('antler', srgb('#d8d0bf'), 0.65)
     S['bone2'] = flat_material('antler_base', srgb('#8a7a62'), 0.75)
     S['chair'] = flat_material('chair_wood', srgb('#4a3a2a'), 0.55)

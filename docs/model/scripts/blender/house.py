@@ -12,6 +12,7 @@ PLATE = Z0 + 8 * PITCH  # 9.333
 CROWN = 1.0             # corner projection
 TAN = math.tan(math.radians(30))
 RIDGE_X = 15.0
+SHOW_INTERIOR = False   # True: no dark stand-in planes behind windows/doors; interior faces of logs in fresh wood
 ROOF_RAISE = 0.5        # rafter depth above plate at the wall face
 def roof_z(x):          # roof deck top (ft)
     return PLATE + ROOF_RAISE + (15.0 - abs(x - RIDGE_X)) * TAN
@@ -42,7 +43,7 @@ def wpt(wall, a, o, z):
     return Vector(org) + Vector(u) * a + Vector(n) * o + Vector((0, 0, z))
 
 
-def hewn_log(b, mk, p0, p1, up, out, w, h, rng, endmk='logend', segs_per_ft=0.6, tile=1.0):
+def hewn_log(b, mk, p0, p1, up, out, w, h, rng, endmk='logend', segs_per_ft=0.6, tile=1.0, inner=None):
     """Hewn log with waney (chamfered, irregular) corners. p0,p1 centre-line ends in ft."""
     p0, p1 = Vector(p0), Vector(p1)
     L = (p1 - p0).length
@@ -82,7 +83,10 @@ def hewn_log(b, mk, p0, p1, up, out, w, h, rng, endmk='logend', segs_per_ft=0.6,
             pts = [rings[i][k], rings[i + 1][k], rings[i + 1][k2], rings[i][k2]]
             uv = [(d0 / tile + off, acc[k] / tile), (d1 / tile + off, acc[k] / tile),
                   (d1 / tile + off, acc[k + 1] / tile), (d0 / tile + off, acc[k + 1] / tile)]
-            b.face(mk, pts, uv)
+            fmk = mk
+            if inner and k in (3, 4, 5) and inner[0] <= (d0 + d1) / 2 / FT <= inner[1]:
+                fmk = 'ilog'
+            b.face(fmk, pts, uv)
     b.quad_auto(endmk, list(reversed(rings[0])), 0.4)
     b.quad_auto(endmk, rings[-1], 0.4)
     b.col = prev_col
@@ -128,7 +132,8 @@ def walls(b, rng):
                 # long walls sit at out=-T/2; end walls the same
                 p0 = wpt(wall, s0, -T / 2, zc); p1 = wpt(wall, s1, -T / 2, zc)
                 hh = hgt * (1 if hgt > 0.8 else 1)
-                hewn_log(b, 'log', p0, p1, (0, 0, 1), n, T, hh, rng)
+                inner = (max(0.0, T - s0), L - T - s0) if SHOW_INTERIOR else None
+                hewn_log(b, 'log', p0, p1, (0, 0, 1), n, T, hh, rng, inner=inner)
         # chink: recessed slab in the wall plane behind the logs (fills gaps between courses)
         for (s0, s1) in [(0, L)]:
             pts_out = -T / 2 - 0.02
@@ -205,11 +210,12 @@ def window(b, wall, c, rng, w=WIN['w'], sill=WIN['sill'], head=WIN['head'], ligh
         if wall in ('W', 'N'):
             pts = list(reversed(pts))
         b.quad_auto('glass', pts, 1.0)
-    # dark room interior behind
+    # dark room interior behind (stand-in when the interior is not modelled)
     pts = [m(wpt(wall, a0, -T - 1.5, sill)), m(wpt(wall, a1, -T - 1.5, sill)), m(wpt(wall, a1, -T - 1.5, head)), m(wpt(wall, a0, -T - 1.5, head))]
     if wall in ('W', 'N'):
         pts = list(reversed(pts))
-    b.quad_auto('interior', pts, 1.0)
+    if not SHOW_INTERIOR:
+        b.quad_auto('interior', pts, 1.0)
     # curtain on some windows (white muslin seen in T.R.'s photo of W1)
     if rng.random() < 0.5:
         wbox(b, 'curtain', wall, a0 + 0.1, a0 + 0.1 + (a1 - a0) * rng.uniform(0.25, 0.45), -T - 0.1, -T - 0.05, sill + 0.4, head - 0.15)
@@ -232,7 +238,8 @@ def door(b, wall, c, rng, w=DOOR['w'], sill=DOOR['sill'], head=DOOR['head']):
         bw = min(rng.uniform(0.42, 0.55), a1 - 0.06 - x)
         wbox(b, 'door', wall, x + 0.008, x + bw - 0.008, -0.42, -0.34, sill, leaf_top, 1.2, 2)
         x += bw
-    wbox(b, 'interior', wall, a0, a1, -0.44, -0.43, sill, leaf_top)
+    if not SHOW_INTERIOR:
+        wbox(b, 'interior', wall, a0, a1, -0.44, -0.43, sill, leaf_top)
     # strap hinges (iron)
     for zz in (sill + 0.8, leaf_top - 0.8):
         wbox(b, 'iron', wall, a0 + 0.06, a0 + 1.4, -0.34, -0.32, zz - 0.06, zz + 0.06)
@@ -502,8 +509,10 @@ def rock(b, c, size, rng, mk='stone'):
 def build_house(b, rng):
     b.group = 'house'
     walls(b, rng)
+    b.group = 'roof'
     roof(b, rng)
     gables(b, rng)
+    b.group = 'house'
     chimney(b, rng)
     porches(b, rng)
     foundation(b, rng)

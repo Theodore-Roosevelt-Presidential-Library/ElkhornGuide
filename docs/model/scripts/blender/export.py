@@ -30,7 +30,28 @@ def bake_image(path, tint, size, kind, name):
 
 def simplify_materials():
     for mat in bpy.data.materials:
+        if 'x_flat_rgb' in mat:          # procedural fur -> flat colour for glTF
+            nt = mat.node_tree
+            for n in list(nt.nodes):
+                if n.type not in ('BSDF_PRINCIPLED', 'OUTPUT_MATERIAL'):
+                    nt.nodes.remove(n)
+            nt.nodes['Principled BSDF'].inputs['Base Color'].default_value = (*mat['x_flat_rgb'], 1)
+            continue
         if 'x_albedo' not in mat:
+            continue
+        if mat.get('x_alpha'):
+            nt = mat.node_tree; bsdf = nt.nodes['Principled BSDF']
+            for n in list(nt.nodes):
+                if n.type not in ('BSDF_PRINCIPLED', 'OUTPUT_MATERIAL'):
+                    nt.nodes.remove(n)
+            src = Image.open(mat['x_albedo']).convert('RGBA').resize((256, 256), Image.LANCZOS)
+            outp = f'{TEX}/{mat.name}_rgba.png'; src.save(outp)
+            t = nt.nodes.new('ShaderNodeTexImage'); t.image = bpy.data.images.load(outp)
+            nt.links.new(t.outputs['Color'], bsdf.inputs['Base Color']); nt.links.new(t.outputs['Alpha'], bsdf.inputs['Alpha'])
+            try:
+                mat.surface_render_method = 'DITHERED'
+            except Exception:
+                pass
             continue
         size = 1024 if mat.name in BIG else 512
         nt = mat.node_tree
@@ -67,24 +88,57 @@ def export(path, groups):
     print('wrote', path, os.path.getsize(path) // 1024, 'KB')
 
 
+def terrain_glb(path):
+    """Low-poly context terrain (2021 lidar) with slope/height-coloured vertices + river surface, for the viewer only."""
+    import numpy as np, terrain as T
+    d, meta = T.load()
+    xs, ys, Z = d['near_xs'], d['near_ys'], d['near_Z']
+    Z = T.flatten(xs, ys, Z, {k: 0.0 for k in T.PADS})
+    st = 4; xs, ys, Z = xs[::st], ys[::st], Z[::st, ::st]
+    nx, ny = len(xs), len(ys)
+    gy, gx = np.gradient(Z, ys[1] - ys[0], xs[1] - xs[0]); slope = np.hypot(gx, gy)
+    V = [((x - 15) * FT, (y - 30) * FT, Z[j, i] * FT) for j, y in enumerate(ys) for i, x in enumerate(xs)]
+    F = [(j * nx + i, j * nx + i + 1, (j + 1) * nx + i + 1, (j + 1) * nx + i) for j in range(ny - 1) for i in range(nx - 1)]
+    me = bpy.data.meshes.new('terrain'); me.from_pydata(V, [], F)
+    col = me.color_attributes.new('Col', 'BYTE_COLOR', 'POINT')
+    grass = np.array([0.42, 0.40, 0.26]); clay = np.array([0.55, 0.5, 0.42]); bank = np.array([0.5, 0.45, 0.35])
+    for j in range(ny):
+        for i in range(nx):
+            s_ = min(1.0, max(0.0, (slope[j, i] - 0.35) / 0.5))
+            c = grass * (1 - s_) + clay * s_
+            if Z[j, i] < meta['water_ft'] + 3: c = bank
+            col.data[j * nx + i].color = (*c, 1)
+    mt = bpy.data.materials.new('terrain_vc'); mt.use_nodes = True
+    nt = mt.node_tree; va = nt.nodes.new('ShaderNodeVertexColor'); va.layer_name = 'Col'
+    nt.links.new(va.outputs['Color'], nt.nodes['Principled BSDF'].inputs['Base Color']); nt.nodes['Principled BSDF'].inputs['Roughness'].default_value = 1.0
+    me.materials.append(mt)
+    for p in me.polygons: p.use_smooth = True
+    ob = bpy.data.objects.new('terrain', me); bpy.context.scene.collection.objects.link(ob)
+    wl = (meta['water_ft'] + 0.6) * FT; r = 1300 * FT
+    wm = bpy.data.meshes.new('river'); wm.from_pydata([(-r, -r, wl), (r, -r, wl), (r, r, wl), (-r, r, wl)], [], [(0, 1, 2, 3)])
+    wmat = bpy.data.materials.new('river'); wmat.use_nodes = True
+    wmat.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value = (0.24, 0.24, 0.2, 1)
+    wmat.node_tree.nodes['Principled BSDF'].inputs['Roughness'].default_value = 0.15
+    wm.materials.append(wmat); wo = bpy.data.objects.new('river', wm); bpy.context.scene.collection.objects.link(wo)
+    for o in bpy.data.objects:
+        o.select_set(o.name in ('terrain', 'river'))
+    bpy.ops.export_scene.gltf(filepath=path, export_format='GLB', use_selection=True, export_vertex_color='ACTIVE')
+    print('wrote', path, os.path.getsize(path) // 1024, 'KB')
+
+
 if __name__ == '__main__':
-    mats, objs = scene.build_all(site=True)
+    mats, objs = scene.build_all(site=True, context=False, inside=True)
     for o in list(bpy.data.objects):
         if o.name.startswith('ground'):
             bpy.data.objects.remove(o)
     simplify_materials()
-    # origin at the centre of the house footprint (15, 30 ft); ground level z = 0
     off = Vector((-15 * FT, -30 * FT, 0))
     for o in bpy.data.objects:
         if o.type == 'MESH':
             o.data.transform(__import__('mathutils').Matrix.Translation(off))
-    export(AR + '/elkhorn_house.glb', {'house', 'props'})
-    export(AR + '/elkhorn_site.glb', {'house', 'props', 'barn', 'shed', 'blacksmith', 'dugout', 'well', 'corral', 'fences'})
-    json.dump({
-        'model_origin': 'centre of the 60 x 30 ft house footprint at grade (house coords 15, 30 ft)',
-        'origin_lat': 47.2419083, 'origin_lon': -103.6222558,
-        'model_plus_y_azimuth_deg_true': 11.7,
-        'model_plus_x_azimuth_deg_true': 101.7,
-        'units': 'metres; glTF +Y up, model north (+Y in Blender) exported as glTF -Z',
-        'absolute_accuracy_m': 12, 'relative_accuracy_m': '0.3-0.5 at the foundation stones',
-        'source': 'docs/model/footprint.json rectangle_primary'}, open(AR + '/geo.json', 'w'), indent=1)
+    H = {'house', 'props', 'interior'}
+    export(AR + '/elkhorn_house.glb', H | {'roof', 'ceiling'})
+    export(AR + '/elkhorn_house_open.glb', H)
+    export(AR + '/elkhorn_site.glb', H | {'roof', 'ceiling', 'barn', 'shed', 'blacksmith', 'dugout', 'well', 'corral', 'fences'})
+    export(AR + '/elkhorn_site_open.glb', H | {'barn', 'shed', 'blacksmith', 'dugout', 'well', 'corral', 'fences'})
+    terrain_glb(AR + '/elkhorn_terrain.glb')

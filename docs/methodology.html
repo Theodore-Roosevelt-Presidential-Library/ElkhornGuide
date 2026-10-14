@@ -58,7 +58,7 @@ footer{max-width:860px;margin:0 auto;padding:0 16px 40px;font:13px/1.5 var(--san
 <li><strong>The record.</strong> The Park Service's 1957–59 excavation produced a measured site plan, and period accounts describe where things stood.</li>
 </ol>
 <p>A fourth step lays the excavation plan onto the ground using the panorama footprint, then checks whether the lidar shows something where the plan says a building stood.</p>
-<p>A fifth step rebuilds the ranch in 3D from all of the above and checks the model against T.R.’s 1886 photographs.</p>
+<p>A fifth step rebuilds the ranch in 3D from all of the above and checks the model against T.R.’s 1886 photographs. A sixth adds the terrain, trees and river, and furnishes the rooms from the written record.</p>
 <h2>Sources used</h2>
 <div class="tw"><table>
 <thead>
@@ -317,6 +317,33 @@ footer{max-width:860px;margin:0 auto;padding:0 16px 40px;font:13px/1.5 var(--san
 </table></div>
 <p><strong>Open questions.</strong> The veranda photograph shows a chimney cap whose line of sight falls well north of the kitchen chimney Taylor found, which may be the sitting-room fireplace T.R. described. It is not modeled until the excavation records can be checked. The cottonwood grove, the river and the terrain are not modeled yet, so the views from the southeast and across the river cannot be compared with T.R.’s photographs.</p>
 <p><strong>For AR.</strong> The model is exported as compressed glTF files (about 2.5 MB for the house, 4.4 MB for the whole ranch). Its origin is the center of the house footprint at 47.24191, −103.62226, with the long axis 11.7° east of true north. Standing the model on the ruins themselves needs the surveyed corner positions from the field visit below and a geo-anchored AR app; the web viewer places it at full size wherever the phone is pointed.</p>
+<h2>Step 6: Setting and interiors</h2>
+<p><strong>Terrain, river and trees.</strong> The ground around the ranch is now built from the 2021 USGS lidar. That covers about 800 m at 1 m detail and 4.8 km at 8 m detail, which brings in the buttes behind the house. A water surface marks the Little Missouri. Cottonwoods and junipers are placed from the lidar canopy model, and a grove of cottonwoods south and southeast of the house is added as it appears in T.R.’s photograph from that side. Terrain and trees are for the renders and the web viewer only. In AR the real ground and trees are there already.</p>
+<p><strong>The two remaining photo comparisons.</strong></p>
+<ul>
+<li><strong>House from the southeast.</strong> From the camera solved earlier, the house sits in the frame where it does in T.R.’s print. The south gable, the piazza and the line of the east wall match, under a canopy of tall cottonwoods. The 1886 grove is placed by eye from the photograph, so tree positions are approximate.</li>
+<li><strong>From across the river.</strong> Matching the outline of the buttes in the print to the lidar terrain fixed the camera independently of the buildings. It stood about 400 ft from the house, on a bearing of about 117° from the house’s long axis, with a lens covering about 64° across the full scan. From there the house lands where it is in the print. The blacksmith shop and first cabin land about 8° (roughly 40 ft) south of where the print shows them. Either the site-plan registration puts them slightly too far south, or the print is trimmed unevenly. This is worth checking at the concrete markers during the field visit. The river has moved since 1886, so the foreground is today’s, not T.R.’s.</li>
+</ul>
+<p><strong>Hay on the stable roof.</strong> The stack is rebuilt as stacked prairie hay: a long loaf with shaggy sides, straw hanging over its lower edge, and the stacking pole left standing in it, as in the stables photograph.</p>
+<p><strong>The rooms.</strong> No photograph of the inside of the house is known. The interior is built from what the documents say and marked by how strong the evidence is (<a href="model/interior_evidence.json"><code>interior_evidence.json</code></a>).</p>
+<ul>
+<li><strong>The sitting room</strong> is the best documented room in the house. T.R. described it himself, in <em>Hunting Trips of a Ranchman</em> (1885), <em>Ranch Life and the Hunting-Trail</em> (1888) and his <em>Autobiography</em> (1913). It has a big fireplace with elk antlers over it and rifles resting across them, deer horns hung with fur coats and caps, rough board shelves of books, rocking chairs, and elk hides and wolf skins in front of the hearth.</li>
+<li><strong>T.R.’s bedroom, the kitchen and the hall</strong> rest on Hagedorn (1921), Edith Roosevelt’s 1890 sketch plan, the rubber bathtub T.R. mentions in his <em>Autobiography</em>, and what Taylor dug up in 1959:
+<ul>
+<li>lamp-chimney glass;</li>
+<li>blue-printed whiteware;</li>
+<li>an ironstone pitcher handle;</li>
+<li>door latches and clothes hooks;</li>
+<li>tins and a lard pail;</li>
+<li>the chimney thimble for a stovepipe;</li>
+<li>the cellar darkroom.</li>
+</ul></li>
+<li><strong>The other rooms</strong> are furnished with period types only.</li>
+</ul>
+<p><strong>One plan decision to review.</strong> Taylor found only one chimney, on the line of the hall’s west wall, and thought the fireplace was in the kitchen. T.R. puts a big fireplace in the sitting room next to his bedroom. The model reconciles the two: the sitting-room fireplace opens east from the excavated chimney, and the kitchen stove is piped into its back. Taylor’s field notes and Edith Roosevelt’s 1890 letter are the sources most likely to settle it.</p>
+<p><strong>Object references.</strong> Furniture and fittings follow public-domain and CC0 references of the period, from the Metropolitan Museum’s open access collection, the National Gallery’s Index of American Design, and an 1880 stove catalog. They are period types, not the Roosevelts’ own pieces, except where noted.</p>
+<figure><a href="model/render_cutaway.jpg"><img src="model/render_cutaway.jpg" alt="Cutaway render of the furnished ranch house with the roof removed" loading="lazy"></a><figcaption>The house with roof and ceiling lifted off: hall, sitting room with its fireplace, T.R.’s room at the southeast corner, kitchen, dining room and the north rooms.</figcaption></figure>
+<figure><a href="model/render_sitting_room.jpg"><img src="model/render_sitting_room.jpg" alt="Render of the sitting room with fireplace, antlers, rocking chairs and book shelves" loading="lazy"></a><figcaption>The sitting room as T.R. described it. The arrangement of the pieces is interpretation.</figcaption></figure>
 <h2>Accuracy and limits</h2>
 <ul>
 <li><strong>Absolute position is the weak link.</strong> Phone GPS puts the whole layout within about ±12 m. Relative positions (house to stones, stones to each other) are good to a few tenths of a meter.</li>
@@ -381,6 +408,10 @@ footer{max-width:860px;margin:0 auto;padding:0 16px 40px;font:13px/1.5 var(--san
 <tr>
 <td><a href="model/house_spec.json"><code>house_spec.json</code></a>, <a href="model/outbuildings_spec.json"><code>outbuildings_spec.json</code></a>, <a href="model/camera_matches.json"><code>camera_matches.json</code></a>, <a href="model/site_houseft.json"><code>site_houseft.json</code></a></td>
 <td>Step 5: every dimension with its source, the solved photograph cameras, and outbuilding positions in house coordinates</td>
+</tr>
+<tr>
+<td><a href="model/interior_evidence.json"><code>interior_evidence.json</code></a>, <a href="../model/models/elkhorn_house_open.glb"><code>elkhorn_house_open.glb</code></a></td>
+<td>Step 6: room-by-room evidence, quotations and the plan decision; the house model with roof and ceiling removed for the cutaway and for AR</td>
 </tr>
 <tr>
 <td><a href="model/scripts/blender/"><code>scripts/blender/</code></a></td>

@@ -1,0 +1,59 @@
+{
+ "status": "Draft interpretation, October 2026. Roosevelt quotations below were checked against page scans by the research pass; confirm against the Library's own copies before any publication.",
+ "no_interior_photographs": "No photograph of the Elkhorn house interior is known.",
+ "plan_decision": "Taylor (1959) found one chimney, at house X 12.67-14 ft, Y 22-24 ft. T.R. describes a sitting room with a big fireplace next to his bedroom; Hagedorn (1921 p.240) puts that room on the east side; Taylor (p.50) argued the fireplace was in the kitchen. The model reconciles them with a double-sided stack: the sitting-room fireplace opens east from the excavated chimney and the kitchen cookstove is piped into its west face. Alternative: fireplace in the kitchen (Taylor). Needs Taylor's field notes and Edith Roosevelt's 1890 letter to settle.",
+ "quotes": [
+  {
+   "text": "The long winter evenings are spent sitting round the hearthstone, while the pine logs roar and crackle, and the men play checkers or chess, in the fire light. The rifles stand in the corners of the room or rest across the elk antlers which jut out from over the fireplace. From the deer horns ranged along the walls and thrust into the beams and rafters hang heavy overcoats of wolf-skin or coon-skin, and otter-fur or beaver-fur caps and gauntlets. Rough board shelves hold a number of books",
+   "source": "T.R., Hunting Trips of a Ranchman (1885), pp. 11-12 (Presidential Edition scan); pp. 15-16 in the first printing"
+  },
+  {
+   "text": "a bedroom for myself, and a sitting-room with a big fire-place. I got out a rocking-chair—I am very fond of rocking-chairs—and enough books to fill two or three shelves, and a rubber bathtub so that I could get a bath.",
+   "source": "T.R., An Autobiography (1913), ch. IV"
+  },
+  {
+   "text": "We had buffalo robes and bearskins of our own killing.",
+   "source": "T.R., An Autobiography (1913), ch. IV"
+  },
+  {
+   "text": "many a worn volume in the primitive little sitting-room, with its log walls and huge fire-place",
+   "source": "T.R., Ranch Life and the Hunting-Trail (1888), p. 36"
+  }
+ ],
+ "rooms": [
+  {
+   "room": "Sitting room",
+   "evidence": "strong",
+   "items": "fireplace and hearthstone; elk antlers over the fireplace with rifles; deer horns hung with fur coats and caps; rough board book shelves; rocking chairs; elk hides, wolf skins, bearskin; checkers; writing table (NPS holds a small desk said to be from Elkhorn); kerosene lamp (Taylor: lamp-chimney glass)"
+  },
+  {
+   "room": "T.R.'s bedroom (SE)",
+   "evidence": "partial",
+   "items": "bed with buffalo robe; washstand with ironstone pitcher (Taylor: pitcher handle); T.R.'s wicker-and-duck trunk (at TRNP); rubber bathtub (form conjectural); clothes hooks (Taylor)"
+  },
+  {
+   "room": "Kitchen",
+   "evidence": "partial",
+   "items": "cookstove into the chimney thimble (Taylor); cupboard with blue-printed whiteware (Taylor sherds); tinware, Fairbank lard pail, cans (Taylor); trapdoor to the cellar darkroom (Taylor)"
+  },
+  {
+   "room": "Dining room",
+   "evidence": "conjectural",
+   "items": "plank table with oilcloth and spindle-back chairs; cupboard ('a table and some cupboards' remained c.1895, Mattison)"
+  },
+  {
+   "room": "Work rooms, Bamie's room, Sewall and Dow rooms",
+   "evidence": "conjectural",
+   "items": "beds, twin cradle built by Sewall (NPS 1969), trunks, saddle rack, ironing table and sad irons"
+  }
+ ],
+ "finishes": "Interior faces of the hewn cottonwood logs left bare (no evidence of plaster, paper or whitewash); partitions of vertical pine boards planed one side (Sewall 1884); double pine floor (Sewall 1885); board ceiling on exposed joists ('beams and rafters', HTR); plank doors with thumb latches (Taylor: latches, hinges; no knobs).",
+ "requests": [
+  "MWAC: Taylor's field notes and maps (any east-side brick)",
+  "SHSND: the recovered hearthstone, dimensions",
+  "Edith Roosevelt's 1890 letter and sketch, full transcription",
+  "TRNP museum records with dimensions for the Elkhorn writing desk, T.R. trunk, rocker, organ",
+  "Photos of Taylor's whiteware, lamp chimneys, latches"
+ ],
+ "reference_images": "model/ref/interior/SOURCES.json (public domain / CC0 sources for object types)"
+}

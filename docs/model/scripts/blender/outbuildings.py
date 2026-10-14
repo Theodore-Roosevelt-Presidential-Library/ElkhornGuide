@@ -238,7 +238,7 @@ def barn(b, rng):
     # E-W poles under the sod between stringers (visible from inside the bay)
     for ys in [-2.5 + 1.25 * k for k in range(16)]:
         for (xa, xb) in ((-1.5, 26.0), (26.0, 53.5)):
-            round_log(b, F, (xa, ys, Z(xa, ys) + 0.42 + 0.25), (xb, ys, Z(xb, ys) + 0.42 + 0.25), 0.15, rng, mk='pole')
+            round_log(b, F, (xa, ys, Z(xa, ys) - 0.16), (xb, ys, Z(xb, ys) - 0.16), 0.15, rng, mk='pole')
     # front plate across the bay and ridge plate/posts at the back
     round_log(b, F, (19.0, 0.2, H - 0.1), (33.0, 0.2, H - 0.1), 0.42, rng)
     for xs in (20.0, 32.0):
@@ -263,23 +263,64 @@ def barn(b, rng):
 
 
 def hay(b, F, c, w, d, h, rng):
-    nu, nv = 14, 6
+    """Stacked prairie hay as in T.R.'s stables photograph: a long loaf with steep, shaggy sides, a rounded
+    settled top, straw hanging over the eaves of the stack, loose tufts, and the stacking pole left in it."""
+    nu, nv = 28, 10
+    cx, cy, cz = c
+    noise = [[rng.uniform(-1, 1) for i in range(nu)] for j in range(nv + 1)]
     rings = []
     for j in range(nv + 1):
-        th = (math.pi / 2) * j / nv
+        t = j / nv                                      # 0 = base, 1 = crown
         ring = []
         for i in range(nu):
             ph = 2 * math.pi * i / nu
-            rr = rng.uniform(0.92, 1.05)
-            x = math.cos(th) * math.cos(ph) * w / 2 * rr; y = math.cos(th) * math.sin(ph) * d / 2 * rr
-            z = math.sin(th) ** 0.8 * h * (0.9 + 0.1 * rr) * (1 - 0.35 * abs(math.cos(ph)) * math.sin(th))
-            ring.append(F.mp(c[0] + x, c[1] + y, c[2] + z))
+            # superellipse plan (loaf), bulging just above the base, drawing in to a rounded crown
+            bulge = 1.06 if t < 0.25 else 1.0
+            prof = (1 - t ** 1.6) ** 0.75 * bulge
+            sx = math.copysign(abs(math.cos(ph)) ** 0.6, math.cos(ph)); sy = math.copysign(abs(math.sin(ph)) ** 0.6, math.sin(ph))
+            n = 1 + 0.06 * noise[j][i] + 0.03 * math.sin(i * 1.7 + j)
+            x = sx * w / 2 * prof * n; y = sy * d / 2 * prof * n
+            peak = 1.0 + 0.18 * math.cos(ph) * (1 if math.cos(ph) < 0 else 0.4)   # higher toward the west end, as in the photo
+            z = h * t * peak * (1 + 0.05 * noise[j][(i + 3) % nu]) - (0.25 if t == 0 else 0)
+            ring.append(Vector((cx + x, cy + y, cz + z)))
         rings.append(ring)
+    # body with UVs running down-slope (strands vertical in the texture)
+    per = sum((rings[0][i] - rings[0][(i + 1) % nu]).length for i in range(nu))
     for j in range(nv):
         for i in range(nu):
             i2 = (i + 1) % nu
-            b.quad_auto('hay', [rings[j][i], rings[j][i2], rings[j + 1][i2], rings[j + 1][i]], 1.5)
-
+            u0 = i / nu * per / 4.0; u1 = (i + 1) / nu * per / 4.0
+            v0 = (nv - j) / nv * h / 3.0; v1 = (nv - j - 1) / nv * h / 3.0
+            g = rng.uniform(0.85, 1.1); b.col = (g, g, g * 0.97)
+            b.face('hay', [F.mp(*rings[j][i]), F.mp(*rings[j][i2]), F.mp(*rings[j + 1][i2]), F.mp(*rings[j + 1][i])],
+                   [(u0, v0), (u1, v0), (u1, v1), (u0, v1)])
+    b.col = (1, 1, 1)
+    cen = Vector((cx, cy, cz + h)); b.face('hay', [F.mp(*p) for p in reversed(rings[-1])], [(0.5 + 0.5 * math.cos(2 * math.pi * k / nu), 0.5 + 0.5 * math.sin(2 * math.pi * k / nu)) for k in range(nu)][::-1])
+    # hanging fringe: strand cards draped over the bulge and below the base
+    for j in (0, 1, 2, 3, 4, 5, 6):
+        for i in range(nu):
+            if rng.random() < 0.15: continue
+            p0 = rings[j][i]; p1 = rings[j][(i + 1) % nu]
+            out = Vector((p0.x - cx, p0.y - cy, 0)).normalized() * 0.15
+            L = rng.uniform(0.9, 2.2) * (1.3 if j <= 1 else 1.0)
+            mid = (p0 + p1) / 2; half = (p1 - p0) * rng.uniform(0.6, 0.9)
+            top0, top1 = mid - half + out, mid + half + out
+            b.face('straw', [F.mp(*(top0 - Vector((0, 0, L)) + out * 1.5)), F.mp(*(top1 - Vector((0, 0, L)) + out * 1.5)), F.mp(*top1), F.mp(*top0)],
+                   [(0, 1), (1, 1), (1, 0), (0, 0)])
+    # loose tufts sticking out all over
+    for k in range(260):
+        j = rng.randint(1, nv - 1); i = rng.randrange(nu)
+        p = rings[j][i]; nrm = Vector((p.x - cx, p.y - cy, (p.z - cz) * 0.8)).normalized()
+        side = nrm.cross(Vector((0, 0, 1))).normalized() if abs(nrm.z) < 0.95 else Vector((1, 0, 0))
+        s = rng.uniform(0.15, 0.35); L = rng.uniform(0.9, 1.8)
+        tip = p + nrm * L * 0.5 - Vector((0, 0, L))
+        b.face('straw', [F.mp(*(tip - side * s)), F.mp(*(tip + side * s)), F.mp(*(p + side * s * 0.6)), F.mp(*(p - side * s * 0.6))],
+               [(0, 1), (1, 1), (1, 0), (0, 0)])
+    # stacking pole left standing in the stack, leaning, with a fork end
+    base = Vector((cx - w * 0.3, cy, cz + h * 0.4)); top = base + Vector((-1.8, -0.5, h * 0.95))
+    round_log(b, F, base, top, 0.12, rng, mk='pole')
+    for s in (-0.25, 0.25):
+        round_log(b, F, top, top + Vector((-0.6, s, 1.3)), 0.06, rng, mk='iron')
 
 def utility_shed(b, rng):
     """Storehouse 16.5 x 25, low sod gable facing south; door S centre (conjectural); woodpile in front."""
