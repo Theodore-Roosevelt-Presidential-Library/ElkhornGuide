@@ -248,19 +248,54 @@
   /* ---------- story ---------- */
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); }
   function quoteHTML(q) { return q ? '<blockquote><p>“' + esc(q.text) + '”</p><cite>' + esc(q.cite) + '</cite></blockquote>' : ''; }
+  function figHTML(g, cls) {
+    return '<figure class="' + (cls || 'story-fig') + '"><img src="' + g.src + '" alt="' + esc(g.alt) + '" loading="lazy">' +
+      '<figcaption>' + esc(g.caption) + (g.credit ? ' <span class="credit">' + esc(g.credit) + '</span>' : '') + '</figcaption></figure>';
+  }
+  function galleryHTML(gs) {
+    if (!gs || !gs.length) return '';
+    var slides = gs.map(function (g, k) {
+      return '<figure class="slide"><img src="' + g.src + '" alt="' + esc(g.alt) + '"' + (k ? ' loading="lazy"' : '') + '>' +
+        '<figcaption>' + esc(g.caption) + ' <span class="credit">' + esc(g.credit) + '</span></figcaption></figure>';
+    }).join('');
+    var dots = gs.length > 1 ? '<div class="gallery-count" aria-hidden="true"><span class="gc-n">1</span> / ' + gs.length + ' · swipe for more</div>' : '';
+    return '<div class="gallery" role="region" aria-label="Photographs">' + '<div class="gallery-track">' + slides + '</div>' + dots + '</div>';
+  }
+  function blocksHTML(bs) {
+    return (bs || []).map(function (b) {
+      if (b.p) return b.p.charAt(0) === '<' ? b.p : '<p>' + b.p + '</p>';
+      if (b.q) return quoteHTML({ text: b.q, cite: b.cite });
+      if (b.h) return '<h3>' + esc(b.h) + '</h3>';
+      if (b.thenNow) {
+        var t = b.thenNow;
+        return '<section class="then-now"><h3>' + esc(t.heading) + '</h3>' + t.intro +
+          '<div class="tn-label">Then</div>' + figHTML(t.then, 'tn-fig') +
+          '<div class="tn-label">Today</div>' + figHTML(t.now, 'tn-fig') + '</section>';
+      }
+      return '';
+    }).join('');
+  }
   function openStory(i) {
     if (!data) return;
     storyIndex = i;
     var s = data.stops[i];
     $('storyScroll').innerHTML =
-      '<figure class="story-photo"><img src="' + s.image + '" alt="' + esc(s.imageAlt) + '"><figcaption>' + esc(s.imageCredit) + '</figcaption></figure>' +
+      galleryHTML(s.gallery || [{ src: s.image, alt: s.imageAlt, caption: '', credit: s.imageCredit }]) +
       '<div class="story-inner">' +
       '<div class="story-num">Stop ' + s.n + ' of ' + data.stops.length + '</div>' +
       '<h2>' + esc(s.title) + '</h2>' +
       '<p class="lede">' + esc(s.lede) + '</p>' +
-      s.body + quoteHTML(s.quote) + (s.after || '') + quoteHTML(s.quote2) + (s.closing || '') +
-      (s.source ? '<p class="story-source">' + esc(s.source) + '</p>' : '') +
+      (s.blocks ? blocksHTML(s.blocks) : s.body + quoteHTML(s.quote) + (s.after || '') + quoteHTML(s.quote2)) +
+      (s.look ? '<aside class="look"><strong>Look for</strong> ' + esc(s.look) + '</aside>' : '') +
+      (s.more && s.more.length ? '<details class="more"><summary>More at this stop</summary>' + blocksHTML(s.more) + '</details>' : '') +
+      (s.closing || '') +
+      (s.source ? '<p class="story-source">Sources: ' + esc(s.source) + '</p>' : '') +
       '</div>';
+    var tr = $('storyScroll').querySelector('.gallery-track');
+    if (tr) tr.addEventListener('scroll', function () {
+      var n = Math.round(tr.scrollLeft / tr.clientWidth) + 1, c = $('storyScroll').querySelector('.gc-n');
+      if (c) c.textContent = n;
+    }, { passive: true });
     $('storyScroll').scrollTop = 0;
     $('btnPrev').disabled = i === 0;
     $('btnNext').textContent = i < data.stops.length - 1 ? 'Next stop →' : 'Finish';

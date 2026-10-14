@@ -1,5 +1,5 @@
 /* Elkhorn Ranch Walking Guide service worker: app shell offline + USGS topo tiles for the ranch area */
-var VERSION = 'v2';
+var VERSION = 'v3';
 var SHELL = 'elkhorn-shell-' + VERSION;
 var FULL = 'elkhorn-full-' + VERSION;
 var TILES = 'elkhorn-tiles-' + VERSION;
@@ -10,9 +10,35 @@ var CORE = [
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-180.png'
 ];
 var MEDIA = [
-  'map/naip.jpg',
-  'img/stop1.jpg', 'img/stop2.jpg', 'img/stop3.jpg', 'img/stop4.jpg',
-  'img/stop5.jpg', 'img/stop6.jpg', 'img/stop7.jpg', 'img/stop8.jpg'
+  'map/naip.jpg', 'img/stop8.jpg',
+  'img/s1-gifford.jpg',
+  'img/s1-brands.jpg',
+  'img/s2-buckskin.jpg',
+  'img/s3-furs.jpg',
+  'img/s3-sewall.jpg',
+  'img/s3-dow.jpg',
+  'img/s3-maine.jpg',
+  'img/s4-house.jpg',
+  'img/s4-stables.jpg',
+  'img/s4-bottom.jpg',
+  'img/s5-roundup.jpg',
+  'img/s5-tr-roundup.jpg',
+  'img/s5-cowpunchers.jpg',
+  'img/s5-cutting.jpg',
+  'img/s6-river.jpg',
+  'img/s6-above.jpg',
+  'img/s6-winter.jpg',
+  'img/s7-women.jpg',
+  'img/s7-dugout.jpg',
+  'img/s7-guarding.jpg',
+  'img/s7-handsup.jpg',
+  'img/s7-dickinson.jpg',
+  'img/s8-piazza.jpg',
+  'img/s8-site1919.jpg',
+  'img/s8-today.jpg',
+  'img/s8-drifting.jpg',
+  'img/s8-then.jpg',
+  'img/s8-now.jpg'
 ];
 var FONTS = [
   'https://www.trlibrary.com/themes/custom/trpl/css/dharma_type-dharmagothice-bold.woff2',
