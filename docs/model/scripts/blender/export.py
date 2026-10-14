@@ -107,7 +107,7 @@ def terrain_glb(path):
             s_ = min(1.0, max(0.0, (slope[j, i] - 0.35) / 0.5))
             c = grass * (1 - s_) + clay * s_
             if Z[j, i] < meta['water_ft'] + 3: c = bank
-            col.data[j * nx + i].color = (*c, 1)
+            col.data[j * nx + i].color = (*(c ** 2.2), 1)   # store linear values (glTF COLOR_0 is linear)
     mt = bpy.data.materials.new('terrain_vc'); mt.use_nodes = True
     nt = mt.node_tree; va = nt.nodes.new('ShaderNodeVertexColor'); va.layer_name = 'Col'
     nt.links.new(va.outputs['Color'], nt.nodes['Principled BSDF'].inputs['Base Color']); nt.nodes['Principled BSDF'].inputs['Roughness'].default_value = 1.0
