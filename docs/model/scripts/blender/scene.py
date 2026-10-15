@@ -2,7 +2,7 @@ import sys, math, random, json, os
 sys.path.insert(0, os.path.dirname(__file__))
 import bpy
 from mathutils import Vector
-import lib, house, props, outbuildings, terrain, interior
+import lib, house, props, outbuildings, terrain, interior, detail
 from lib import FT
 
 OUT = lib.M + '/out'
@@ -82,6 +82,7 @@ def prairie_material(mats):
 def build_all(seed=7, site=True, context=False, inside=True):
     reset()
     mats = lib.build_materials()
+    detail.build_materials(mats)
     house.SHOW_INTERIOR = inside
     if inside:
         interior.build_materials(mats)
@@ -163,6 +164,7 @@ if __name__ == '__main__':
         'in_sitting': camera('cam_in_sitting', (27.6, 30.4, F + 5.2), 236, 72.0, pitch=-8),
         'in_bedroom': camera('cam_in_bedroom', (19.0, 13.0, F + 5.2), 139, 72.0, pitch=-10),
         'in_kitchen': camera('cam_in_kitchen', (2.0, 33.2, F + 5.2), 145, 72.0, pitch=-8),
+        'in_cupboard': camera('cam_in_cupboard', (7.0, 11.0, F + 4.5), 270, 60.0, pitch=-5),
         'in_dining': camera('cam_in_dining', (13.2, 14.2, F + 5.2), 225, 72.0, pitch=-12),
     })
     if any(w.startswith('in_') for w in which):

@@ -144,6 +144,9 @@ def build_materials():
 
 
 # ----------------------------------------------------------------- mesh builder
+SMOOTH_MK = {}      # material key -> crease angle (deg) for smooth-shaded detailed props
+
+
 class Builder:
     """Accumulates geometry per material, emits one object per (group, material)."""
 
@@ -280,12 +283,19 @@ class Builder:
                 for l in poly.loop_indices:
                     ca.data[l].color = (c[0], c[1], c[2], 1.0)
             me.validate(); me.update()
+            if mk in SMOOTH_MK:          # detailed props: weld coincident vertices, smooth with sharp creases
+                import bmesh
+                bm = bmesh.new(); bm.from_mesh(me)
+                bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=0.0003)
+                bm.to_mesh(me); bm.free()
+                me.shade_smooth(); me.set_sharp_from_angle(angle=math.radians(SMOOTH_MK[mk]))
             ob = bpy.data.objects.new(f'{grp}_{mk}', me)
             ob.data.materials.append(self.mats[mk])
             ob['group'] = grp
             (collection or bpy.context.scene.collection).objects.link(ob)
-            for p in me.polygons:
-                p.use_smooth = False
+            if mk not in SMOOTH_MK:
+                for p in me.polygons:
+                    p.use_smooth = False
             objs.append(ob)
         self.parts = {}
         return objs

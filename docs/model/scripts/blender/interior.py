@@ -272,13 +272,14 @@ def fireplace(b, rng):
     box(b, 'iron', xf + 0.2, 25.0, FL + 0.05, xf + 0.32, 25.25, FL + 0.4)
     # mantel things: lamp, clock-less shelf with tobacco jar, clay pipe (Taylor), cartridge boxes, candlestick
     lamp(b, (xf + 0.2, 21.2, FL + 4.55), lit=False)
-    lathe(b, 'ware', (xf + 0.2, 24.6, FL + 4.55), [(0.18, 0), (0.2, 0.3), (0.16, 0.4), (0.0, 0.42)], col=(0.5, 0.42, 0.32), sides=12)
+    detail.revolve(b, 'yellowware', (xf + 0.2, 24.6, FL + 4.55), [(0.0, 0.0), (0.15, 0.0), (0.18, 0.04), (0.2, 0.2), (0.18, 0.32), (0.15, 0.35),
+                   (0.155, 0.37), (0.12, 0.4), (0.04, 0.42), (0.035, 0.45), (0.0, 0.46)], 32, col=(0.42, 0.3, 0.2), smooth_n=2)   # salt-glazed tobacco jar
     cyl(b, 'ware', (xf + 0.25, 23.6, FL + 4.6), (xf + 0.32, 24.0, FL + 4.62), 0.02, col=(0.92, 0.9, 0.86), sides=6)
     for k in range(3):
         box(b, 'paper', xf + 0.05, 22.3 + k * 0.32, FL + 4.55, xf + 0.35, 22.55 + k * 0.32, FL + 4.75, col=(0.6, 0.35, 0.2) if k % 2 else (0.75, 0.62, 0.3))
     # elk antlers jutting out over the fireplace, two rifles across them (HTR 1885)
     import props
-    props.antler_rack(b, (xf + 0.1, 23.0, FL + 5.6), (1, 0, 0.35), scale=1.0, rng=rng, skull=True)
+    props.antler_rack(b, (xf + 0.1, 23.0, FL + 5.6), (1, 0, 0.35), scale=1.0, rng=rng, skull=True, wall=0.1)
     props.rifle(b, (xf + 0.55, 20.9, FL + 6.4), (xf + 0.55, 25.6, FL + 6.25), rng)
     props.rifle(b, (xf + 0.75, 21.3, FL + 6.8), (xf + 0.75, 25.3, FL + 6.7), rng)
 
@@ -307,12 +308,15 @@ def cookstove(b, x, y, yaw, rng):
     B(-1.5, -1.12, 0.55, 2.25, -1.08, 0.62, mk='nickel', col=NI)      # nickel apron rail
     B(-1.0, -1.1, 1.0, 0.9, -1.06, 2.2, col=(1.25, 1.25, 1.25))      # oven door
     cyl(b, 'nickel', L(-0.8, -1.16, 1.9), L(0.6, -1.16, 1.9), 0.04, col=NI)
-    B(-1.3, -0.4, 2.55, 1.3, 0.9, 4.0, col=(1.0, 1.0, 1.0))        # high-shelf warming closet back
-    B(-1.4, -0.6, 4.0, 1.4, 0.9, 4.15, col=(0.9, 0.9, 0.9))
+    for sx in (-1.32, 1.32):                                         # cast brackets carrying the warming closet
+        B(sx - 0.05, 0.72, 2.55, sx + 0.05, 0.9, 3.6)
+    B(-1.3, 0.3, 3.6, 1.3, 0.9, 4.25, col=(1.0, 1.0, 1.0))           # raised warming closet over the back of the top
+    B(-1.4, 0.2, 4.25, 1.4, 0.95, 4.35, col=(0.9, 0.9, 0.9))
+    B(-1.3, 0.26, 3.6, 1.3, 0.3, 3.65, mk='nickel', col=NI)
     for sx in (-1.3, 1.3):
         for sy in (-0.95, 0.95):
             cyl(b, 'castiron', L(sx, sy, 0.0), L(sx * 1.05, sy * 1.05, 0.55), 0.09, col=K, r1=0.12)
-    p = L(-0.9, 0.5, 4.15)
+    p = L(-0.9, 0.62, 2.55)
     stovepipe(b, p[0], p[1], p[2], FL + 6.4)
 
 
@@ -335,7 +339,10 @@ def plate_rack_cupboard(b, x, y, yaw, rng):
             plate(b, (c[0], c[1], c[2]), 0.36, normal=tuple(Matrix.Rotation(L.yaw, 3, 'Z') @ Vector((0, -1, 0.25))))
     for k in range(5):
         c = L(-1.3 + k * 0.6, 0.5, 2.67)
-        lathe(b, 'ware', c, [(0.13, 0), (0.16, 0.25), (0.17, 0.28)], col=(0.82, 0.84, 0.9) if k % 2 else (0.35, 0.42, 0.62), sides=14)
+        if k % 2:
+            cup(b, c, handle_angle=L.yaw + math.pi / 2, with_saucer=False)
+        else:
+            detail.revolve(b, 'whiteware', c, [(0.0, 0.0), (0.1, 0.0), (0.11, 0.02), (0.2, 0.15), (0.23, 0.22), (0.215, 0.225), (0.18, 0.16), (0.1, 0.04), (0.0, 0.035)], 32, col=(0.94, 0.94, 0.9))
 
 
 def plate(b, c, r, normal=(0, 0, 1)):
@@ -602,7 +609,7 @@ def sitting_room(b, rng):
     coats_on_horns(b, 18.6, 31.4, FL + 6.4, 0.0, rng)
     coats_on_horns(b, 28.9, 16.8, FL + 6.2, math.radians(-90), rng, kinds=('wolf',))
     for yy in (18.5, 29.5):
-        props.antler_rack(b, (28.95, yy, FL + 6.6), (-1, 0, 0), scale=0.42, rng=rng, kind='deer', skull=True)
+        props.antler_rack(b, (28.95, yy, FL + 6.6), (-1, 0, 0), scale=0.42, rng=rng, kind='deer', skull=True, wall=0.22)
     # rifles standing in the corners
     props.rifle(b, (28.9, 30.9, FL + 0.05), (28.75, 31.25, FL + 4.4), rng)
     props.rifle(b, (28.9, 14.6, FL + 0.05), (28.7, 14.2, FL + 4.3), rng)
@@ -617,10 +624,10 @@ def tr_bedroom(b, rng):
     side_chair(b, 28.2, 11.5, face_yaw(28.2, 11.5, 25.0, 8.0), rng)
     lantern(b, (19.5, 4.6, FL + 2.5))
     # clothes hooks (Taylor: 'metal clothes hooks, fancy') with a canvas hunting coat and hat
-    for k, yy in enumerate((5.5, 7.0)):
+    for k, yy in enumerate((9.6, 11.1)):                                 # clear of the east window
         box(b, 'iron', 29.12, yy - 0.03, FL + 5.5, 29.17, yy + 0.03, FL + 5.6)
-    lathe(b, 'duck', (28.85, 5.5, FL + 3.0), [(0.5, 0), (0.5, 1.3), (0.35, 2.3), (0.08, 2.5)], col=(0.62, 0.55, 0.42), sides=10)
-    lathe(b, 'cloth', (28.85, 7.0, FL + 5.25), [(0.45, 0), (0.45, 0.04), (0.25, 0.08), (0.24, 0.4), (0.0, 0.45)], col=(0.36, 0.3, 0.22), sides=14)
+    detail.coat(b, 'duckcoat', (28.98, 9.6, FL + 5.52), math.radians(-90), length=2.7, width=0.8, rng=rng, wall=0.17, collar=False)
+    detail.felt_hat(b, (29.12, 11.1, FL + 5.15), up=(-1, 0, 0))
 
 
 def kitchen(b, rng):
@@ -628,14 +635,13 @@ def kitchen(b, rng):
     table(b, 5.0, 25.0, 0.0, 6.0, 3.0, H=2.45, col=(0.66, 0.55, 0.4))
     bench(b, 5.0, 23.0, 0.0, 5.0)
     plate_rack_cupboard(b, 5.2, 16.4, math.radians(180), rng)
-    for k in range(3):
-        lathe(b, 'tin', (4.0 + k * 1.2, 25.2, FL + 2.45), [(0.35, 0), (0.42, 0.18), (0.44, 0.2)], col=(0.6, 0.6, 0.58), sides=16)   # pie tins / pans
-    lathe(b, 'tin', (6.5, 24.6, FL + 2.45), [(0.3, 0), (0.33, 0.6), (0.2, 0.75), (0.1, 0.85)], col=(0.55, 0.55, 0.52), sides=14)   # coffee pot
+    detail.pie_tins(b, (4.5, 24.3, FL + 2.45))
+    detail.yellowware_bowl(b, (5.5, 25.7, FL + 2.45))
     bucket(b, 1.5, 31.5); bucket(b, 2.6, 31.8, col=(0.4, 0.3, 0.2), mk='paint')
     lathe(b, 'ware', (1.4, 29.5, FL), [(0.0, 0), (0.6, 0.02), (0.7, 1.6), (0.55, 1.75)], col=(0.6, 0.55, 0.45), sides=16)   # crock
     lathe(b, 'tin', (2.6, 29.0, FL), [(0.0, 0), (0.42, 0.01), (0.45, 0.85), (0.47, 0.9)], col=(0.65, 0.6, 0.45), sides=14)   # Fairbank lard pail
     trapdoor(b, 7.0, 29.5)
-    lantern(b, (9.5, 25.4, FL + 2.45))
+    lantern(b, (6.4, 24.1, FL + 2.45), lit=True)                          # on the table (was floating off its end)
     # wood box by the stove
     box(b, 'pine', 11.0, 26.0, FL, 13.6, 27.8, FL + 2.0, col=(0.6, 0.48, 0.34))
     for k in range(8):
@@ -650,7 +656,7 @@ def dining_room(b, rng):
         a = k * math.pi / 3
         px, py = 7.0 + 1.0 * math.cos(a) * 1.2, 7.5 + 2.2 * math.sin(a) * 0.9
         plate(b, (px, py, FL + 2.47), 0.37)
-        cup(b, (px + 0.45, py + 0.25, FL + 2.47))
+        cup(b, (px - 0.62 * math.sin(a), py + 0.62 * math.cos(a), FL + 2.47), handle_angle=a)
     plate_rack_cupboard(b, 2.18, 11.0, math.radians(90), rng)
 
 
@@ -789,7 +795,7 @@ def details(b, rng):
     view_camera(b, (25.6, 22.2, FL), math.radians(200))
     gun_belt(b, (29.1, 19.0, FL + 5.6), math.radians(-90))
     lariat(b, (27.0, 14.1, FL + 6.0), math.radians(180))
-    hat(b, (27.4, 26.2, FL + 2.5))                                  # on the writing table
+    detail.felt_hat(b, (27.0, 28.2, FL + 2.475))                     # on the writing table
     box(b, 'paper', 22.2, 17.7, FL + 2.38, 22.9, 18.3, FL + 2.39, col=(0.82, 0.78, 0.68))     # newspaper by the checkers
     for k in range(4):   # split firewood stacked beside the hearth
         for j in range(3):
@@ -805,20 +811,22 @@ def details(b, rng):
         obox(b, 'books', (27.9 + 0.02 * k, 11.3, FL + 1.53 + 0.08 * k), 0.3 * k, 0.25, 0.35, 0.04, col=(1, 1, 1), tile=0.27)
     obox(b, 'duck', (26.0, 12.7, FL + 0.5), 0.0, 0.7, 0.35, 0.5, col=(0.7, 0.62, 0.48), tile=0.5)   # canvas war bag
     # ---- kitchen
-    kettle(b, (10.6, 22.4, FL + 2.57))
-    skillet(b, (10.5, 23.6, FL + 2.57))
+    kettle(b, (10.55, 23.1, FL + 2.57))
+    detail.coffee_pot(b, (10.55, 22.3, FL + 2.57), angle=math.radians(-90))
+    skillet(b, (11.45, 23.1, FL + 2.57), angle=math.radians(-90))
     coffee_mill(b, (3.4, 25.3, FL + 2.47))
     flour_barrel(b, (1.8, 21.0, FL))
     sack(b, (3.4, 20.7, FL)); sack(b, (3.0, 21.9, FL), h=1.2)
     shelf_with(b, IX0 + 0.05, 27.5, IX0 + 1.0, 33.5, FL + 4.6, rng, items=9)
     shelf_with(b, IX0 + 0.05, 27.5, IX0 + 1.0, 33.5, FL + 5.7, rng, items=8)
     bucket(b, 5.2, 33.2); cyl(b, 'tin', (5.2, 33.2, FL + 0.9), (5.7, 33.6, FL + 1.3), 0.03, col=(0.7, 0.7, 0.68))   # dipper
-    lathe(b, 'tin', (7.6, 25.4, FL + 2.47), [(0.0, 0), (0.6, 0.02), (0.75, 0.35), (0.78, 0.38)], col=(0.62, 0.62, 0.6), sides=18)   # dish pan
+    detail.dish_pan(b, (7.1, 25.4, FL + 2.45))
     towel(b, (13.85, 24.6, FL + 3.4), math.radians(90), col=(0.86, 0.84, 0.8))
     can(b, (2.2, 33.0, FL), r=0.3, h=0.9)                         # kerosene can
     # ---- dining room: lamp and coffee pot on the table
-    lamp(b, (7.0, 7.5, FL + 2.47))
-    lathe(b, 'tin', (7.0, 9.0, FL + 2.47), [(0.3, 0), (0.33, 0.6), (0.2, 0.75), (0.1, 0.85)], col=(0.55, 0.55, 0.52), sides=14)
+    lamp(b, (7.0, 7.5, FL + 2.475))
+    detail.coffee_pot(b, (7.6, 6.6, FL + 2.475), angle=math.radians(150))
+    detail.sugar_bowl(b, (6.4, 8.3, FL + 2.475))
     # ---- north rooms: hats and coats on pegs, sewing basket, child's toy (Taylor: carved wooden toy)
     hat(b, (11.0, 48.0, FL + 1.68), col=(0.25, 0.22, 0.2))
     lathe(b, 'pine', (6.5, 56.5, FL), [(0.0, 0), (0.45, 0.02), (0.5, 0.35), (0.52, 0.38)], col=(0.65, 0.52, 0.32), sides=14)
@@ -844,7 +852,7 @@ def interior_lights():
     for name, loc, energy, color, size in (('fire_glow', (15.0, 23.0, FL + 0.7), 35, (1.0, 0.42, 0.12), 0.4),
                                            ('lamp_desk', (28.6, 27.0, FL + 3.6), 35, (1.0, 0.75, 0.45), 0.15),
                                            ('lamp_table', (23.2, 17.5, FL + 3.4), 25, (1.0, 0.75, 0.45), 0.15),
-                                           ('kitchen_lantern', (9.5, 25.4, FL + 3.3), 20, (1.0, 0.75, 0.45), 0.15)):
+                                           ('kitchen_lantern', (6.4, 24.1, FL + 3.0), 20, (1.0, 0.75, 0.45), 0.15)):
         ld = bpy.data.lights.new(name, 'POINT'); ld.energy = energy; ld.color = color; ld.shadow_soft_size = size * FT
         ob = bpy.data.objects.new(name, ld); ob.location = m(loc); bpy.context.scene.collection.objects.link(ob)
 
@@ -860,3 +868,7 @@ def build_interior(b, rng, mats):
     dining_room(b, rng)
     north_rooms(b, rng)
     details(b, rng)
+
+
+import detail                       # draft 5: detailed props replace the first-pass builders above
+detail.install(globals())

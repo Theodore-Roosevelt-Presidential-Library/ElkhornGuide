@@ -11,6 +11,10 @@
    "file": "house_ilog.webp",
    "size": 1024
   },
+  "interior_antler": {
+   "file": "interior_antler.webp",
+   "size": 512
+  },
   "interior_bark": {
    "file": "interior_bark.webp",
    "size": 128
@@ -19,17 +23,21 @@
    "file": "interior_bear.webp",
    "size": 128
   },
+  "interior_bellows": {
+   "file": "interior_bellows.webp",
+   "size": 128
+  },
   "interior_blanket": {
    "file": "interior_blanket.webp",
    "size": 256
   },
-  "interior_bone": {
-   "file": "interior_bone.webp",
-   "size": 128
-  },
   "interior_books": {
    "file": "interior_books.webp",
    "size": 256
+  },
+  "interior_brass": {
+   "file": "interior_brass.webp",
+   "size": 512
   },
   "interior_brick": {
    "file": "interior_brick.webp",
@@ -51,21 +59,33 @@
    "file": "interior_cloth.webp",
    "size": 128
   },
-  "interior_coon": {
-   "file": "interior_coon.webp",
-   "size": 128
+  "interior_cooncoat": {
+   "file": "interior_cooncoat.webp",
+   "size": 256
   },
   "interior_door": {
    "file": "interior_door.webp",
    "size": 512
   },
+  "interior_drape": {
+   "file": "interior_drape.webp",
+   "size": 128
+  },
   "interior_duck": {
    "file": "interior_duck.webp",
+   "size": 256
+  },
+  "interior_duckcoat": {
+   "file": "interior_duckcoat.webp",
    "size": 256
   },
   "interior_elkhide": {
    "file": "interior_elkhide.webp",
    "size": 128
+  },
+  "interior_felt": {
+   "file": "interior_felt.webp",
+   "size": 256
   },
   "interior_flagstone": {
    "file": "interior_flagstone.webp",
@@ -75,9 +95,21 @@
    "file": "interior_floor.webp",
    "size": 1024
   },
+  "interior_granite": {
+   "file": "interior_granite.webp",
+   "size": 512
+  },
+  "interior_gunmetal": {
+   "file": "interior_gunmetal.webp",
+   "size": 256
+  },
   "interior_iron": {
    "file": "interior_iron.webp",
    "size": 128
+  },
+  "interior_ironware": {
+   "file": "interior_ironware.webp",
+   "size": 256
   },
   "interior_leather": {
    "file": "interior_leather.webp",
@@ -119,21 +151,41 @@
    "file": "interior_tin.webp",
    "size": 128
   },
+  "interior_tin2": {
+   "file": "interior_tin2.webp",
+   "size": 512
+  },
   "interior_tinlabel": {
    "file": "interior_tinlabel.webp",
    "size": 128
   },
-  "interior_transfer": {
-   "file": "interior_transfer.webp",
-   "size": 128
+  "interior_transfer2": {
+   "file": "interior_transfer2.webp",
+   "size": 512
+  },
+  "interior_walnut": {
+   "file": "interior_walnut.webp",
+   "size": 1024
   },
   "interior_ware": {
    "file": "interior_ware.webp",
-   "size": 128
+   "size": 256
+  },
+  "interior_whiteware": {
+   "file": "interior_whiteware.webp",
+   "size": 1024
   },
   "interior_wolf": {
    "file": "interior_wolf.webp",
    "size": 128
+  },
+  "interior_wolfcoat": {
+   "file": "interior_wolfcoat.webp",
+   "size": 512
+  },
+  "interior_yellowware": {
+   "file": "interior_yellowware.webp",
+   "size": 256
   }
  }
 }

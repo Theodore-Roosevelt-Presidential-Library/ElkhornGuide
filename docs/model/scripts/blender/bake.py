@@ -20,7 +20,7 @@ SCALE = 4.0
 DENSITY = float(os.environ.get('LM_DENSITY', 42))      # lightmap texels per metre
 SAMPLES = int(os.environ.get('LM_SAMPLES', 96))
 SKIP = {'interior_glass', 'interior_flame', 'interior_ember', 'interior_interior', 'interior_nickel', 'interior_bone2',
-        'interior_book', 'interior_pole'}
+        'interior_book', 'interior_pole', 'interior_clearglass'}
 
 
 def targets():
@@ -53,7 +53,8 @@ def lightmap_uv(o):
 def size_for(o):
     area = sum(p.area for p in o.data.polygons)
     px = math.sqrt(area) * DENSITY * 1.25          # packing loss
-    return int(min(2048, max(128, 2 ** math.ceil(math.log2(max(px, 1))))))
+    lo = 1024 if len(o.data.polygons) > 20000 else 512 if len(o.data.polygons) > 4000 else 256 if len(o.data.polygons) > 800 else 128
+    return int(min(2048, max(lo, 2 ** math.ceil(math.log2(max(px, 1))))))   # many small prop islands need a floor
 
 
 def bake_one(o):
@@ -100,7 +101,13 @@ if __name__ == '__main__':
     sc.cycles.max_bounces = 6; sc.cycles.diffuse_bounces = 4
     tg = targets()
     print('targets', len(tg), flush=True)
-    manifest = {'scale': SCALE, 'exposure_stops': 1.0, 'uv': 'TEXCOORD_1', 'maps': {}}
+    manifest = {'scale': SCALE, 'exposure_stops': 1.4, 'uv': 'TEXCOORD_1', 'maps': {}}
+    # metals have no diffuse lobe, so a DIFFUSE bake would come out black: bake them as dielectrics, then restore
+    saved = {}
+    for mt in bpy.data.materials:
+        bs = mt.node_tree.nodes.get('Principled BSDF') if mt.use_nodes else None
+        if bs and bs.inputs['Metallic'].default_value > 0:
+            saved[mt.name] = bs.inputs['Metallic'].default_value; bs.inputs['Metallic'].default_value = 0.0
     only = os.environ.get('LM_ONLY')
     for o in tg:
         lightmap_uv(o)
@@ -110,5 +117,7 @@ if __name__ == '__main__':
         fn, res = bake_one(o)
         manifest['maps'][o.name] = {'file': fn, 'size': res}
         json.dump(manifest, open(lib.M + '/out/ar/lightmaps.json', 'w'), indent=1)
+    for name, v in saved.items():
+        bpy.data.materials[name].node_tree.nodes['Principled BSDF'].inputs['Metallic'].default_value = v
     bpy.ops.wm.save_as_mainfile(filepath=lib.M + '/out/elkhorn_baked.blend')
     print('done', flush=True)
