@@ -84,11 +84,7 @@ footer code { font: 12.5px var(--f-data); }
   </div>
 
   <div class="controls">
-    <div class="row" role="group" aria-label="Model">
-      <span class="lbl">Model</span>
-      <button class="chip" id="m-house" aria-pressed="true">Ranch house</button>
-      <button class="chip" id="m-site" aria-pressed="false">Whole ranch</button>
-    </div>
+    <div class="row" role="group" aria-label="Viewpoint" id="views"></div>
     <div class="row" role="group" aria-label="Interior light">
       <span class="lbl">Light</span>
       <button class="chip" id="l-baked" aria-pressed="true">Baked (as rendered)</button>
@@ -99,7 +95,6 @@ footer code { font: 12.5px var(--f-data); }
       <button class="chip" id="r-on" aria-pressed="true">Roof on</button>
       <button class="chip" id="r-off" aria-pressed="false">Look inside</button>
     </div>
-    <div class="row" role="group" aria-label="Viewpoint" id="views"></div>
     <p class="note" id="viewnote">Viewpoints marked “1886” put the camera where T.R. stood for his photographs, solved from the window positions in each print.</p>
   </div>
 
@@ -145,7 +140,7 @@ const MODELS = {
     ] },
   site: { src: 'models/elkhorn_site.glb', badge: 'House, stables, storehouse, blacksmith shop, first cabin, corral · 2021 terrain',
     views: [
-      { id: 'aerial', label: 'Aerial', orbit: '20deg 55deg 230m', target: '-10m 0m 25m', fov: '40deg' },
+      { id: 'aerial', label: 'Whole ranch', orbit: '20deg 55deg 230m', target: '-10m 0m 25m', fov: '40deg' },
       { id: 'stables', open: false, label: '1886 · Stables', orbit: '4deg 90deg 20.7m', target: '-30.4m 1.52m -47.5m', fov: '34deg',
         note: 'T.R.\'s photograph of the stables from the south: two log stables with an open wagon bay and hay stacked on the roof.' },
       { id: 'river', open: false, label: '1886 · From across the river', orbit: '83.3deg 90deg 121.9m', target: '-12.9m -2m 40.9m', fov: '39deg',
@@ -268,15 +263,20 @@ async function load(key) {
   if (key !== 'terrain') await applyLightmaps(gltf.scene);
   cache[key] = gltf.scene; return gltf.scene;
 }
-async function setModel(key) {
-  current = key; updateAR(); const M = MODELS[key]; const my = ++token;
-  document.getElementById('m-house').setAttribute('aria-pressed', String(key === 'house'));
-  document.getElementById('m-site').setAttribute('aria-pressed', String(key === 'site'));
-  document.getElementById('badge').textContent = M.badge;
+// One flat list of every viewpoint; picking one loads its model if needed.
+const ALL_VIEWS = Object.entries(MODELS).flatMap(([key, M]) => M.views.map(v => ({ ...v, model: key })));
+function buildViews() {
   const row = document.getElementById('views');
-  row.innerHTML = '<span class="lbl">View</span>' + M.views.map(v => `<button class="chip" data-id="${v.id}" aria-pressed="false">${v.label}</button>`).join('');
-  row.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => setView(M.views.find(v => v.id === b.dataset.id))));
-  setView(M.views[0]);
+  row.innerHTML = '<span class="lbl">View</span>' + ALL_VIEWS.map(v => `<button class="chip" data-id="${v.id}" aria-pressed="false">${v.label}</button>`).join('');
+  row.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
+    const v = ALL_VIEWS.find(x => x.id === b.dataset.id);
+    if (v.model !== current || !model) setModel(v.model, v); else setView(v);
+  }));
+}
+async function setModel(key, view) {
+  current = key; updateAR(); const M = MODELS[key]; const my = ++token;
+  document.getElementById('badge').textContent = M.badge;
+  setView(view || ALL_VIEWS.find(v => v.model === key));
   try {
     const s = await load(key); if (my !== token) return;
     if (model) scene.remove(model); model = s; scene.add(s); applyRoof();
@@ -292,14 +292,12 @@ async function setModel(key) {
     console.error(e);
   }
 }
-document.getElementById('m-house').addEventListener('click', () => setModel('house'));
-document.getElementById('m-site').addEventListener('click', () => setModel('site'));
 document.getElementById('r-on').addEventListener('click', () => setRoof(false));
 document.getElementById('l-baked').addEventListener('click', () => setBaked(true));
 document.getElementById('l-live').addEventListener('click', () => setBaked(false));
 document.getElementById('r-off').addEventListener('click', () => setRoof(true));
 renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
-resize(); renderLedger(); setModel('house');
+resize(); renderLedger(); buildViews(); setModel('house');
 </script>
 
 </body>
